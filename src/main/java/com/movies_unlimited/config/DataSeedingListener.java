@@ -7,6 +7,7 @@ import com.movies_unlimited.entity.ProductEntity;
 import com.movies_unlimited.entity.enums.ActiveStatus;
 import com.movies_unlimited.entity.enums.CategoryEnum;
 import com.movies_unlimited.entity.enums.Role;
+import com.movies_unlimited.recommender_system.Recommender;
 import com.movies_unlimited.repository.AccountRepository;
 import com.movies_unlimited.repository.AccountRoleRepository;
 import com.movies_unlimited.repository.CategoryRepository;
@@ -21,6 +22,9 @@ import org.springframework.stereotype.Component;
 import java.io.BufferedReader;
 import java.io.FileReader;
 import java.io.IOException;
+import java.text.DateFormat;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.*;
 
 @Component
@@ -78,34 +82,26 @@ public class DataSeedingListener implements ApplicationListener<ContextRefreshed
 
     @Override
     public void onApplicationEvent(ContextRefreshedEvent event) {
+        addRoleIfMissing(Role.ROLE_ADMIN);
+        addRoleIfMissing(Role.ROLE_USER);
+        addUserIfMissing("congtrinh2404@gmail.com", "123456789aaA", Role.ROLE_USER);
+        addUserIfMissing("congtrinhadmin2404@gmail.com", "123456789aaA", Role.ROLE_USER, Role.ROLE_ADMIN);
 
+        for (int i = 0; i < 15; ++i) {
+            String username = "congtrinh" + i + "@gmail.com";
+            addUserIfMissing(username, "123456789aaA", Role.ROLE_ADMIN, Role.ROLE_USER);
+        }
 
-
-
-
-//        addRoleIfMissing(Role.ROLE_ADMIN);
-//        addRoleIfMissing(Role.ROLE_USER);
-//        addUserIfMissing("congtrinh2404@gmail.com", "123456789aaA", Role.ROLE_USER);
-//        addUserIfMissing("congtrinhadmin2404@gmail.com", "123456789aaA", Role.ROLE_USER, Role.ROLE_ADMIN);
-//
-//        for (int i = 0; i < 15; ++i) {
-//            String username = "congtrinh" + i + "@gmail.com";
-//            addUserIfMissing(username, "123456789aaA", Role.ROLE_ADMIN, Role.ROLE_USER);
-//        }
-//
-//        for (CategoryEnum category : CategoryEnum.values()) {
-//            addCategoryIfMissing(category);
-//        }
+        for (CategoryEnum category : CategoryEnum.values()) {
+            addCategoryIfMissing(category);
+        }
         readFileMovie();
     }
-
-
 
     public void readFileMovie() {
         String filename = "C:\\Users\\USER\\Desktop\\IT\\DATN\\movies_unlimited\\src\\main\\java\\com\\movies_unlimited\\data\\ml-data\\u.item";
         List<ProductEntity> productEntities = new ArrayList<>();
         try {
-
             BufferedReader br = new BufferedReader(new FileReader(filename));
             String line = br.readLine();
             while (line != null) {
@@ -113,13 +109,21 @@ public class DataSeedingListener implements ApplicationListener<ContextRefreshed
                 String[] splitLine = line.split("\\|");
                 productEntity.setId(Integer.parseInt(splitLine[0]));
                 productEntity.setName(splitLine[1]);
-                System.out.println(splitLine[2]);
-
-                line = br.readLine();
+                DateFormat format = new SimpleDateFormat("dd-MMMM-yyyy", Locale.ENGLISH);
+                Date date = format.parse(splitLine[2]);
+                productEntity.setDate(date);
+                Set<CategoryEntity> categoryEntities = new HashSet<>();
+                for (int i=5;i<=23;i++){
+                    if (splitLine[i].equals("1")){
+                        categoryEntities.add(categoryRepository.findById(i-4));
+                    }
+                }
+                productEntity.setCategoryEntities(categoryEntities);
                 productEntities.add(productEntity);
+                line = br.readLine();
             }
 
-        } catch (IOException e) {
+        } catch (Exception e) {
             e.printStackTrace();
         }
         productRepository.saveAll(productEntities);

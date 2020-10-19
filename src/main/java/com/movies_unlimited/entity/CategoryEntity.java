@@ -12,6 +12,7 @@ import lombok.NoArgsConstructor;
 import javax.persistence.*;
 import java.io.Serializable;
 import java.util.List;
+import java.util.Set;
 
 @Entity
 @Table(name = "category")
@@ -22,13 +23,12 @@ public class CategoryEntity implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
-    
+
     private String name;
 
     private String description;
 
-    @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "product_id",nullable = false)
-    private ProductEntity product;
+    @ManyToMany(mappedBy = "categoryEntities",cascade = CascadeType.ALL,fetch = FetchType.EAGER)
+    private Set<ProductEntity> productEntities;
 
 }

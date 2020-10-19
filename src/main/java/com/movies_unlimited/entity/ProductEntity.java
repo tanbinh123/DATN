@@ -10,6 +10,7 @@ import javax.persistence.*;
 import java.io.Serializable;
 import java.util.Date;
 import java.util.List;
+import java.util.Set;
 
 @Entity
 @Table(name = "product")
@@ -28,11 +29,20 @@ public class ProductEntity implements Serializable {
 
     private String description;
 
+    @DateTimeFormat(pattern = "dd-MM-yyyy")
+    @Temporal(TemporalType.DATE)
+    @Column(name = "date",nullable = false)
+    private Date date;
+
     @Enumerated(EnumType.STRING)
     private ActiveStatus status = ActiveStatus.ACTIVE;
 
-    @OneToMany(mappedBy = "product", fetch = FetchType.LAZY)
-    private CategoryEntity category;
+
+    @ManyToMany(fetch = FetchType.EAGER, cascade = CascadeType.MERGE)
+    @JoinTable(name = "category_product_relation",
+            joinColumns = @JoinColumn(name = "product_id", referencedColumnName = "id"),
+            inverseJoinColumns = @JoinColumn(name = "category_id", referencedColumnName = "id"))
+    private Set<CategoryEntity> categoryEntities;
 
     @ManyToMany(mappedBy = "products")
     private List<PromotionEntity> promotions;
