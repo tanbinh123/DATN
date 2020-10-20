@@ -1,7 +1,6 @@
 package com.movies_unlimited.service;
 
 import com.movies_unlimited.entity.RatingEntity;
-import com.movies_unlimited.recommender_system.ValueComparator;
 import com.movies_unlimited.repository.RatingRepository;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -27,12 +26,10 @@ public class RatingService {
 
     public void readFile() {
         List<RatingEntity> ratingEntityList = ratingRepository.findAll();
-        System.out.println(ratingEntityList.size());
         for (RatingEntity ratingEntity : ratingEntityList) {
             int idUser = ratingEntity.getAccount().getId();
             int idMovie = ratingEntity.getProduct().getId();
             int rating = ratingEntity.getRating();
-
             if (ratings.containsKey(idUser)) {
                 ratings.get(idUser).put(idMovie, rating);
                 averageRating.put(idUser, averageRating.get(idUser) + rating);

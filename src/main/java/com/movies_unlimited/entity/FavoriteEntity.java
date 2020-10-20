@@ -12,17 +12,17 @@ import java.io.Serializable;
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
-public class FavoriteEntity implements Serializable{
+public class FavoriteEntity implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
-    
+
     @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "product_id",nullable = false)
+    @JoinColumn(name = "product_id", nullable = false)
     private ProductEntity product;
-    
+
     @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "account_id",nullable = false)
+    @JoinColumn(name = "account_id", nullable = false)
     private AccountEntity account;
 
 }

@@ -31,7 +31,7 @@ public class ProductEntity implements Serializable {
 
     @DateTimeFormat(pattern = "dd-MM-yyyy")
     @Temporal(TemporalType.DATE)
-    @Column(name = "date",nullable = false)
+    @Column(name = "date", nullable = false)
     private Date date;
 
     @Enumerated(EnumType.STRING)

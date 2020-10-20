@@ -12,14 +12,14 @@ import java.io.Serializable;
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
-public class ShippingEntity implements Serializable{
+public class ShippingEntity implements Serializable {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @PrimaryKeyJoinColumn
     private int id;
-    
-    @Column(name = "full_name",nullable = false)
+
+    @Column(name = "full_name", nullable = false)
     private String fullName;
 
     @Column(nullable = false)

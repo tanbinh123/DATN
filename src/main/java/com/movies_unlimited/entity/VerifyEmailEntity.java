@@ -12,14 +12,14 @@ import java.io.Serializable;
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
-public class VerifyEmailEntity implements Serializable{
+public class VerifyEmailEntity implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
-    
-    @Column(nullable = false,unique = true)
+
+    @Column(nullable = false, unique = true)
     private String email;
-    
+
     @Column(nullable = false)
     private String code;
 

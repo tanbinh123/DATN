@@ -31,16 +31,17 @@ public class OrderEntity implements Serializable {
 
     @DateTimeFormat(pattern = "yyyy-MM-dd")
     @Temporal(TemporalType.DATE)
-    @Column(name = "order_date",nullable = false)
+    @Column(name = "order_date", nullable = false)
     private Date orderDate;
 
-    @Column(name = "total_price",nullable = false)
+    @Column(name = "total_price", nullable = false)
     private double totalPrice;
 
     @OneToMany(mappedBy = "order", fetch = FetchType.EAGER)
     List<OrderDetailEntity> orderDetails;
 
     @OneToOne(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
-    @JoinColumn(name = "shipping_id",nullable = false)
+    @JoinColumn(name = "shipping_id", nullable = false)
     private ShippingEntity shipping;
+
 }

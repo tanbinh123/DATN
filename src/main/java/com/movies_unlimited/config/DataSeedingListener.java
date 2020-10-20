@@ -13,10 +13,9 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Component;
 
 import java.io.BufferedReader;
+import java.io.File;
 import java.io.FileReader;
-import java.io.IOException;
 import java.text.DateFormat;
-import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.*;
 
@@ -75,28 +74,8 @@ public class DataSeedingListener implements ApplicationListener<ContextRefreshed
         }
     }
 
-    @Override
-    public void onApplicationEvent(ContextRefreshedEvent event) {
-//        addRoleIfMissing(Role.ROLE_ADMIN);
-//        addRoleIfMissing(Role.ROLE_USER);
-//
-//        for (int i = 0; i < 943; ++i) {
-//            String username = "test" + i + "@gmail.com";
-//            addUserIfMissing(username, "123456789aaA", Role.ROLE_ADMIN, Role.ROLE_USER);
-//        }
-//
-//        addUserIfMissing("congtrinh2404@gmail.com", "123456789aaA", Role.ROLE_USER);
-//        addUserIfMissing("congtrinhadmin2404@gmail.com", "123456789aaA", Role.ROLE_USER, Role.ROLE_ADMIN);
-//
-//        for (CategoryEnum category : CategoryEnum.values()) {
-//            addCategoryIfMissing(category);
-//        }
-//        readFileMovie();
-//        readFileRating();
-    }
-
     public void readFileMovie() {
-        String filename = "C:\\Users\\USER\\Desktop\\DATN\\src\\main\\java\\com\\movies_unlimited\\data\\ml-data\\u.item";
+        String filename = new File("src/main/java/com/movies_unlimited/data/ml-data/u.item").getAbsolutePath();
         List<ProductEntity> productEntities = new ArrayList<>();
         try {
             BufferedReader br = new BufferedReader(new FileReader(filename));
@@ -127,7 +106,7 @@ public class DataSeedingListener implements ApplicationListener<ContextRefreshed
     }
 
     public void readFileRating() {
-        String filename = "C:\\Users\\USER\\Desktop\\DATN\\src\\main\\java\\com\\movies_unlimited\\data\\ml-data\\u.data";
+        String filename = new File("src/main/java/com/movies_unlimited/data/ml-data/u.date").getAbsolutePath();
         List<RatingEntity> ratings = new ArrayList<>();
         try {
             BufferedReader br = new BufferedReader(new FileReader(filename));
@@ -137,7 +116,7 @@ public class DataSeedingListener implements ApplicationListener<ContextRefreshed
                 String[] splitLine = line.split("\t");
                 rating.setAccount(accountRepository.findById(Integer.parseInt(splitLine[0])));
                 rating.setProduct(productRepository.findById(Integer.parseInt(splitLine[1])));
-                rating.setRating(Integer.parseInt(splitLine[0]));
+                rating.setRating(Integer.parseInt(splitLine[2]));
                 ratings.add(rating);
                 line = br.readLine();
             }
@@ -146,6 +125,26 @@ public class DataSeedingListener implements ApplicationListener<ContextRefreshed
             e.printStackTrace();
         }
         ratingRepository.saveAll(ratings);
+    }
+
+    @Override
+    public void onApplicationEvent(ContextRefreshedEvent event) {
+//        addRoleIfMissing(Role.ROLE_ADMIN);
+//        addRoleIfMissing(Role.ROLE_USER);
+//
+//        for (int i = 0; i < 943; ++i) {
+//            String username = "test" + i + "@gmail.com";
+//            addUserIfMissing(username, "123456789aaA", Role.ROLE_ADMIN, Role.ROLE_USER);
+//        }
+//
+//        addUserIfMissing("congtrinh2404@gmail.com", "123456789aaA", Role.ROLE_USER);
+//        addUserIfMissing("congtrinhadmin2404@gmail.com", "123456789aaA", Role.ROLE_USER, Role.ROLE_ADMIN);
+//
+//        for (CategoryEnum category : CategoryEnum.values()) {
+//            addCategoryIfMissing(category);
+//        }
+//        readFileMovie();
+//        readFileRating();
     }
 
 }

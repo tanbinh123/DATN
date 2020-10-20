@@ -14,26 +14,25 @@ import java.util.Date;
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
-public class CommentEntity implements Serializable{
+public class CommentEntity implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
-    
+
     @DateTimeFormat(pattern = "yyyy-mm-dd")
     @Temporal(TemporalType.DATE)
     @Column(name = "comment_date", nullable = false)
     private Date commentDate;
-    
+
     @Column(nullable = false)
     private String content;
-    
-    @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "product_id",nullable = false)
-    private ProductEntity product;
-    
-    @ManyToOne(fetch = FetchType.EAGER)
-    @JoinColumn(name = "account_id",nullable = false)
-    private AccountEntity account;
 
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "product_id", nullable = false)
+    private ProductEntity product;
+
+    @ManyToOne(fetch = FetchType.EAGER)
+    @JoinColumn(name = "account_id", nullable = false)
+    private AccountEntity account;
 
 }
