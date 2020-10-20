@@ -42,7 +42,7 @@ public class ProductEntity implements Serializable {
     @JoinTable(name = "category_product_relation",
             joinColumns = @JoinColumn(name = "product_id", referencedColumnName = "id"),
             inverseJoinColumns = @JoinColumn(name = "category_id", referencedColumnName = "id"))
-    private Set<CategoryEntity> categoryEntities;
+    private List<CategoryEntity> categories;
 
     @ManyToMany(mappedBy = "products")
     private List<PromotionEntity> promotions;
@@ -52,6 +52,9 @@ public class ProductEntity implements Serializable {
 
     @OneToMany(mappedBy = "product", fetch = FetchType.LAZY)
     private List<CommentEntity> comments;
+
+    @OneToMany(mappedBy = "product", fetch = FetchType.LAZY)
+    private List<RatingEntity> ratings;
 
     private String image;
 

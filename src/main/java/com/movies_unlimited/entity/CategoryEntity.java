@@ -28,7 +28,4 @@ public class CategoryEntity implements Serializable {
 
     private String description;
 
-    @ManyToMany(mappedBy = "categoryEntities",cascade = CascadeType.ALL,fetch = FetchType.EAGER)
-    private Set<ProductEntity> productEntities;
-
 }
