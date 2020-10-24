@@ -8,8 +8,8 @@ import org.springframework.data.jpa.repository.config.EnableJpaAuditing;
 @EnableJpaAuditing
 public class MoviesUnlimitedApplication {
 
-	public static void main(String[] args) {
-		SpringApplication.run(MoviesUnlimitedApplication.class, args);
-	}
+    public static void main(String[] args) {
+        SpringApplication.run(MoviesUnlimitedApplication.class, args);
+    }
 
 }
