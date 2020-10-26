@@ -23,4 +23,8 @@ public class AccountService {
         accountRepository.save(accountEntity);
     }
 
+    public AccountEntity getAccountByEmail(String email){
+        return accountRepository.findAccountByEmail(email);
+    }
+
 }

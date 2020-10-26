@@ -1,5 +1,6 @@
 package com.movies_unlimited.entity;
 
+import com.movies_unlimited.Ultil.StringUltil;
 import com.movies_unlimited.entity.enums.ActiveStatus;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -59,5 +60,12 @@ public class AccountEntity implements Serializable {
 
     @OneToMany(mappedBy = "account", fetch = FetchType.LAZY)
     private List<OrderEntity> orders;
+
+    public String getBirthdayFormat(){
+        if(birthday==null){
+            return "";
+        }
+        return StringUltil.fromDateToUS(birthday);
+    }
 
 }

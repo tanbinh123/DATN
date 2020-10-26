@@ -18,5 +18,6 @@
         <sec:authorize access="hasRole('ROLE_ADMIN')">
         <li><a href="<c:url value="/admin?action=account-manager"></c:url>">Account manager</a></li>       
         </sec:authorize>
+
     <li><a href="<c:url value="/logout"></c:url>">Logout</a></li>
     </sec:authorize>
