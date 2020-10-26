@@ -25,4 +25,10 @@ public interface ProductRepository extends PagingAndSortingRepository<ProductEnt
     @Query(value = "select p from ProductEntity p where p.status = :status")
     Page<ProductEntity> findAllActiveProductPageable(@Param("status") ActiveStatus status, Pageable pageable);
 
+    @Query(value = "select p from ProductEntity p " +
+            "JOIN p.categories c " +
+            "where c.id = :categoryID and p.status = :status")
+    Page<ProductEntity> findProductByCategoryID(@Param("categoryID") int categoryID, @Param("status") ActiveStatus status, Pageable pageable);
+
+
 }

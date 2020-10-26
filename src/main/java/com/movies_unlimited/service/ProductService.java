@@ -29,8 +29,24 @@ public class ProductService {
     private final RatingService users;
 
     public Page<ProductEntity> getProductsActive(int page){
-        Pageable pageable = PageRequest.of(1, 12, Sort.by("date").descending());
+        Pageable pageable = PageRequest.of(page, 12, Sort.by("date").descending());
         return productRepository.findAllActiveProductPageable(ActiveStatus.ACTIVE,pageable);
+    }
+
+    public Page<ProductEntity> getProductByCategoryId(int categoryId, int page, String sort) {
+        Pageable pageable;
+        if(sort.equals("Latest")){
+            pageable = PageRequest.of(page, 12, Sort.by("date").descending());
+        }else if(sort.equals("Oldest")){
+            pageable = PageRequest.of(page, 12, Sort.by("date").ascending());
+        }else if(sort.equals("HightoLow")){
+            pageable = PageRequest.of(page, 12, Sort.by("price").descending());
+        }else if(sort.equals("LowtoHigh")){
+            pageable = PageRequest.of(page, 12, Sort.by("price").ascending());
+        }else{
+            pageable = PageRequest.of(page, 12, Sort.by("date").descending());
+        }
+        return productRepository.findProductByCategoryID(categoryId,ActiveStatus.ACTIVE,pageable);
     }
 
 //    public void recommendMovie() {

@@ -41,9 +41,7 @@
 				</div>
 			</div>
 		</div>
-
 		<!-- Movies -->
-
 		<div class="products">
 			<div class="container">
 				<div class="row products_bar_row">
@@ -380,9 +378,7 @@
 				</div>
 			</div>
 		</div>
-
 		<!-- Footer -->
-
 		<jsp:include page="./include/footer.jsp"/>
 	</div>
 
