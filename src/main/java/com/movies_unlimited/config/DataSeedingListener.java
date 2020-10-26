@@ -131,6 +131,7 @@ public class DataSeedingListener implements ApplicationListener<ContextRefreshed
     public void onApplicationEvent(ContextRefreshedEvent event) {
 //        addRoleIfMissing(Role.ROLE_ADMIN);
 //        addRoleIfMissing(Role.ROLE_USER);
+//        addRoleIfMissing(Role.ROLE_SELLER);
 //
 //        for (int i = 0; i < 943; ++i) {
 //            String username = "test" + i + "@gmail.com";

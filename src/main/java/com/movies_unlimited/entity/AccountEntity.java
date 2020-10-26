@@ -2,6 +2,7 @@ package com.movies_unlimited.entity;
 
 import com.movies_unlimited.Ultil.StringUltil;
 import com.movies_unlimited.entity.enums.ActiveStatus;
+import com.movies_unlimited.entity.enums.Role;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
@@ -38,7 +39,7 @@ public class AccountEntity implements Serializable {
     @Column(unique = true, nullable = false)
     private String email;
 
-    @DateTimeFormat(pattern = "yyyy-mm-dd")
+    @DateTimeFormat(pattern = "yyyy-MM-dd")
     @Temporal(TemporalType.DATE)
     private Date birthday;
 
@@ -66,6 +67,20 @@ public class AccountEntity implements Serializable {
             return "";
         }
         return StringUltil.fromDateToUS(birthday);
+    }
+    public String getRoleString(){
+
+        for(AccountRoleEntity role : accountRoles){
+            if(role!=null && role.getName().equals("ROLE_ADMIN")){
+                return "ROLE_ADMIN";
+            }
+        }
+        for(AccountRoleEntity role : accountRoles){
+            if(role!=null && role.getName().equals("ROLE_SELLER")){
+                return "ROLE_SELLER";
+            }
+        }
+        return "ROLE_USER";
     }
 
 }

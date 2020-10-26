@@ -19,12 +19,20 @@ import org.springframework.stereotype.Service;
 public class AccountService {
     private final AccountRepository accountRepository;
 
-    public void save(AccountEntity accountEntity){
-        accountRepository.save(accountEntity);
+    public AccountEntity save(AccountEntity accountEntity){
+        return accountRepository.save(accountEntity);
     }
 
     public AccountEntity getAccountByEmail(String email){
         return accountRepository.findAccountByEmail(email);
+    }
+    public Page<AccountEntity> getAccounts(int page){
+        Pageable pageable = PageRequest.of(page-1, 9);
+        return (Page<AccountEntity>) accountRepository.findAll(pageable);
+    }
+
+    public AccountEntity getAccountById(int id){
+        return accountRepository.findById(id);
     }
 
 }
