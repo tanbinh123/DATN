@@ -94,14 +94,7 @@
                         <div class="col">
                             <div class="page_nav">
                                 <ul class="d-flex flex-row align-items-start justify-content-center">
-
-
-
-
-
-
                                     <c:forEach begin="${param.page > 5 ? param.page - 5 : 1}" end="${param.page - page + 5 <= 0 ? param.page + 5 : page}" varStatus="status">
-
                                         <c:choose>
                                             <c:when test="${param.page==null && status.index==1}">
                                                 <li class="active"><a href="<c:url value="/admin?action=account-manager&page=${status.index}"/>">${status.index}</a></li>

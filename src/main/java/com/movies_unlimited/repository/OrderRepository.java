@@ -9,4 +9,6 @@ import org.springframework.data.repository.PagingAndSortingRepository;
 @Repository
 public interface OrderRepository extends PagingAndSortingRepository<OrderEntity, Integer> {
     Page<OrderEntity> findByAccount_id (int id, Pageable pageable);
+    OrderEntity findById(int id);
+
 }

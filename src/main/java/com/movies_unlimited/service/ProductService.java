@@ -33,6 +33,10 @@ public class ProductService {
         return productRepository.findAllActiveProductPageable(ActiveStatus.ACTIVE,pageable);
     }
 
+    public List<ProductEntity> getProductsActive(){
+        return productRepository.findAllActiveProduct(ActiveStatus.ACTIVE);
+    }
+
     public Page<ProductEntity> getProductByCategoryId(int categoryId, int page, String sort) {
         Pageable pageable;
         if(sort.equals("Latest")){
@@ -47,6 +51,27 @@ public class ProductService {
             pageable = PageRequest.of(page, 12, Sort.by("date").descending());
         }
         return productRepository.findProductByCategoryID(categoryId,ActiveStatus.ACTIVE,pageable);
+    }
+
+    public Page<ProductEntity> getProducts(Integer page) {
+        Pageable pageable = PageRequest.of(page-1, 9);
+        return (Page<ProductEntity>) productRepository.findAll(pageable);
+    }
+
+    public List<ProductEntity> getProducts(){
+        return (List<ProductEntity>) productRepository.findAll();
+    }
+
+    public ProductEntity getProductById(Integer id) {
+        return productRepository.getById(id);
+    }
+
+    public List<ProductEntity> getProductsByPromotionId(int id){
+        return productRepository.findAllProductByPromotionId(id);
+    }
+
+    public ProductEntity saveProduct(ProductEntity product) {
+        return productRepository.save(product);
     }
 
 //    public void recommendMovie() {

@@ -10,13 +10,13 @@
         <meta http-equiv="X-UA-Compatible" content="IE=edge">
         <meta name="description" content="Little Closet template">
         <meta name="viewport" content="width=device-width, initial-scale=1">
-        <link rel="stylesheet" type="text/css" href="<c:url value="/resources/styles/bootstrap-4.1.2/bootstrap.min.css"></c:url>">
-        <link href="<c:url value="/resources/plugins/font-awesome-4.7.0/css/font-awesome.min.css"></c:url>" rel="stylesheet" type="text/css">
-        <link rel="stylesheet" type="text/css" href="<c:url value="/resources/plugins/OwlCarousel2-2.2.1/owl.carousel.css"></c:url>">
-        <link rel="stylesheet" type="text/css" href="<c:url value="/resources/plugins/OwlCarousel2-2.2.1/owl.theme.default.css"></c:url>">
-        <link rel="stylesheet" type="text/css" href="<c:url value="/resources/plugins/OwlCarousel2-2.2.1/animate.css"></c:url>">
-        <link rel="stylesheet" type="text/css" href="<c:url value="/resources/styles/main_styles.css"></c:url>">
-        <link rel="stylesheet" type="text/css" href="<c:url value="/resources/styles/responsive.css"></c:url>">
+        <link rel="stylesheet" type="text/css" href="<c:url value="/styles/bootstrap-4.1.2/bootstrap.min.css"></c:url>">
+        <link href="<c:url value="/plugins/font-awesome-4.7.0/css/font-awesome.min.css"></c:url>" rel="stylesheet" type="text/css">
+        <link rel="stylesheet" type="text/css" href="<c:url value="/plugins/OwlCarousel2-2.2.1/owl.carousel.css"></c:url>">
+        <link rel="stylesheet" type="text/css" href="<c:url value="/plugins/OwlCarousel2-2.2.1/owl.theme.default.css"></c:url>">
+        <link rel="stylesheet" type="text/css" href="<c:url value="/plugins/OwlCarousel2-2.2.1/animate.css"></c:url>">
+        <link rel="stylesheet" type="text/css" href="<c:url value="/styles/main_styles.css"></c:url>">
+        <link rel="stylesheet" type="text/css" href="<c:url value="/styles/responsive.css"></c:url>">
             <style>
                 .img-thumbnail-list{
                     width: 50px;
@@ -71,7 +71,6 @@
                                 <tr>
                                     <th>Product ID</th>                                    
                                     <th>Name</th>
-                                    <th>Code</th>
                                     <th>Price</th>   
                                     <th>Status</th>
                                     <th>Action</th>
@@ -79,8 +78,7 @@
                                 <c:forEach var="product" items="${products}">
                                     <tr>
                                         <td>${product.id}</td>
-                                        <td><a href="<c:url value="/product?id=${product.id}"/>"><img src="${product.images[0].url}" class="img-thumbnail-list"/>${product.name}</a></td>
-                                        <td>${product.code}</td>                                        
+                                        <td><a href="<c:url value="/product?id=${product.id}"/>"><img src="${product.image}" class="img-thumbnail-list"/>${product.name}</a></td>
                                         <td>${product.price}</td>
                                         <c:if test="${product.status=='ACTIVE'}">
                                             <td style="color: blue">${product.status}</td>
@@ -98,7 +96,10 @@
                         <div class="col">
                             <div class="page_nav">
                                 <ul class="d-flex flex-row align-items-start justify-content-center">
-                                    <c:forEach begin="1" end="${page}" varStatus="status">
+
+<c:forEach begin="${param.page > 5 ? param.page - 5 : 1}" end="${param.page - page + 5 <= 0 ? param.page + 5 : page}" varStatus="status">
+
+
                                         <c:choose>
                                             <c:when test="${param.page==null && status.index==1}">
                                                 <li class="active"><a href="<c:url value="/seller?action=product-manager&page=${status.index}"/>">${status.index}</a></li>
@@ -119,29 +120,23 @@
                         </div>
                     </div>                    
                 </div>
-                <!-- profile -->
-
-
-
             </div>
         </div>
-
         <!-- Footer -->
         <jsp:include page="../include/footer.jsp"/>
-
         <!-- script -->
-        <script src="<c:url value="/resources/js/jquery-3.2.1.min.js"></c:url>"></script>
-        <script src="<c:url value="/resources/styles/bootstrap-4.1.2/popper.js"></c:url>"></script>
-        <script src="<c:url value="/resources/styles/bootstrap-4.1.2/bootstrap.min.js"></c:url>"></script>
-        <script src="<c:url value="/resources/plugins/greensock/TweenMax.min.js"></c:url>"></script>
-        <script src="<c:url value="/resources/plugins/greensock/TimelineMax.min.js"></c:url>"></script>
-        <script src="<c:url value="/resources/plugins/scrollmagic/ScrollMagic.min.js"></c:url>"></script>
-        <script src="<c:url value="/resources/plugins/greensock/animation.gsap.min.js"></c:url>"></script>
-        <script src="<c:url value="/resources/plugins/greensock/ScrollToPlugin.min.js"></c:url>"></script>
-        <script src="<c:url value="/resources/plugins/OwlCarousel2-2.2.1/owl.carousel.js"></c:url>"></script>
-        <script src="<c:url value="/resources/plugins/easing/easing.js"></c:url>"></script>
-        <script src="<c:url value="/resources/plugins/progressbar/progressbar.min.js"></c:url>"></script>
-        <script src="<c:url value="/resources/plugins/parallax-js-master/parallax.min.js"></c:url>"></script>
-        <script src="<c:url value="/resources/js/custom.js"></c:url>"></script>
+        <script src="<c:url value="/js/jquery-3.2.1.min.js"></c:url>"></script>
+        <script src="<c:url value="/styles/bootstrap-4.1.2/popper.js"></c:url>"></script>
+        <script src="<c:url value="/styles/bootstrap-4.1.2/bootstrap.min.js"></c:url>"></script>
+        <script src="<c:url value="/plugins/greensock/TweenMax.min.js"></c:url>"></script>
+        <script src="<c:url value="/plugins/greensock/TimelineMax.min.js"></c:url>"></script>
+        <script src="<c:url value="/plugins/scrollmagic/ScrollMagic.min.js"></c:url>"></script>
+        <script src="<c:url value="/plugins/greensock/animation.gsap.min.js"></c:url>"></script>
+        <script src="<c:url value="/plugins/greensock/ScrollToPlugin.min.js"></c:url>"></script>
+        <script src="<c:url value="/plugins/OwlCarousel2-2.2.1/owl.carousel.js"></c:url>"></script>
+        <script src="<c:url value="/plugins/easing/easing.js"></c:url>"></script>
+        <script src="<c:url value="/plugins/progressbar/progressbar.min.js"></c:url>"></script>
+        <script src="<c:url value="/plugins/parallax-js-master/parallax.min.js"></c:url>"></script>
+        <script src="<c:url value="/js/custom.js"></c:url>"></script>
     </body>
 </html>

@@ -10,13 +10,13 @@
         <meta http-equiv="X-UA-Compatible" content="IE=edge">
         <meta name="description" content="Little Closet template">
         <meta name="viewport" content="width=device-width, initial-scale=1">
-        <link rel="stylesheet" type="text/css" href="<c:url value="/resources/styles/bootstrap-4.1.2/bootstrap.min.css"></c:url>">
-        <link href="<c:url value="/resources/plugins/font-awesome-4.7.0/css/font-awesome.min.css"></c:url>" rel="stylesheet" type="text/css">
-        <link rel="stylesheet" type="text/css" href="<c:url value="/resources/plugins/OwlCarousel2-2.2.1/owl.carousel.css"></c:url>">
-        <link rel="stylesheet" type="text/css" href="<c:url value="/resources/plugins/OwlCarousel2-2.2.1/owl.theme.default.css"></c:url>">
-        <link rel="stylesheet" type="text/css" href="<c:url value="/resources/plugins/OwlCarousel2-2.2.1/animate.css"></c:url>">
-        <link rel="stylesheet" type="text/css" href="<c:url value="/resources/styles/main_styles.css"></c:url>">
-        <link rel="stylesheet" type="text/css" href="<c:url value="/resources/styles/responsive.css"></c:url>">
+        <link rel="stylesheet" type="text/css" href="<c:url value="/styles/bootstrap-4.1.2/bootstrap.min.css"></c:url>">
+        <link href="<c:url value="/plugins/font-awesome-4.7.0/css/font-awesome.min.css"></c:url>" rel="stylesheet" type="text/css">
+        <link rel="stylesheet" type="text/css" href="<c:url value="/plugins/OwlCarousel2-2.2.1/owl.carousel.css"></c:url>">
+        <link rel="stylesheet" type="text/css" href="<c:url value="/plugins/OwlCarousel2-2.2.1/owl.theme.default.css"></c:url>">
+        <link rel="stylesheet" type="text/css" href="<c:url value="/plugins/OwlCarousel2-2.2.1/animate.css"></c:url>">
+        <link rel="stylesheet" type="text/css" href="<c:url value="/styles/main_styles.css"></c:url>">
+        <link rel="stylesheet" type="text/css" href="<c:url value="/styles/responsive.css"></c:url>">
             <style>
                 /*            td{
                                 text-align: center;
@@ -141,18 +141,18 @@
 
         <!-- script -->
 
-        <script src="<c:url value="/resources/js/jquery-3.2.1.min.js"></c:url>"></script>
-        <script src="<c:url value="/resources/styles/bootstrap-4.1.2/popper.js"></c:url>"></script>
-        <script src="<c:url value="/resources/styles/bootstrap-4.1.2/bootstrap.min.js"></c:url>"></script>
-        <script src="<c:url value="/resources/plugins/greensock/TweenMax.min.js"></c:url>"></script>
-        <script src="<c:url value="/resources/plugins/greensock/TimelineMax.min.js"></c:url>"></script>
-        <script src="<c:url value="/resources/plugins/scrollmagic/ScrollMagic.min.js"></c:url>"></script>
-        <script src="<c:url value="/resources/plugins/greensock/animation.gsap.min.js"></c:url>"></script>
-        <script src="<c:url value="/resources/plugins/greensock/ScrollToPlugin.min.js"></c:url>"></script>
-        <script src="<c:url value="/resources/plugins/OwlCarousel2-2.2.1/owl.carousel.js"></c:url>"></script>
-        <script src="<c:url value="/resources/plugins/easing/easing.js"></c:url>"></script>
-        <script src="<c:url value="/resources/plugins/progressbar/progressbar.min.js"></c:url>"></script>
-        <script src="<c:url value="/resources/plugins/parallax-js-master/parallax.min.js"></c:url>"></script>
-        <script src="<c:url value="/resources/js/custom.js"></c:url>"></script>
+        <script src="<c:url value="/js/jquery-3.2.1.min.js"></c:url>"></script>
+        <script src="<c:url value="/styles/bootstrap-4.1.2/popper.js"></c:url>"></script>
+        <script src="<c:url value="/styles/bootstrap-4.1.2/bootstrap.min.js"></c:url>"></script>
+        <script src="<c:url value="/plugins/greensock/TweenMax.min.js"></c:url>"></script>
+        <script src="<c:url value="/plugins/greensock/TimelineMax.min.js"></c:url>"></script>
+        <script src="<c:url value="/plugins/scrollmagic/ScrollMagic.min.js"></c:url>"></script>
+        <script src="<c:url value="/plugins/greensock/animation.gsap.min.js"></c:url>"></script>
+        <script src="<c:url value="/plugins/greensock/ScrollToPlugin.min.js"></c:url>"></script>
+        <script src="<c:url value="/plugins/OwlCarousel2-2.2.1/owl.carousel.js"></c:url>"></script>
+        <script src="<c:url value="/plugins/easing/easing.js"></c:url>"></script>
+        <script src="<c:url value="/plugins/progressbar/progressbar.min.js"></c:url>"></script>
+        <script src="<c:url value="/plugins/parallax-js-master/parallax.min.js"></c:url>"></script>
+        <script src="<c:url value="/js/custom.js"></c:url>"></script>
     </body>
 </html>

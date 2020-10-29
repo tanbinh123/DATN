@@ -15,7 +15,7 @@ import java.util.List;
 @Repository
 public interface ProductRepository extends PagingAndSortingRepository<ProductEntity, Integer> {
 
-    ProductEntity findById(int id);
+    ProductEntity getById(int id);
 
     ProductEntity findByName(String name);
 
@@ -30,5 +30,6 @@ public interface ProductRepository extends PagingAndSortingRepository<ProductEnt
             "where c.id = :categoryID and p.status = :status")
     Page<ProductEntity> findProductByCategoryID(@Param("categoryID") int categoryID, @Param("status") ActiveStatus status, Pageable pageable);
 
-
+    @Query(value = "select * from product join product_promotion_relation on product.id = product_promotion_relation.product_id where product_promotion_relation.promotion_id = ?1", nativeQuery = true)
+    List<ProductEntity> findAllProductByPromotionId(int id);
 }

@@ -7,6 +7,7 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
+import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 
 @Service
@@ -21,4 +22,16 @@ public class OrderService {
         return orderRepository.findByAccount_id(id,pageable);
     }
 
+    public Page<OrderEntity> getOrders(int page){
+        Pageable pageable = PageRequest.of(page-1, 9, Sort.Direction.DESC, "orderDate");
+        return (Page<OrderEntity>) orderRepository.findAll(pageable);
+    }
+
+    public OrderEntity getOrderById(int id){
+        return orderRepository.findById(id);
+    }
+
+    public OrderEntity saveOrder(OrderEntity order) {
+        return orderRepository.save(order);
+    }
 }

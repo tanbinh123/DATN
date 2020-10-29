@@ -115,7 +115,7 @@ public class DataSeedingListener implements ApplicationListener<ContextRefreshed
                 RatingEntity rating = new RatingEntity();
                 String[] splitLine = line.split("\t");
                 rating.setAccount(accountRepository.findById(Integer.parseInt(splitLine[0])));
-                rating.setProduct(productRepository.findById(Integer.parseInt(splitLine[1])));
+                rating.setProduct(productRepository.getById(Integer.parseInt(splitLine[1])));
                 rating.setRating(Integer.parseInt(splitLine[2]));
                 ratings.add(rating);
                 line = br.readLine();

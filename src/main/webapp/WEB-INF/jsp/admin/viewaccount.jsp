@@ -65,7 +65,7 @@
                                         </tr>
                                         <tr>
                                             <th>Birthday</th>
-                                            <td><input type="date" name="birthday" value="${account.birthday}" class="form-control"/></td>
+                                            <td><input type="date" name="birthday" value="${account.birthdayFormat}" class="form-control"/></td>
                                         </tr>
                                         <tr>
                                             <th>Address</th>

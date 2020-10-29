@@ -35,4 +35,7 @@ public class AccountService {
         return accountRepository.findById(id);
     }
 
+    public AccountEntity findAccountByOrderId(int id){
+        return accountRepository.findAccountByOrderId(id);
+    }
 }

@@ -58,4 +58,8 @@ public class ProductEntity implements Serializable {
 
     private String image;
 
+    public String getStatusString(){
+        return status.name();
+    }
+
 }

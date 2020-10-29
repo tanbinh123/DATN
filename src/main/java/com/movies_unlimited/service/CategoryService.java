@@ -6,6 +6,8 @@ import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
+
 @Service
 @RequiredArgsConstructor
 @Slf4j
@@ -14,5 +16,13 @@ public class CategoryService {
 
     public CategoryEntity getCategoryById(int id){
         return categoryRepository.findById(id);
+    }
+
+    public List<CategoryEntity> getCategorys(){
+        return (List<CategoryEntity>) categoryRepository.findAll();
+    }
+
+    public List<CategoryEntity> getCategoryByProductId(Integer id) {
+        return categoryRepository.findSizeByProductId(id);
     }
 }
