@@ -118,6 +118,7 @@ public class FunctionController {
     @RequestMapping(value = "/comment", method = RequestMethod.POST)
     public String comment(@ModelAttribute(value = "content") String content,
                           @ModelAttribute(value = "productId") int productId) {
+        System.out.println("123");
         AccountEntity account = accountRepository.findAccountByEmail(AccountUltil.getAccount());
         if (account != null) {
             ProductEntity product = productService.getProductById(productId);

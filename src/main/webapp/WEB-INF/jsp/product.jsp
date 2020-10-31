@@ -97,7 +97,7 @@ checked<%@page contentType="text/html" pageEncoding="UTF-8"%>
                                                         </c:if>
                                                     </div></div>
                                             </div>
-                                            <div class="product_button product_cart text-center d-flex flex-column align-items-center justify-content-center" onclick="location.href = '<c:url value="/order/${product.id}/"></c:url>' + getSizeSelected();">
+                                            <div class="product_button product_cart text-center d-flex flex-column align-items-center justify-content-center" onclick="location.href='<c:url value="/order/${product.id}/"></c:url>'">
                                                 <div><div><img src="<c:url value="/images/cart.svg"></c:url>" class="svg" alt=""><div>+</div></div></div>
                                                 </div>                                               
                                             </div>

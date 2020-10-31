@@ -17,6 +17,7 @@ import org.springframework.web.bind.annotation.RestController;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.util.List;
+import java.util.Set;
 
 @Slf4j
 @RequiredArgsConstructor
@@ -32,10 +33,10 @@ public class ExportController {
             OrderEntity order = orders.get(i);
             AccountEntity account = accountService.findAccountByOrderId(order.getId());
             order.setAccount(account);
-            List<OrderDetailEntity> orderDetails = order.getOrderDetails();
-            for (int j = 0; j < orderDetails.size(); j++){
-                OrderDetailEntity od = orderDetails.get(j);
-                orderDetails.set(j, od);
+            Set<OrderDetailEntity> orderDetails = order.getOrderDetails();
+            for (OrderDetailEntity orderDetail:
+                    orderDetails) {
+                orderDetails.add(orderDetail);
             }
             order.setOrderDetails(orderDetails);
             orders.set(i, order);

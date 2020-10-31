@@ -17,9 +17,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.HttpSession;
-import java.util.ArrayList;
-import java.util.Date;
-import java.util.List;
+import java.util.*;
 
 @Slf4j
 @RequiredArgsConstructor
@@ -186,13 +184,13 @@ public class OrderController {
         return "checkoutStatus";
     }
 
-    @RequestMapping("/order/{productId}/{sizeId}")
-    public String orderProduct(HttpSession session, @PathVariable(value = "productId") int productId, @PathVariable(value = "sizeId") int sizeId) {
+    @RequestMapping(value = "/order/{productId}", method = RequestMethod.GET)
+    public String orderProduct(HttpSession session, @PathVariable(value = "productId") int productId) {
         OrderEntity order = (OrderEntity) session.getAttribute("order");
         if (order == null) {
             order = new OrderEntity();
 
-            List<OrderDetailEntity> orderDetails = new ArrayList<>();
+            Set<OrderDetailEntity> orderDetails = new HashSet<>();
 
             ProductEntity product = productService.getProductById(productId);
             OrderDetailEntity orderDetail = new OrderDetailEntity();
@@ -203,7 +201,7 @@ public class OrderController {
             order.setOrderDetails(orderDetails);
             session.setAttribute("order", order);
         } else {
-            List<OrderDetailEntity> orderDetails = order.getOrderDetails();
+            Set<OrderDetailEntity> orderDetails = order.getOrderDetails();
             boolean isUpdate = false;
             for (OrderDetailEntity orderDetail : orderDetails) {
                 if (orderDetail.getProduct().getId() == productId) {
@@ -228,10 +226,9 @@ public class OrderController {
 
     @RequestMapping("/order/delete")
     public String deleteOrder(HttpSession session,
-                              @RequestParam(value = "productId") int productId,
-                              @RequestParam(value = "sizeId") int sizeId) {
+                              @RequestParam(value = "productId") int productId) {
         OrderEntity order = (OrderEntity) session.getAttribute("order");
-        List<OrderDetailEntity> orderDetails = order.getOrderDetails();
+        Set<OrderDetailEntity> orderDetails = order.getOrderDetails();
         for (OrderDetailEntity orderDetail : orderDetails) {
             if (orderDetail.getProduct().getId() == productId) {
                 orderDetails.remove(orderDetail);
@@ -258,10 +255,9 @@ public class OrderController {
     @RequestMapping(value = "/order/update")
     public String updateOrder(HttpSession session,
                               @RequestParam(value = "productId") int productId,
-                              @RequestParam(value = "sizeId") int sizeId,
                               @RequestParam(value = "quantity") int quantity) {
         OrderEntity order = (OrderEntity) session.getAttribute("order");
-        List<OrderDetailEntity> orderDetails = order.getOrderDetails();
+        Set<OrderDetailEntity> orderDetails = order.getOrderDetails();
         for (OrderDetailEntity orderDetail : orderDetails) {
             if (orderDetail.getProduct().getId() == productId) {
                 if (quantity <= 0) {
@@ -309,10 +305,10 @@ public class OrderController {
             return "redirect:/cart";
         }
         boolean isPromotionApply = false;
-        List<OrderDetailEntity> orderDetails = order.getOrderDetails();
-        for (int i = 0; i < orderDetails.size(); i++) {
-            OrderDetailEntity od = orderDetails.get(i);
-            orderDetails.set(i, od);
+        Set<OrderDetailEntity> orderDetails = order.getOrderDetails();
+        for (OrderDetailEntity orderDetail:
+                orderDetails) {
+            orderDetails.add(orderDetail);
         }
         order.setTotalPrice(order.getTotal());
         order.setOrderDetails(orderDetails);
@@ -330,17 +326,14 @@ public class OrderController {
                                   @RequestParam(value = "id") int id) {
         OrderEntity order = (OrderEntity) session.getAttribute("order");
         if (order != null) {
-            List<OrderDetailEntity> orderDetails = order.getOrderDetails();
-            for (int i = 0; i < orderDetails.size(); i++) {
-                OrderDetailEntity od = orderDetails.get(i);
-            }
+            Set<OrderDetailEntity> orderDetails = order.getOrderDetails();
             order.setOrderDetails(orderDetails);
             session.setAttribute("order", order);
         }
         return "redirect:/cart";
     }
 
-    @RequestMapping(value = "/order-detail")
+        @RequestMapping(value = "/order-detail")
     public String viewOrderDetail(Model model,
                                   @RequestParam(value = "id") int id,
                                   @RequestParam(value = "email") String email) {
@@ -348,11 +341,6 @@ public class OrderController {
         if(!order.getShipping().getEmail().equals(email)){
             return "redirect:/home";
         }
-        List<OrderDetailEntity> orderDetails = order.getOrderDetails();
-        for (int i = 0; i < orderDetails.size(); i++) {
-            OrderDetailEntity od = orderDetails.get(i);
-        }
-        order.setOrderDetails(orderDetails);
         model.addAttribute("vieworder", order);
         return "order-detail";
     }

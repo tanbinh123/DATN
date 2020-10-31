@@ -88,6 +88,8 @@ public class DataSeedingListener implements ApplicationListener<ContextRefreshed
                 DateFormat format = new SimpleDateFormat("dd-MMMM-yyyy", Locale.ENGLISH);
                 Date date = format.parse(splitLine[2]);
                 productEntity.setDate(date);
+                Random r = new Random();
+                productEntity.setPrice(Math.round(20 + (50 - 20) * r.nextDouble() * 100.0) / 100.0);
                 List<CategoryEntity> categoryEntities = new ArrayList<>();
                 for (int i = 5; i <= 23; i++) {
                     if (splitLine[i].equals("1")) {
@@ -106,7 +108,7 @@ public class DataSeedingListener implements ApplicationListener<ContextRefreshed
     }
 
     public void readFileRating() {
-        String filename = new File("src/main/java/com/movies_unlimited/data/ml-data/u.date").getAbsolutePath();
+        String filename = new File("src/main/java/com/movies_unlimited/data/ml-data/u.data").getAbsolutePath();
         List<RatingEntity> ratings = new ArrayList<>();
         try {
             BufferedReader br = new BufferedReader(new FileReader(filename));

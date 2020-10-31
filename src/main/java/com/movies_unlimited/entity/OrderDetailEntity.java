@@ -1,16 +1,15 @@
 package com.movies_unlimited.entity;
 
 import com.movies_unlimited.Ultil.NumberUltil;
-import lombok.AllArgsConstructor;
-import lombok.Data;
-import lombok.NoArgsConstructor;
+import lombok.*;
 
 import javax.persistence.*;
 import java.io.Serializable;
 
 @Entity
 @Table(name = "order_detail")
-@Data
+@Setter
+@Getter
 @AllArgsConstructor
 @NoArgsConstructor
 public class OrderDetailEntity implements Serializable {
