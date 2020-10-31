@@ -60,7 +60,7 @@ public class FunctionController {
             }
             model.addAttribute("page", productsPage.getTotalPages());
             model.addAttribute("products", products);
-            return "home";
+            return "index";
         } else if (action.equals("searchAccount")) {
             Page<AccountEntity> accountsPage = accountService.searchAccounts(searchText, page);
             model.addAttribute("accounts", accountsPage.getContent());
@@ -112,13 +112,12 @@ public class FunctionController {
             }
             return "seller/order-manager";
         }
-        return "redirect:/home";
+        return "redirect:/index";
     }
 
     @RequestMapping(value = "/comment", method = RequestMethod.POST)
     public String comment(@ModelAttribute(value = "content") String content,
                           @ModelAttribute(value = "productId") int productId) {
-        System.out.println("123");
         AccountEntity account = accountRepository.findAccountByEmail(AccountUltil.getAccount());
         if (account != null) {
             ProductEntity product = productService.getProductById(productId);

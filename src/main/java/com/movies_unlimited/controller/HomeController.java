@@ -28,7 +28,7 @@ public class HomeController {
     private final CommentService commentService;
     private final PromotionService promotionService;
 
-    @RequestMapping(value = { "/", "/index" }, method = RequestMethod.GET)
+    @RequestMapping(value = { "", "/index" }, method = RequestMethod.GET)
     public String index(Model model,@RequestParam(value = "page", required = false) Integer page) {
         if (page == null || page <= 0) {
             page = 1;

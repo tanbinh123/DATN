@@ -62,4 +62,8 @@ public class ProductEntity implements Serializable {
         return status.name();
     }
 
+    public int getTotalFavorite() {
+        return this.favorites.size();
+    }
+
 }

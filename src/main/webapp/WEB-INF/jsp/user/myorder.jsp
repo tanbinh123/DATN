@@ -60,7 +60,6 @@
                                         <th>Order ID</th>
                                         <th>Date</th>
                                         <th>Product</th>
-                                        <th>Size</th>
                                         <th>Quantity</th>
                                         <th>Price</th>
                                         <th>Total Price</th>
@@ -74,8 +73,7 @@
                                                     <td class="align-middle" rowspan="${o.orderDetails.size()}">${o.id}</td>
                                                     <td class="align-middle" rowspan="${o.orderDetails.size()}">${o.orderDate}</td>
                                                 </c:if>
-                                                <td class="align-middle"><a href="<c:url value="/product?id=${od.product.id}"/>"><img src="${od.product.images[0].url}" class="img-thumbnail-list"/>${od.product.name}</a></td>
-                                                <td class="align-middle">${od.size.size}</td>
+                                                <td class="align-middle"><a href="<c:url value="/product?id=${od.product.id}"/>"><img src="${od.product.image}" class="img-thumbnail-list"/>${od.product.name}</a></td>
                                                 <td class="align-middle">${od.quantity}</td>
                                                 <td class="align-middle">${od.product.price}</td>
                                                 <c:if test="${status.index == 0}">

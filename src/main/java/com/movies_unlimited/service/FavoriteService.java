@@ -27,4 +27,12 @@ public class FavoriteService {
     public int countFavoriteByProductId(int id){
         return favoriteRepository.countFavoriteByProductId(id);
     }
+
+    public void delete(FavoriteEntity fav){
+        favoriteRepository.delete(fav);
+    }
+
+    public FavoriteEntity save(FavoriteEntity fav){
+        return favoriteRepository.save(fav);
+    }
 }

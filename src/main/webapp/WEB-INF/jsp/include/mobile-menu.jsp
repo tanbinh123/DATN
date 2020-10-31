@@ -11,9 +11,9 @@
         <!-- Navigation -->
         <div class="menu_nav">
             <ul>
-                <li><a href="<c:url value="/category?id=1&page=1"></c:url>">Women</a></li>
-                <li><a href="<c:url value="/category?id=2&page=1"></c:url>">Men</a></li>
-                <li><a href="<c:url value="/category?id=3&page=1"></c:url>">Kids</a></li>
+                <li><a href="<c:url value="/category?id=2&page=1"></c:url>">Action</a></li>
+                <li><a href="<c:url value="/category?id=3&page=1"></c:url>">Adventure</a></li>
+                <li><a href="<c:url value="/category?id=4&page=1"></c:url>">Animation</a></li>
             </ul>
         </div>
         <!-- Contact Info -->

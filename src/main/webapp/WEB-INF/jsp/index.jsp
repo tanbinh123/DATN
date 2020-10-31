@@ -334,30 +334,21 @@
 					<c:forEach var="product" items="${products}">
 					<div class="col-xl-4 col-md-6">
 						<div class="product">
-							<div class="product_image"><img src="images/product_1.jpg" alt=""></div>
+							<div class="product_image"><img src="https://picsum.photos/530/591" alt=""></div>
 							<div class="product_content">
 								<div class="product_info d-flex flex-row align-items-start justify-content-start">
 									<div>
 										<div>
 											<div class="product_name"><a href="<c:url value="/product?id=${product.id}"></c:url>">${product.name}</a></div>
-											<div class="product_category">In <a href="category.html">Category</a></div>
+											<div class="product_category">In <a href="<c:url value="/category?id=${product.categories[0].id}&page=1"></c:url>">${product.categories[0].name}</a></div>
 										</div>
 									</div>
 									<div class="ml-auto text-right">
 										<div class="rating_r rating_r_4 home_item_rating"><i></i><i></i><i></i><i></i><i></i></div>
-										<div class="product_price text-right">$3<span>.99</span></div>
+										<div class="product_price text-right">$${product.price}</div>
 									</div>
 								</div>
-								<div class="product_buttons">
-									<div class="text-right d-flex flex-row align-items-start justify-content-start">
-										<div class="product_button product_fav text-center d-flex flex-column align-items-center justify-content-center">
-											<div><div><img src="images/heart_2.svg" class="svg" alt=""><div>+</div></div></div>
-										</div>
-										<div class="product_button product_cart text-center d-flex flex-column align-items-center justify-content-center">
-											<div><div><img src="images/cart.svg" class="svg" alt=""><div>+</div></div></div>
-										</div>
-									</div>
-								</div>
+
 							</div>
 						</div>
 					</div>
@@ -499,18 +490,19 @@
 		<jsp:include page="./include/footer.jsp"/>
 	 </div>
 </div>
-<script src="js/jquery-3.2.1.min.js"></script>
-<script src="styles/bootstrap-4.1.2/popper.js"></script>
-<script src="styles/bootstrap-4.1.2/bootstrap.min.js"></script>
-<script src="plugins/greensock/TweenMax.min.js"></script>
-<script src="plugins/greensock/TimelineMax.min.js"></script>
-<script src="plugins/scrollmagic/ScrollMagic.min.js"></script>
-<script src="plugins/greensock/animation.gsap.min.js"></script>
-<script src="plugins/greensock/ScrollToPlugin.min.js"></script>
-<script src="plugins/OwlCarousel2-2.2.1/owl.carousel.js"></script>
-<script src="plugins/easing/easing.js"></script>
-<script src="plugins/progressbar/progressbar.min.js"></script>
-<script src="plugins/parallax-js-master/parallax.min.js"></script>
-<script src="js/custom.js"></script>
+        <script src="<c:url value="/js/jquery-3.2.1.min.js"></c:url>"></script>
+        <script src="<c:url value="/styles/bootstrap-4.1.2/popper.js"></c:url>"></script>
+        <script src="<c:url value="/styles/bootstrap-4.1.2/bootstrap.min.js"></c:url>"></script>
+        <script src="<c:url value="/plugins/greensock/TweenMax.min.js"></c:url>"></script>
+        <script src="<c:url value="/plugins/greensock/TimelineMax.min.js"></c:url>"></script>
+        <script src="<c:url value="/plugins/scrollmagic/ScrollMagic.min.js"></c:url>"></script>
+        <script src="<c:url value="/plugins/greensock/animation.gsap.min.js"></c:url>"></script>
+        <script src="<c:url value="/plugins/greensock/ScrollToPlugin.min.js"></c:url>"></script>
+        <script src="<c:url value="/plugins/OwlCarousel2-2.2.1/owl.carousel.js"></c:url>"></script>
+        <script src="<c:url value="/plugins/easing/easing.js"></c:url>"></script>
+        <script src="<c:url value="/plugins/progressbar/progressbar.min.js"></c:url>"></script>
+        <script src="<c:url value="/plugins/parallax-js-master/parallax.min.js"></c:url>"></script>
+        <script src="<c:url value="/js/custom.js"></c:url>"></script>
+        <script src="<c:url value="/js/product-script-custom.js"></c:url>"></script>
 </body>
 </html>
