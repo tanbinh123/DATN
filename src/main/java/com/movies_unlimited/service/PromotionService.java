@@ -11,6 +11,8 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
+
 @Service
 @RequiredArgsConstructor
 @Slf4j
@@ -33,5 +35,10 @@ public class PromotionService {
 
     public PromotionEntity save(PromotionEntity promo) {
         return promotionRepository.save(promo);
+    }
+
+    public List<PromotionEntity> getPromotionsByProductId(int id){
+
+        return promotionRepository.findPromotionByProductId(id);
     }
 }

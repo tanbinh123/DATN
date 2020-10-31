@@ -23,21 +23,11 @@ import java.util.List;
 @RequiredArgsConstructor
 @Controller
 public class SellerController {
-    @Autowired
-    private CategoryService categoryService;
-
-
-    @Autowired
-    private ProductService productService;
-
-    @Autowired
-    private OrderService orderService;
-
-    @Autowired
-    private AccountService accountService;
-
-    @Autowired
-    private PromotionService promotionService;
+    private final CategoryService categoryService;
+    private final ProductService productService;
+    private final OrderService orderService;
+    private final AccountService accountService;
+    private final PromotionService promotionService;
 
     @RequestMapping("/seller")
     public String viewSeller(Model model,

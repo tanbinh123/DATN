@@ -20,14 +20,9 @@ import org.springframework.web.bind.annotation.*;
 @RequiredArgsConstructor
 @Controller
 public class AccountController {
-    @Autowired
-    private OrderService orderService;
-
-    @Autowired
-    private AccountService accountService;
-
-    @Autowired
-    private AccountRoleService accountRoleService;
+    private final OrderService orderService;
+    private final AccountService accountService;
+    private final AccountRoleService accountRoleService;
 
     @RequestMapping(value = "/update-account", method = RequestMethod.POST)
     public String updateAccount(Model model, @ModelAttribute(value = "account") AccountEntity acc) {

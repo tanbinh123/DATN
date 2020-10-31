@@ -1,17 +1,14 @@
 package com.movies_unlimited.controller;
 
+import com.movies_unlimited.Ultil.AccountUltil;
 import com.movies_unlimited.entity.AccountEntity;
+import com.movies_unlimited.entity.CommentEntity;
 import com.movies_unlimited.entity.FavoriteEntity;
 import com.movies_unlimited.entity.ProductEntity;
-import com.movies_unlimited.service.AccountService;
-import com.movies_unlimited.service.CategoryService;
-import com.movies_unlimited.service.FavoriteService;
-import com.movies_unlimited.service.ProductService;
+import com.movies_unlimited.service.*;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.data.domain.Page;
-import org.springframework.security.core.Authentication;
-import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -19,21 +16,17 @@ import org.springframework.web.bind.annotation.*;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Set;
-import java.util.stream.Collectors;
 
 @Slf4j
 @RequiredArgsConstructor
 @Controller
 public class HomeController {
-
     private final ProductService productService;
-
     private final FavoriteService favoriteService;
-
     private final CategoryService categoryService;
-
     private final AccountService accountService;
+    private final CommentService commentService;
+    private final PromotionService promotionService;
 
     @RequestMapping(value = { "/", "/index" }, method = RequestMethod.GET)
     public String index(Model model,@RequestParam(value = "page", required = false) Integer page) {
@@ -85,25 +78,28 @@ public class HomeController {
         return "category";
     }
 
-
-
-
-
-
-    @RequestMapping(value = { "/checkout" }, method = RequestMethod.GET)
-    public String checkout(Model model) {
-        return "checkout";
-    }
-
-    @RequestMapping(value = {  "/product" }, method = RequestMethod.GET)
-    public String product(Model model) {
+    @RequestMapping(value = "/product", method = RequestMethod.GET)
+    public String productPage(Model model, @RequestParam("id") int id) {
+        ProductEntity product = productService.getProductById(id);
+        model.addAttribute("product", product);
+        List<CommentEntity> comments = commentService.getCommentsByProductId(id);
+        model.addAttribute("comments", comments);
+        model.addAttribute("favorites", favoriteService.countFavoriteByProductId(id));
+        AccountEntity account = accountService.getAccountByEmail(AccountUltil.getAccount());
+        if (account != null) {
+            FavoriteEntity fav = favoriteService.getFavotiteByAccountIDAndProductID(account.getId(), id);
+            if (fav != null) {
+                model.addAttribute("favorited", true);
+            } else {
+                model.addAttribute("favorited", false);
+            }
+        } else {
+            model.addAttribute("favorited", false);
+        }
+        model.addAttribute("promotions", promotionService.getPromotionsByProductId(id));
         return "product";
     }
 
-    @RequestMapping(value = {  "/cart" }, method = RequestMethod.GET)
-    public String cart(Model model) {
-        return "cart";
-    }
 
 
     @GetMapping("/registration")

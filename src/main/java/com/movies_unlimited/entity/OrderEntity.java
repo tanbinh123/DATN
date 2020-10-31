@@ -44,4 +44,11 @@ public class OrderEntity implements Serializable {
     @JoinColumn(name = "shipping_id", nullable = false)
     private ShippingEntity shipping;
 
+    public double getTotal() {
+        double total = 0;
+        for (OrderDetailEntity orderDetail : orderDetails) {
+            total += orderDetail.getTotal();
+        }
+        return total;
+    }
 }

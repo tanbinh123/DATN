@@ -38,4 +38,9 @@ public class AccountService {
     public AccountEntity findAccountByOrderId(int id){
         return accountRepository.findAccountByOrderId(id);
     }
+
+    public Page<AccountEntity> searchAccounts(String searchText, int page){
+        Pageable pageable = PageRequest.of(page-1, 9);
+        return accountRepository.findAccountByAny(searchText, pageable);
+    }
 }

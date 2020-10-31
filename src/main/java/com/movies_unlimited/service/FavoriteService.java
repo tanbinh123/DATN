@@ -15,8 +15,16 @@ import java.util.List;
 public class FavoriteService {
 
     private final FavoriteRepository favoriteRepository;
+
     public List<FavoriteEntity> getFavoritesByProductId(int id){
         return favoriteRepository.findByProduct_id(id);
     }
 
+    public FavoriteEntity getFavotiteByAccountIDAndProductID(int accountid, int productid){
+        return favoriteRepository.findByAccount_idAndProduct_id(accountid, productid);
+    }
+
+    public int countFavoriteByProductId(int id){
+        return favoriteRepository.countFavoriteByProductId(id);
+    }
 }

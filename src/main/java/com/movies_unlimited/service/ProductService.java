@@ -70,9 +70,47 @@ public class ProductService {
         return productRepository.findAllProductByPromotionId(id);
     }
 
+    public Page<ProductEntity> getProductsActive(int page, String sort){
+        Pageable pageable;
+        if(sort.equals("Latest")){
+            pageable = PageRequest.of(page-1, 9, Sort.Direction.DESC, "date");
+        }else if(sort.equals("Oldest")){
+            pageable = PageRequest.of(page-1, 9, Sort.Direction.ASC, "date");
+        }else if(sort.equals("HightoLow")){
+            pageable = PageRequest.of(page-1, 9, Sort.Direction.DESC, "price");
+        }else if(sort.equals("LowtoHigh")){
+            pageable = PageRequest.of(page-1, 9, Sort.Direction.ASC, "price");
+        }else{
+            pageable = PageRequest.of(page-1, 9, Sort.Direction.DESC, "date");
+        }
+        return productRepository.findAllActiveProductPageable(ActiveStatus.ACTIVE,pageable);
+    }
+
     public ProductEntity saveProduct(ProductEntity product) {
         return productRepository.save(product);
     }
+
+    public Page<ProductEntity> getProductByAnyActive(String searchText, int page, String sort){
+        Pageable pageable;
+        if(sort.equals("Latest")){
+            pageable = PageRequest.of(page-1, 9, Sort.Direction.DESC, "date");
+        }else if(sort.equals("Oldest")){
+            pageable = PageRequest.of(page-1, 9, Sort.Direction.ASC, "date");
+        }else if(sort.equals("HightoLow")){
+            pageable = PageRequest.of(page-1, 9, Sort.Direction.DESC, "price");
+        }else if(sort.equals("LowtoHigh")){
+            pageable = PageRequest.of(page-1, 9, Sort.Direction.ASC, "price");
+        }else{
+            pageable = PageRequest.of(page-1, 9, Sort.Direction.DESC, "date");
+        }
+        return productRepository.findProductByAnyActive(searchText,ActiveStatus.ACTIVE,pageable);
+    }
+
+    public Page<ProductEntity> getProductByAny(String searchText, int page){
+        Pageable pageable = PageRequest.of(page-1, 9);
+        return productRepository.findProductByAny(searchText, pageable);
+    }
+
 
 //    public void recommendMovie() {
 //        List<ProductEntity> products = productRepository.findAll();

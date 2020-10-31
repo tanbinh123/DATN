@@ -1,6 +1,7 @@
 package com.movies_unlimited.repository;
 
 import com.movies_unlimited.entity.CategoryEntity;
+import com.movies_unlimited.entity.OrderEntity;
 import com.movies_unlimited.entity.ProductEntity;
 import com.movies_unlimited.entity.enums.ActiveStatus;
 import org.springframework.data.domain.Page;
@@ -32,4 +33,11 @@ public interface ProductRepository extends PagingAndSortingRepository<ProductEnt
 
     @Query(value = "select * from product join product_promotion_relation on product.id = product_promotion_relation.product_id where product_promotion_relation.promotion_id = ?1", nativeQuery = true)
     List<ProductEntity> findAllProductByPromotionId(int id);
+
+    @Query(value = "select p from ProductEntity p where (p.name like %:searchText% or p.description like %:searchText%) and status = :status")
+    Page<ProductEntity> findProductByAnyActive(@Param("searchText") String searchText, @Param("status") ActiveStatus status, Pageable pageable);
+
+    @Query(value = "select p from ProductEntity p where p.name like %:searchText% or p.description like %:searchText%")
+    Page<ProductEntity> findProductByAny(@Param("searchText") String searchText, Pageable pageable);
+
 }

@@ -339,7 +339,7 @@
 								<div class="product_info d-flex flex-row align-items-start justify-content-start">
 									<div>
 										<div>
-											<div class="product_name"><a href="product.html">${product.name}</a></div>
+											<div class="product_name"><a href="<c:url value="/product?id=${product.id}"></c:url>">${product.name}</a></div>
 											<div class="product_category">In <a href="category.html">Category</a></div>
 										</div>
 									</div>

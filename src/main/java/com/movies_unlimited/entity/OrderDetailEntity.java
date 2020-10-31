@@ -1,5 +1,6 @@
 package com.movies_unlimited.entity;
 
+import com.movies_unlimited.Ultil.NumberUltil;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -29,4 +30,7 @@ public class OrderDetailEntity implements Serializable {
     @JoinColumn(name = "order_id", nullable = false)
     private OrderEntity order;
 
+    public double getTotal() {
+        return NumberUltil.roundDoubleMoney(this.product.getPrice() * this.quantity, 2);
+    }
 }
