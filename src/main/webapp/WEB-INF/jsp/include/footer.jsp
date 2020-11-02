@@ -10,7 +10,7 @@
                             <a href="#">
                                 <div class="d-flex flex-row align-items-center justify-content-start">
                                     <div class="footer_logo_icon"><img src="images/logo_2.png" alt=""></div>
-                                    <div>Little Closet</div>
+                                    <div>Movies Unlimited</div>
                                 </div>
                             </a>
                         </div>
@@ -65,8 +65,7 @@
                         <div class="footer_title">Stay in Touch</div>
                         <div class="newsletter">
                             <form action="#" id="newsletter_form" class="newsletter_form">
-                                <input type="email" class="newsletter_input" placeholder="Subscribe to our Newsletter"
-                                       required="required">
+                                <input type="email" class="newsletter_input" placeholder="Subscribe to our Newsletter">
                                 <button class="newsletter_button">+</button>
                             </form>
                         </div>
@@ -98,10 +97,9 @@
                             <!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. --></div>
                         <nav class="footer_nav ml-md-auto order-md-2 order-1">
                             <ul class="d-flex flex-row align-items-center justify-content-start">
-                                <li><a href="category.html">Women</a></li>
-                                <li><a href="category.html">Men</a></li>
-                                <li><a href="category.html">Kids</a></li>
-                                <li><a href="category.html">Home Deco</a></li>
+                                <li><a href="<c:url value="/category?id=2&page=1"></c:url>">Action</a></li>
+                                <li><a href="<c:url value="/category?id=3&page=1"></c:url>">Adventure</a></li>
+                                <li><a href="<c:url value="/category?id=4&page=1"></c:url>">Animation</a></li>
                                 <li><a href="#">Contact</a></li>
                             </ul>
                         </nav>

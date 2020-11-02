@@ -15,10 +15,10 @@
             <div class="hamburger"><i class="fa fa-bars" aria-hidden="true"></i></div>
             <nav class="main_nav">
                 <ul class="d-flex flex-row align-items-start justify-content-start">
-                   <li><a href="<c:url value="/category?id=1&page=1"></c:url>">Action</a></li>
-                   <li><a href="<c:url value="/category?id=2&page=1"></c:url>">Adventure</a></li>
-                   <li><a href="<c:url value="/category?id=3&page=1"></c:url>">Animation</a></li>
-                   <li><a href="<c:url value="/category?id=3&page=1"></c:url>">Comedy</a></li>
+                   <li><a href="<c:url value="/category?id=2&page=1"></c:url>">Action</a></li>
+                   <li><a href="<c:url value="/category?id=3&page=1"></c:url>">Adventure</a></li>
+                   <li><a href="<c:url value="/category?id=4&page=1"></c:url>">Animation</a></li>
+                   <li><a href="<c:url value="/category?id=5&page=1"></c:url>">Comedy</a></li>
                 </ul>
             </nav>
             <div class="header_right d-flex flex-row align-items-center justify-content-start ml-auto">

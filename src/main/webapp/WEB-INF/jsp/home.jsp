@@ -4,10 +4,10 @@
 <%@taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn" %>
 <html>
    <head>
-      <title>Little Closet</title>
+      <title>Movies Unlimited</title>
       <meta charset="utf-8">
       <meta http-equiv="X-UA-Compatible" content="IE=edge">
-      <meta name="description" content="Little Closet template">
+      <meta name="description" content="Movies Unlimited template">
       <meta name="viewport" content="width=device-width, initial-scale=1">
       <link rel="stylesheet" type="text/css" href="styles/bootstrap-4.1.2/bootstrap.min.css">
       <link href="plugins/font-awesome-4.7.0/css/font-awesome.min.css" rel="stylesheet" type="text/css">
@@ -40,7 +40,7 @@
 									<div class="home_container d-flex flex-column align-items-center justify-content-start">
 										<div class="home_content">
 											<div class="home_title">New Arrivals</div>
-											<div class="home_subtitle">Summer Wear</div>
+											<div class="home_subtitle">Summer Movies</div>
 											<div class="home_items">
 												<div class="row">
 													<div class="col-sm-3 offset-lg-1">
@@ -102,7 +102,7 @@
 									<div class="home_container d-flex flex-column align-items-center justify-content-start">
 										<div class="home_content">
 											<div class="home_title">Popular</div>
-											<div class="home_subtitle">Summer Wear</div>
+											<div class="home_subtitle">Summer Movies</div>
 											<div class="home_items">
 												<div class="row">
 													<div class="col-sm-3 offset-lg-1">
@@ -164,7 +164,7 @@
 									<div class="home_container d-flex flex-column align-items-center justify-content-start">
 										<div class="home_content">
 											<div class="home_title">Trendsetters</div>
-											<div class="home_subtitle">Summer Wear</div>
+											<div class="home_subtitle">Summer Movies</div>
 											<div class="home_items">
 												<div class="row">
 													<div class="col-sm-3 offset-lg-1">
@@ -226,7 +226,7 @@
 									<div class="home_container d-flex flex-column align-items-center justify-content-start">
 										<div class="home_content">
 											<div class="home_title">Premium Items</div>
-											<div class="home_subtitle">Summer Wear</div>
+											<div class="home_subtitle">Summer Movies</div>
 											<div class="home_items">
 												<div class="row">
 													<div class="col-sm-3 offset-lg-1">
@@ -309,17 +309,16 @@
 			<div class="container">
 				<div class="row">
 					<div class="col-lg-6 offset-lg-3">
-						<div class="section_title text-center">Popular on Little Closet</div>
+						<div class="section_title text-center">Popular on Movies Unlimited</div>
 					</div>
 				</div>
 				<div class="row page_nav_row">
 					<div class="col">
 						<div class="page_nav">
 							<ul class="d-flex flex-row align-items-start justify-content-center">
-								<li class="active"><a href="category.html">Women</a></li>
-								<li><a href="category.html">Men</a></li>
-								<li><a href="category.html">Kids</a></li>
-								<li><a href="category.html">Home Deco</a></li>
+								 <li class="active"><a href="<c:url value="/category?id=2&page=1"></c:url>">Action</a></li>
+                                 <li><a href="<c:url value="/category?id=3&page=1"></c:url>">Adventure</a></li>
+                                 <li><a href="<c:url value="/category?id=4&page=1"></c:url>">Animation</a></li>
 							</ul>
 						</div>
 					</div>
@@ -362,16 +361,16 @@
 									<c:if test="${param.action == null}">
 										<c:choose>
 											<c:when test="${param.page==null && status.index==1}">
-												<li class="active"><a href="<c:url value="/?page=${status.index}"/>">${status.index}</a></li>
+												<li class="active"><a href="<c:url value="/home?page=${status.index}"/>">${status.index}</a></li>
 											</c:when>
 											<c:when test="${param.page==null && status.index!=1}">
-												<li><a href="<c:url value="/?page=${status.index}"/>">${status.index}</a></li>
+												<li><a href="<c:url value="/home?page=${status.index}"/>">${status.index}</a></li>
 											</c:when>
 											<c:when test="${param.page!=null && param.page==status.index}">
-												<li class="active"><a href="<c:url value="/?page=${status.index}"/>">${status.index}</a></li>
+												<li class="active"><a href="<c:url value="/home?page=${status.index}"/>">${status.index}</a></li>
 											</c:when>
 											<c:otherwise>
-												<li><a href="<c:url value="/?page=${status.index}"/>">${status.index}</a></li>
+												<li><a href="<c:url value="/home?page=${status.index}"/>">${status.index}</a></li>
 											</c:otherwise>
 										</c:choose>
 									</c:if>
@@ -382,110 +381,7 @@
 				</div>
 			</div>
 		</div>
-		<!-- Boxes -->
-		<div class="boxes">
-			<div class="container">
-				<div class="row">
-					<div class="col">
-						<div class="boxes_container d-flex flex-row align-items-start justify-content-between flex-wrap">
 
-							<!-- Box -->
-							<div class="box">
-								<div class="background_image" style="background-image:url(images/box_1.jpg)"></div>
-								<div class="box_content d-flex flex-row align-items-center justify-content-start">
-									<div class="box_left">
-										<div class="box_image">
-											<a href="category.html">
-												<div class="background_image" style="background-image:url(images/box_1_img.jpg)"></div>
-											</a>
-										</div>
-									</div>
-									<div class="box_right text-center">
-										<div class="box_title">Trendsetter Collection</div>
-									</div>
-								</div>
-							</div>
-							<!-- Box -->
-							<div class="box">
-								<div class="background_image" style="background-image:url(images/box_2.jpg)"></div>
-								<div class="box_content d-flex flex-row align-items-center justify-content-start">
-									<div class="box_left">
-										<div class="box_image">
-											<a href="category.html">
-												<div class="background_image" style="background-image:url(images/box_2_img.jpg)"></div>
-											</a>
-										</div>
-									</div>
-									<div class="box_right text-center">
-										<div class="box_title">Popular Choice</div>
-									</div>
-								</div>
-							</div>
-							<!-- Box -->
-							<div class="box">
-								<div class="background_image" style="background-image:url(images/box_3.jpg)"></div>
-								<div class="box_content d-flex flex-row align-items-center justify-content-start">
-									<div class="box_left">
-										<div class="box_image">
-											<a href="category.html">
-												<div class="background_image" style="background-image:url(images/box_3_img.jpg)"></div>
-											</a>
-										</div>
-									</div>
-									<div class="box_right text-center">
-										<div class="box_title">Popular Choice</div>
-									</div>
-								</div>
-							</div>
-
-						</div>
-					</div>
-				</div>
-			</div>
-		</div>
-		<!-- Features -->
-		<div class="features">
-			<div class="container">
-				<div class="row">
-					<!-- Feature -->
-					<div class="col-lg-4 feature_col">
-						<div class="feature d-flex flex-row align-items-start justify-content-start">
-							<div class="feature_left">
-								<div class="feature_icon"><img src="images/icon_1.svg" alt=""></div>
-							</div>
-							<div class="feature_right d-flex flex-column align-items-start justify-content-center">
-								<div class="feature_title">Fast Secure Payments</div>
-							</div>
-						</div>
-					</div>
-
-					<!-- Feature -->
-					<div class="col-lg-4 feature_col">
-						<div class="feature d-flex flex-row align-items-start justify-content-start">
-							<div class="feature_left">
-								<div class="feature_icon ml-auto mr-auto"><img src="images/icon_2.svg" alt=""></div>
-							</div>
-							<div class="feature_right d-flex flex-column align-items-start justify-content-center">
-								<div class="feature_title">Premium Products</div>
-							</div>
-						</div>
-					</div>
-
-					<!-- Feature -->
-					<div class="col-lg-4 feature_col">
-						<div class="feature d-flex flex-row align-items-start justify-content-start">
-							<div class="feature_left">
-								<div class="feature_icon"><img src="images/icon_3.svg" alt=""></div>
-							</div>
-							<div class="feature_right d-flex flex-column align-items-start justify-content-center">
-								<div class="feature_title">Free Delivery</div>
-							</div>
-						</div>
-					</div>
-
-				</div>
-			</div>
-		</div>
 		<!-- Footer -->
 		<jsp:include page="./include/footer.jsp"/>
 	 </div>

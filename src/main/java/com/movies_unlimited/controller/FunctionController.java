@@ -45,8 +45,10 @@ public class FunctionController {
         if (action.equals("searchProduct")) {
             Page<ProductEntity> productsPage;
             if(sort==null || sort.isEmpty()){
-                productsPage = productService.getProductsActive(page, "none");
-            }else if(searchText==null || searchText.isEmpty()){
+                sort  = "none";
+            }
+
+            if(searchText==null || searchText.isEmpty()){
                 productsPage = productService.getProductsActive(page, sort);
             }else{
                 productsPage = productService.getProductByAnyActive(searchText, page, sort);
@@ -60,7 +62,7 @@ public class FunctionController {
             }
             model.addAttribute("page", productsPage.getTotalPages());
             model.addAttribute("products", products);
-            return "index";
+            return "home";
         } else if (action.equals("searchAccount")) {
             Page<AccountEntity> accountsPage = accountService.searchAccounts(searchText, page);
             model.addAttribute("accounts", accountsPage.getContent());
@@ -112,7 +114,7 @@ public class FunctionController {
             }
             return "seller/order-manager";
         }
-        return "redirect:/index";
+        return "redirect:/home";
     }
 
     @RequestMapping(value = "/comment", method = RequestMethod.POST)
