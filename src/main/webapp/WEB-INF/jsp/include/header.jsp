@@ -27,19 +27,30 @@
                     <form action="<c:url value="/search"/>" id="header_search_form">
                     <input type="hidden" name="action" value="searchProduct" />
                     <input type="text" name="searchText" class="search_input" placeholder="Search Item" required="required">
-                    <button class="header_search_button"><img src="<c:url value="/resources/images/search.png"></c:url>" alt=""></button>
+                    <button class="header_search_button"><img src="<c:url value="/images/search.png"></c:url>" alt="">
+                    </button>
                     </form>
                 </div>           
                 <!-- User -->
                 <div><sec:authorize access="isAuthenticated()"><h4 style="color: #002752">Hi <sec:authentication property="principal.username" />!</h4></sec:authorize></div>
-                <div class="user"><a href="<c:url value="/account"></c:url>"><div><img src="<c:url value="/resources/images/user.svg"></c:url>" alt=""></div></a></div>
+                <div class="user"><a href="<c:url value="/account"></c:url>">
+                    <div><img src="<c:url value="/images/user.svg"></c:url>" alt=""></div>
+                    </a></div>
                 <!-- Cart -->
-                    <div class="cart"><a href="<c:url value="/cart"></c:url>"><div><img class="svg" src="<c:url value="/resources/images/cart.svg"></c:url>" alt=""><c:if test="${order!=null}"><div>${fn:length(order.orderDetails)}</div></c:if></div></a></div>
+                <div class="cart"><a href="<c:url value="/cart"></c:url>">
+                    <div><img class="svg" src="<c:url value="/images/cart.svg"></c:url>" alt="">
+                        <c:if test="${order!=null}">
+                            <div>${fn:length(order.orderDetails)}</div>
+                        </c:if>
+                    </div>
+                    </a></div>
                 <!-- Phone -->
                 <div class="header_phone d-flex flex-row align-items-center justify-content-start">
-                        <div><div><img src="<c:url value="/resources/images/phone.svg"></c:url>" alt=""></div></div>
-                <div>+84 704.555.444</div>
-            </div>
+                    <div>
+                        <div><img src="<c:url value="/images/phone.svg"></c:url>" alt=""></div>
+                    </div>
+                    <div>+84 774.093.482</div>
+                </div>
         </div>
     </div>
 </header>

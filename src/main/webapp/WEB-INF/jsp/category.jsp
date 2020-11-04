@@ -48,66 +48,77 @@
                                 </div>
                             </div>
                         </div>
-                        <div class="row products_row products_container grid">
-
+                        <div class="row products_row">
+                            <!-- Product -->
+                            <c:if test="${products.size()==0}">
+                                <div class="col-md-12" style="text-align: center">
+                                    <h3>We couldn't find any matches!</h3>
+                                </div>
+                            </c:if>
                             <c:forEach var="product" items="${products}">
-                                <!-- Product -->
-                                <div class="col-xl-4 col-md-6 grid-item new">
+                                <div class="col-xl-4 col-md-6">
                                     <div class="product">
-                                        <div class="product_image"><a href="<c:url value="/product?id=${product.id}"></c:url>"><img src="https://picsum.photos/530/591" alt=""></div>
-                                        <!-- div class="product_image"><a href="<c:url value="/product?id=${product.id}"></c:url>"><img src="${product.image}" alt=""></div> -->
-                                                    <div class="product_content">
-                                                        <div class="product_info d-flex flex-row align-items-start justify-content-start">
-                                                            <div>
-                                                                <div>
-                                                                    <div class="product_name"><a href="<c:url value="/product?id=${product.id}"></c:url>">${product.name}</a></div>
-                                                                <div class="product_category">In <a href="<c:url value="/category?id=${product.categories[0].id}&page=1"></c:url>">${product.categories[0].name}</a></div>
-                                                                </div>
-                                                            </div>
-                                                            <div class="ml-auto text-right">
-                                                                <div class="rating_r rating_r_4 home_item_rating">${product.totalFavorite} favorite</div>
-                                                            <div class="product_price text-right">$${product.price}</div>
-                                                        </div>
+                                        <div class="product_image"><img src="https://picsum.photos/530/591" alt=""></div>
+                                        <div class="product_content">
+                                            <div class="product_info d-flex flex-row align-items-start justify-content-start">
+                                                <div>
+                                                    <div>
+                                                        <div class="product_name"><a href="<c:url value="/product?id=${product.id}"></c:url>">${product.name}</a></div>
+                                                        <div class="product_category">In <a href="<c:url value="/category?id=${product.categories[0].id}&page=1"></c:url>">${product.categories[0].name}</a></div>
                                                     </div>
                                                 </div>
+                                                <div class="ml-auto text-right">
+                                                    <div>
+                                                        <i class="fa fa-heart fa-1x" style="color: #ff66a3" aria-hidden="true"></i>
+                                                        ${product.totalFavorite}
+                                                    </div>
+                                                    <div class="product_price text-right">
+                                                        $${product.price}
+                                                    </div>
+                                                </div>
+                                            </div>
+
                                         </div>
                                     </div>
-                                </c:forEach>
-
-                            </div>
-                            <div class="row page_nav_row">
+                                </div>
+                            </c:forEach>
+                        </div>
+                        <div class="row page_nav_row">
                                 <div class="col">
                                     <div class="page_nav">
                                         <ul class="d-flex flex-row align-items-start justify-content-center">
-                                            <c:forEach begin="1" end="${page}" varStatus="status">
+                                            <c:forEach begin="${param.page > 5 ? param.page - 5 : 1}" end="${param.page - page + 5 <= 0 ? param.page + 5 : page}" varStatus="status">
                                                 <c:choose>
                                                     <c:when test="${param.page==null && status.index==1}">
                                                         <li class="active"><a href="<c:url value="/category?id=${param.id}&page=${status.index}&sort=${param.sort}"/>">${status.index}</a></li>
-                                                        </c:when>
-                                                        <c:when test="${param.page==null && status.index!=1}">
+                                                    </c:when>
+                                                    <c:when test="${param.page==null && status.index!=1}">
                                                         <li><a href="<c:url value="/category?id=${param.id}&page=${status.index}&sort=${param.sort}"/>">${status.index}</a></li>
-                                                        </c:when>
-                                                        <c:when test="${param.page!=null && param.page==status.index}">
+                                                    </c:when>
+                                                    <c:when test="${param.page!=null && param.page==status.index}">
                                                         <li class="active"><a href="<c:url value="/category?id=${param.id}&page=${status.index}&sort=${param.sort}"/>">${status.index}</a></li>
-                                                        </c:when>
-                                                        <c:otherwise>
+                                                    </c:when>
+                                                    <c:otherwise>
                                                         <li><a href="<c:url value="/category?id=${param.id}&page=${status.index}&sort=${param.sort}"/>">${status.index}</a></li>
-                                                        </c:otherwise>
-                                                    </c:choose>
-                                                </c:forEach>
+                                                    </c:otherwise>
+                                                </c:choose>
+                                            </c:forEach>
                                         </ul>
                                     </div>
                                 </div>
                             </div>
-                        </div>
+
+
                     </div>
+
+
+                </div>
 
                     <!-- Footer -->
                     <jsp:include page="./include/footer.jsp"/>
 
                 </div>
 
-            </div>
 
             <script src="<c:url value="/js/jquery-3.2.1.min.js"></c:url>"></script>
             <script src="<c:url value="/styles/bootstrap-4.1.2/popper.js"></c:url>"></script>

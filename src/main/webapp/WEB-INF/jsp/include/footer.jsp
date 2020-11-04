@@ -1,8 +1,10 @@
+<%@taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+<%@taglib uri="http://www.springframework.org/security/tags" prefix="sec" %>
+<%@taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn" %>
 <footer class="footer">
     <div class="footer_content">
         <div class="container">
             <div class="row">
-
                 <!-- About -->
                 <div class="col-lg-4 footer_col">
                     <div class="footer_about">

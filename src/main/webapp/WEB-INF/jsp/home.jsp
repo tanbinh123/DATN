@@ -278,10 +278,13 @@
 							</div>
 						</div>
 					</div>
-
 				</div>
-				<div class="home_slider_nav home_slider_nav_prev"><i class="fa fa-chevron-left" aria-hidden="true"></i></div>
-				<div class="home_slider_nav home_slider_nav_next"><i class="fa fa-chevron-right" aria-hidden="true"></i></div>
+				<div class="home_slider_nav home_slider_nav_prev">
+					<i class="fa fa-chevron-left" aria-hidden="true"></i>
+				</div>
+				<div class="home_slider_nav home_slider_nav_next">
+					<i class="fa fa-chevron-right" aria-hidden="true"></i>
+				</div>
 
 				<!-- Home Slider Dots -->
 
@@ -343,8 +346,13 @@
 										</div>
 									</div>
 									<div class="ml-auto text-right">
-										<div class="rating_r rating_r_4 home_item_rating"><i></i><i></i><i></i><i></i><i></i></div>
-										<div class="product_price text-right">$${product.price}</div>
+										<div>
+											<i class="fa fa-heart fa-1x" style="color: #ff66a3" aria-hidden="true"></i>
+											${product.totalFavorite}
+										</div>
+										<div class="product_price text-right">
+											$${product.price}
+										</div>
 									</div>
 								</div>
 

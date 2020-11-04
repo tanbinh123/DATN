@@ -5,7 +5,7 @@
         <form action="<c:url value="/search" />" method="post" id="menu_search_form" class="menu_search_form">
             <input type="hidden" name="action" value="searchProduct" />
             <input type="text" name="searchText" class="search_input" placeholder="Search Item" required="required">
-            <button class="menu_search_button"><img src="<c:url value="/resources/images/search.png"></c:url>" alt=""></button>
+            <button class="menu_search_button"><img src="<c:url value="/images/search.png"></c:url>" alt=""></button>
             </form>
         </div>
         <!-- Navigation -->
@@ -19,9 +19,11 @@
         <!-- Contact Info -->
         <div class="menu_contact">
             <div class="menu_phone d-flex flex-row align-items-center justify-content-start">
-                <div><div><img src="<c:url value="/resources/images/phone.svg"></c:url>" alt=""></div></div>
-            <div>+84 704.555.444</div>
-        </div>
+                <div>
+                    <div><img src="<c:url value="/images/phone.svg"></c:url>" alt=""></div>
+                </div>
+                <div>+84 774.093.482</div>
+            </div>
         <div class="menu_social">
             <ul class="menu_social_list d-flex flex-row align-items-start justify-content-start">
                 <li><a href="#"><i class="fa fa-facebook" aria-hidden="true"></i></a></li>

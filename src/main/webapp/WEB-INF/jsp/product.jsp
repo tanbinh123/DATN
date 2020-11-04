@@ -12,101 +12,93 @@ checked<%@page contentType="text/html" pageEncoding="UTF-8"%>
         <meta name="description" content="Movies Unlimited template">
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <link rel="stylesheet" type="text/css" href="<c:url value="/styles/bootstrap-4.1.2/bootstrap.min.css"></c:url>">
-        <link href="<c:url value="/plugins/font-awesome-4.7.0/css/font-awesome.min.css"></c:url>" rel="stylesheet" type="text/css">
-        <link rel="stylesheet" type="text/css" href="<c:url value="/plugins/flexslider/flexslider.css"></c:url>">
+               <link rel="stylesheet" type="text/css" href="<c:url value="/plugins/flexslider/flexslider.css"></c:url>">
         <link rel="stylesheet" type="text/css" href="<c:url value="/styles/product.css"></c:url>">
         <link rel="stylesheet" type="text/css" href="<c:url value="/styles/product_responsive.css"></c:url>">
         <link rel="stylesheet" type="text/css" href="<c:url value="/styles/comment.css"></c:url>">
-        </head>
-        <body>
-
-            <!-- Mobile Menu -->
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.11.2/css/all.min.css">
+    </head>
+    <body>
+        <!-- Mobile Menu -->
         <jsp:include page="./include/mobile-menu.jsp"/>
-
             <div class="super_container">
-
                 <!-- Header -->	
             <jsp:include page="./include/header.jsp"/>
-
                 <div class="super_container_inner">
                     <div class="super_overlay"></div>
-
-
                     <!-- Product -->
-
                     <div class="product">
                         <div class="container">
                             <div class="row">
-
                                 <!-- Product Image -->
                                 <div class="col-lg-6">     
                                     <div id="carouselExampleIndicators" class="carousel slide" data-ride="carousel">
                                         <ol class="carousel-indicators">
-
-                                                <li data-target="#carouselExampleIndicators" data-slide-to="${status.index}" class="active"></li>
-
-                                    </ol>
-                                    <div class="carousel-inner">
-                                                <div class="carousel-item active">
-                                                    <img class="d-block w-100" src="${product.image}">
-                                                </div>
-                                    </div>
-                                    <a class="carousel-control-prev" href="#carouselExampleIndicators" role="button" data-slide="prev">
-                                        <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-                                        <span class="sr-only">Previous</span>
-                                    </a>
-                                    <a class="carousel-control-next" href="#carouselExampleIndicators" role="button" data-slide="next">
-                                        <span class="carousel-control-next-icon" aria-hidden="true"></span>
-                                        <span class="sr-only">Next</span>
-                                    </a>
-                                </div>
-
-                            </div>
-
-                            <!-- Product Info -->
-                            <div class="col-lg-6 product_col">
-                                <div class="product_info">
-                                    <div class="product_name">${product.name}</div>
-                                    <c:forEach var="category" items="${product.categories}">
-                                        <div class="product_category">In <a href="<c:url value="/category?id=${category.id}"></c:url>">${category.name}</a></div>
-                                    </c:forEach>
-                                        <div class="product_rating_container d-flex flex-row align-items-center justify-content-start">                                            
-                                            <div class="product_reviews"><i class="fa fa-heart fa-1x" style="color: #ff66a3" aria-hidden="true"></i> ${favorites}</div>                                        
-                                    </div>
-                                    <div class="product_price">$${product.price}</div>
-                                    <div>
-                                        <c:if test="${promotions != null && fn:length(promotions) > 0}">
-                                            <p style="font-weight: bold;color: red">Promotions: </p>
-                                            <c:forEach var="promo" items="${promotions}">
-                                                <p>${promo.name} - ${promo.description}</p>
-                                            </c:forEach>
-                                        </c:if>                                        
-                                    </div>
-                                    <div class="product_text">
-                                        <p>Description: ${product.description}</p>
-                                    </div>
-                                    <div class="product_buttons">
-                                        <div class="text-right d-flex flex-row align-items-start justify-content-start">
-                                            <div class="product_button product_fav text-center d-flex flex-column align-items-center justify-content-center" productId="${product.id}">
-                                                <div><div>
-                                                        <c:if test="${favorited == true}">
-                                                            <i id="favicon" class="fa fa-heart fa-3x" style="color: #ff66a3" aria-hidden="true"></i>
-                                                        </c:if>
-                                                        <c:if test="${favorited == false}">
-                                                            <i id="favicon" class="fa fa-heart-o fa-3x" style="color: #ff66a3" aria-hidden="true"></i>
-                                                        </c:if>
-                                                    </div></div>
+                                            <li data-target="#carouselExampleIndicators" data-slide-to="${status.index}" class="active"></li>
+                                        </ol>
+                                        <div class="carousel-inner">
+                                            <div class="carousel-item active">
+<!--                                                <img class="d-block w-100" src="${product.image}">-->
+                                                <img class="d-block w-100" src="https://picsum.photos/530/591">
                                             </div>
-                                            <div class="product_button product_cart text-center d-flex flex-column align-items-center justify-content-center" onclick="location.href='<c:url value="/order/${product.id}/"></c:url>'">
-                                                <div><div><img src="<c:url value="/images/cart.svg"></c:url>" class="svg" alt=""><div>+</div></div></div>
-                                                </div>                                               
+                                        </div>
+                                        <a class="carousel-control-prev" href="#carouselExampleIndicators" role="button" data-slide="prev">
+                                            <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                                            <span class="sr-only">Previous</span>
+                                        </a>
+                                        <a class="carousel-control-next" href="#carouselExampleIndicators" role="button" data-slide="next">
+                                            <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                                            <span class="sr-only">Next</span>
+                                        </a>
+                                    </div>
+                                </div>
+                                <!-- Product Info -->
+                                <div class="col-lg-6 product_col">
+                                    <div class="product_info">
+                                        <div class="product_name">${product.name}</div>
+                                        <c:forEach var="category" items="${product.categories}">
+                                            <div class="product_category">In <a href="<c:url value="/category?id=${category.id}"></c:url>">${category.name}</a></div>
+                                        </c:forEach>
+                                        <div class="col-12 col-md-6" style="font-size: 2em;">
+                                            <div id="review"></div>
+                                        </div>
+                                            <div class="product_rating_container d-flex flex-row align-items-center justify-content-start">
+                                                <div class="product_reviews"><i class="fa fa-heart fa-1x" style="color: #ff66a3" aria-hidden="true"></i> ${favorites}</div>
+                                        </div>
+                                        <div class="product_price">$${product.price}</div>
+                                        <div>
+                                            <c:if test="${promotions != null && fn:length(promotions) > 0}">
+                                                <p style="font-weight: bold;color: red">Promotions: </p>
+                                                <c:forEach var="promo" items="${promotions}">
+                                                    <p>${promo.name} - ${promo.description}</p>
+                                                </c:forEach>
+                                            </c:if>
+                                        </div>
+                                        <div class="product_text">
+                                            <p>Description: ${product.description}</p>
+                                        </div>
+                                        <div class="product_buttons">
+                                            <div class="text-right d-flex flex-row align-items-start justify-content-start">
+                                                <div class="product_button product_fav text-center d-flex flex-column align-items-center justify-content-center" productId="${product.id}">
+                                                    <div><div>
+                                                            <c:if test="${favorited == true}">
+                                                                <i id="favicon" class="fas fa-heart fa-3x" style="color: #ff66a3" aria-hidden="true"></i>
+                                                            </c:if>
+                                                            <c:if test="${favorited == false}">
+                                                                <i id="favicon" class="far fa-heart fa-3x" style="color: #ff66a3" aria-hidden="true"></i>
+                                                            </c:if>
+                                                        </div></div>
+                                                </div>
+                                                <div class="product_button product_cart text-center d-flex flex-column align-items-center justify-content-center" onclick="location.href='<c:url value="/order/${product.id}/"></c:url>'">
+                                                    <div><div><img src="<c:url value="/images/cart.svg"></c:url>" class="svg" alt=""><div>+</div></div></div>
+                                                    </div>
+                                                </div>
                                             </div>
                                         </div>
                                     </div>
                                 </div>
                             </div>
                         </div>
-                    </div>                  
 
                     <div class="comments" id="comments">
                         <div class='container'>
@@ -152,7 +144,6 @@ checked<%@page contentType="text/html" pageEncoding="UTF-8"%>
                 </div>
 
             </div>
-
             <!-- script -->
 
         <script src="<c:url value="/js/jquery-3.2.1.min.js"></c:url>"></script>
@@ -168,6 +159,7 @@ checked<%@page contentType="text/html" pageEncoding="UTF-8"%>
         <script src="<c:url value="/plugins/progressbar/progressbar.min.js"></c:url>"></script>
         <script src="<c:url value="/plugins/parallax-js-master/parallax.min.js"></c:url>"></script>
         <script src="<c:url value="/plugins/flexslider/jquery.flexslider-min.js"></c:url>"></script>
+        <script src="./js/rating.js"></script>
         <script src="<c:url value="/js/product.js"></c:url>"></script>
         <script src="<c:url value="/js/product-script-custom.js"></c:url>"></script>
     </body>

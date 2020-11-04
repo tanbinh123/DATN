@@ -1,8 +1,3 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package com.movies_unlimited.api;
 
 import com.movies_unlimited.Ultil.AccountUltil;
@@ -13,12 +8,11 @@ import com.movies_unlimited.service.AccountService;
 import com.movies_unlimited.service.FavoriteService;
 import com.movies_unlimited.service.ProductService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.*;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RestController;
 
-/**
- *
- * @author taing
- */
 @RestController
 @RequestMapping("/api")
 public class AccountAPI {

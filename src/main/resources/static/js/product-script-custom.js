@@ -11,10 +11,18 @@ function getSizeSelected() {
 }
 $(document).ready(function ()
 {
+$("#review").rating({
+                "value": 2,
+                "click": function (e) {
+                    console.log(e);
+                    $("#starsInput").val(e.stars);
+                }
+            });
     "use strict";
     initFavorite();
     function initFavorite()
     {
+
         if ($('.product_fav').length)
         {
             var qtys = $('.product_fav');
@@ -28,10 +36,10 @@ $(document).ready(function ()
                             var favicon = $("#favicon");                            
                             if (data === "favorited") {
                                 favicon.removeClass();
-                                favicon.addClass("fa fa-heart fa-3x");
+                                favicon.addClass("fas fa-heart fa-3x");
                             } else if (data === "unfavorited") {
                                 favicon.removeClass();
-                                favicon.addClass("fa fa-heart-o fa-3x");
+                                favicon.addClass("far fa-heart fa-3x");
                             } else {
                                 alert("Please login first");
                             }
