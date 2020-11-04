@@ -8,13 +8,15 @@ import com.movies_unlimited.service.AccountService;
 import com.movies_unlimited.service.OrderService;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.*;
+import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 
 @Slf4j
 @RequiredArgsConstructor
@@ -49,7 +51,7 @@ public class AccountController {
         if (newpassword1.equals(newpassword2)) {
             AccountEntity account = accountService.getAccountByEmail(AccountUltil.getAccount());
             PasswordEncoder bCryptPasswordEncoder = new BCryptPasswordEncoder();
-            if (bCryptPasswordEncoder.matches(password,account.getPassword())) {
+            if (bCryptPasswordEncoder.matches(password, account.getPassword())) {
                 account.setPassword(new BCryptPasswordEncoder().encode(newpassword1));
                 accountService.save(account);
                 model.addAttribute("messageSuccess", "Successfully updated password");
@@ -62,7 +64,7 @@ public class AccountController {
         return "user/changepassword";
     }
 
-    @RequestMapping(value = { "/account" }, method = RequestMethod.GET)
+    @RequestMapping(value = {"/account"}, method = RequestMethod.GET)
     public String viewAccount(Model model,
                               @RequestParam(value = "action", required = false) String action,
                               @RequestParam(value = "page", required = false) Integer page) {
@@ -74,7 +76,7 @@ public class AccountController {
             if (page == null || page <= 0) {
                 page = 1;
             }
-            AccountEntity account =  accountService.getAccountByEmail(AccountUltil.getAccount());
+            AccountEntity account = accountService.getAccountByEmail(AccountUltil.getAccount());
             Page<OrderEntity> ordersPage = orderService.getOrdersByAccountId(account.getId(), page);
             model.addAttribute("orders", ordersPage.getContent());
             model.addAttribute("page", ordersPage.getTotalPages());

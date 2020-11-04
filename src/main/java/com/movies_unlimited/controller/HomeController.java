@@ -28,8 +28,8 @@ public class HomeController {
     private final CommentService commentService;
     private final PromotionService promotionService;
 
-    @RequestMapping(value = { "","/", "/home" }, method = RequestMethod.GET)
-    public String home(Model model,@RequestParam(value = "page", required = false) Integer page) {
+    @RequestMapping(value = {"", "/", "/home"}, method = RequestMethod.GET)
+    public String home(Model model, @RequestParam(value = "page", required = false) Integer page) {
         if (page == null || page <= 0) {
             page = 1;
         }
@@ -58,10 +58,10 @@ public class HomeController {
             page = 1;
         }
         Page<ProductEntity> productsPage = null;
-        if(sort==null || sort.isEmpty()){
-            productsPage = productService.getProductByCategoryId(id,page,"none");
-        }else{
-            productsPage = productService.getProductByCategoryId(id,page,sort);
+        if (sort == null || sort.isEmpty()) {
+            productsPage = productService.getProductByCategoryId(id, page, "none");
+        } else {
+            productsPage = productService.getProductByCategoryId(id, page, sort);
         }
 
         List<ProductEntity> productsList = productsPage.getContent();
@@ -99,7 +99,6 @@ public class HomeController {
         model.addAttribute("promotions", promotionService.getPromotionsByProductId(id));
         return "product";
     }
-
 
 
     @GetMapping("/registration")

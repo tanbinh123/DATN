@@ -4,7 +4,6 @@ import com.movies_unlimited.entity.FavoriteEntity;
 import com.movies_unlimited.repository.FavoriteRepository;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -16,23 +15,23 @@ public class FavoriteService {
 
     private final FavoriteRepository favoriteRepository;
 
-    public List<FavoriteEntity> getFavoritesByProductId(int id){
+    public List<FavoriteEntity> getFavoritesByProductId(int id) {
         return favoriteRepository.findByProduct_id(id);
     }
 
-    public FavoriteEntity getFavotiteByAccountIDAndProductID(int accountid, int productid){
+    public FavoriteEntity getFavotiteByAccountIDAndProductID(int accountid, int productid) {
         return favoriteRepository.findByAccount_idAndProduct_id(accountid, productid);
     }
 
-    public int countFavoriteByProductId(int id){
+    public int countFavoriteByProductId(int id) {
         return favoriteRepository.countFavoriteByProductId(id);
     }
 
-    public void delete(FavoriteEntity fav){
+    public void delete(FavoriteEntity fav) {
         favoriteRepository.delete(fav);
     }
 
-    public FavoriteEntity save(FavoriteEntity fav){
+    public FavoriteEntity save(FavoriteEntity fav) {
         return favoriteRepository.save(fav);
     }
 }

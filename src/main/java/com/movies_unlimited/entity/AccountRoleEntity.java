@@ -20,7 +20,7 @@ public class AccountRoleEntity implements Serializable {
 
     private String name;
 
-    public String getRoleString(){
+    public String getRoleString() {
         return name;
     }
 

@@ -3,13 +3,10 @@ package com.movies_unlimited.controller;
 import com.movies_unlimited.entity.AccountEntity;
 import com.movies_unlimited.entity.OrderDetailEntity;
 import com.movies_unlimited.entity.OrderEntity;
-import com.movies_unlimited.entity.PromotionEntity;
 import com.movies_unlimited.service.AccountService;
 import com.movies_unlimited.service.OrderService;
-import com.movies_unlimited.service.PromotionService;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
@@ -34,7 +31,7 @@ public class ExportController {
             AccountEntity account = accountService.findAccountByOrderId(order.getId());
             order.setAccount(account);
             Set<OrderDetailEntity> orderDetails = order.getOrderDetails();
-            for (OrderDetailEntity orderDetail:
+            for (OrderDetailEntity orderDetail :
                     orderDetails) {
                 orderDetails.add(orderDetail);
             }

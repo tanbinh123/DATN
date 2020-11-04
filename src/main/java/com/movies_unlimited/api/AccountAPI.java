@@ -32,16 +32,16 @@ public class AccountAPI {
         AccountEntity account = accountService.getAccountByEmail(AccountUltil.getAccount());
         if (account != null) {
             FavoriteEntity fav = favoriteService.getFavotiteByAccountIDAndProductID(account.getId(), productId);
-            if (fav == null) {                             
+            if (fav == null) {
                 fav = new FavoriteEntity();
                 fav.setAccount(account);
                 ProductEntity product = productService.getProductById(productId);
                 fav.setProduct(product);
-                FavoriteEntity favsaved =  favoriteService.save(fav);
-                if(favsaved!=null && favsaved.getId()>0){
+                FavoriteEntity favsaved = favoriteService.save(fav);
+                if (favsaved != null && favsaved.getId() > 0) {
                     return "favorited";
-                }                
-            }else{
+                }
+            } else {
                 fav.setAccount(account);
                 ProductEntity product = productService.getProductById(productId);
                 fav.setProduct(product);

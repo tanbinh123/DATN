@@ -5,7 +5,6 @@
  */
 package com.movies_unlimited.Ultil;
 
-import com.movies_unlimited.entity.AccountEntity;
 import com.movies_unlimited.repository.AccountRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.context.SecurityContextHolder;
@@ -14,12 +13,13 @@ import org.springframework.security.core.userdetails.UserDetails;
 public class AccountUltil {
     @Autowired
     private AccountRepository accountRepository;
-    public static String getAccount(){
+
+    public static String getAccount() {
         Object principal = SecurityContextHolder.getContext().getAuthentication().getPrincipal();
         System.out.println(principal);
         if (principal instanceof UserDetails) {
-            return ((UserDetails)principal).getUsername();
-        }   
+            return ((UserDetails) principal).getUsername();
+        }
         return null;
     }
 }

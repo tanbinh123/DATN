@@ -6,7 +6,6 @@ import com.movies_unlimited.entity.enums.OrderStatus;
 import com.movies_unlimited.service.*;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -157,10 +156,10 @@ public class SellerController {
     @RequestMapping(value = "/seller/add-product", method = RequestMethod.POST)
     public String addProduct(Model model,
                              @ModelAttribute(value = "product") ProductEntity product) {
-                    ProductEntity productEntity = product;
-                    productEntity.setDate(new Date());
-                    productEntity.setStatus(ActiveStatus.ACTIVE);
-                    ProductEntity productEntitySave = productService.saveProduct(productEntity);
+        ProductEntity productEntity = product;
+        productEntity.setDate(new Date());
+        productEntity.setStatus(ActiveStatus.ACTIVE);
+        ProductEntity productEntitySave = productService.saveProduct(productEntity);
         model.addAttribute("messageSuccess", "Successfully added products");
         model.addAttribute("categorys", categoryService.getCategorys());
         return "seller/add-product";
@@ -194,10 +193,9 @@ public class SellerController {
             } else {
                 model.addAttribute("messageError", "Update product failed");
             }
+        } else {
+            model.addAttribute("messageError", "No category selected");
         }
-            else {
-                model.addAttribute("messageError", "No category selected");
-            }
         return "redirect:/seller?action=edit-product&id=" + product.getId();
     }
 

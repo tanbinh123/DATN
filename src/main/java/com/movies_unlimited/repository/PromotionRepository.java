@@ -11,6 +11,6 @@ public interface PromotionRepository extends JpaRepository<PromotionEntity, Inte
 
     PromotionEntity findByNameLike(String name);
 
-    @Query(value = "select promotion.id,promotion.name,promotion.description,promotion.discount,promotion.start_date,promotion.end_date,promotion.status from promotion join product_promotion_relation on promotion.id = product_promotion_relation.promotion_id where promotion.status = 'ACTIVE' and product_promotion_relation.product_id = ?1", nativeQuery = true )
+    @Query(value = "select promotion.id,promotion.name,promotion.description,promotion.discount,promotion.start_date,promotion.end_date,promotion.status from promotion join product_promotion_relation on promotion.id = product_promotion_relation.promotion_id where promotion.status = 'ACTIVE' and product_promotion_relation.product_id = ?1", nativeQuery = true)
     List<PromotionEntity> findPromotionByProductId(int id);
 }

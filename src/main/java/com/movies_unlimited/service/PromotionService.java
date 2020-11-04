@@ -21,15 +21,15 @@ public class PromotionService {
     private PromotionRepository promotionRepository;
 
     public Page<PromotionEntity> getPromotions(Integer page) {
-        Pageable pageable = PageRequest.of(page-1, 9, Sort.Direction.DESC, "id");
+        Pageable pageable = PageRequest.of(page - 1, 9, Sort.Direction.DESC, "id");
         return promotionRepository.findAll(pageable);
     }
 
-    public PromotionEntity getPromotionById(int id){
+    public PromotionEntity getPromotionById(int id) {
         return promotionRepository.findById(id);
     }
 
-    public PromotionEntity getPromotionByName(String name){
+    public PromotionEntity getPromotionByName(String name) {
         return promotionRepository.findByNameLike(name);
     }
 
@@ -37,7 +37,7 @@ public class PromotionService {
         return promotionRepository.save(promo);
     }
 
-    public List<PromotionEntity> getPromotionsByProductId(int id){
+    public List<PromotionEntity> getPromotionsByProductId(int id) {
 
         return promotionRepository.findPromotionByProductId(id);
     }

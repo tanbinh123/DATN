@@ -22,25 +22,25 @@ public class OrderService {
 
     private final OrderRepository orderRepository;
 
-    public Page<OrderEntity> getOrdersByAccountId(int id, int page){
-        Pageable pageable = PageRequest.of(page-1, 9);
-        return orderRepository.findByAccount_id(id,pageable);
+    public Page<OrderEntity> getOrdersByAccountId(int id, int page) {
+        Pageable pageable = PageRequest.of(page - 1, 9);
+        return orderRepository.findByAccount_id(id, pageable);
     }
 
-    public List<OrderEntity> getOrdersByAccountId(int id){
+    public List<OrderEntity> getOrdersByAccountId(int id) {
         return orderRepository.findByAccount_id(id);
     }
 
-    public Page<OrderEntity> getOrders(int page){
-        Pageable pageable = PageRequest.of(page-1, 9, Sort.Direction.DESC, "orderDate");
+    public Page<OrderEntity> getOrders(int page) {
+        Pageable pageable = PageRequest.of(page - 1, 9, Sort.Direction.DESC, "orderDate");
         return orderRepository.findAll(pageable);
     }
 
-    public List<OrderEntity> getOrders(){
+    public List<OrderEntity> getOrders() {
         return (List<OrderEntity>) orderRepository.findAll();
     }
 
-    public OrderEntity getOrderById(int id){
+    public OrderEntity getOrderById(int id) {
         return orderRepository.findById(id);
     }
 
@@ -52,17 +52,17 @@ public class OrderService {
         return orderRepository.findOrderByIdAndEmail(orderId, email);
     }
 
-    public Page<OrderEntity> getOrdersByAny(String searchtext, int page){
-        Pageable pageable = PageRequest.of(page-1, 9);
+    public Page<OrderEntity> getOrdersByAny(String searchtext, int page) {
+        Pageable pageable = PageRequest.of(page - 1, 9);
         Date birthday = null;
-        try{
-            birthday =new SimpleDateFormat("yyyy-MM-dd").parse(searchtext);
-        }catch(ParseException e){
+        try {
+            birthday = new SimpleDateFormat("yyyy-MM-dd").parse(searchtext);
+        } catch (ParseException e) {
 
         }
-        if(birthday!=null){
-            return orderRepository.findOrderByDate(birthday,pageable);
+        if (birthday != null) {
+            return orderRepository.findOrderByDate(birthday, pageable);
         }
-        return orderRepository.findOrderByAny(searchtext,pageable);
+        return orderRepository.findOrderByAny(searchtext, pageable);
     }
 }

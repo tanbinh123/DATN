@@ -1,7 +1,10 @@
 package com.movies_unlimited.entity;
 
 import com.movies_unlimited.Ultil.NumberUltil;
-import lombok.*;
+import lombok.AllArgsConstructor;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
 
 import javax.persistence.*;
 import java.io.Serializable;

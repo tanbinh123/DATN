@@ -14,12 +14,12 @@ import java.util.List;
 public class CategoryService {
     private final CategoryRepository categoryRepository;
 
-    public CategoryEntity getCategoryById(int id){
+    public CategoryEntity getCategoryById(int id) {
         return categoryRepository.findById(id);
     }
 
-    public List<CategoryEntity> getCategorys(){
-        return (List<CategoryEntity>) categoryRepository.findAll();
+    public List<CategoryEntity> getCategorys() {
+        return categoryRepository.findAll();
     }
 
     public List<CategoryEntity> getCategoryByProductId(Integer id) {

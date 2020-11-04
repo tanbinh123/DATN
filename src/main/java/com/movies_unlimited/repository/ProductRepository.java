@@ -1,7 +1,5 @@
 package com.movies_unlimited.repository;
 
-import com.movies_unlimited.entity.CategoryEntity;
-import com.movies_unlimited.entity.OrderEntity;
 import com.movies_unlimited.entity.ProductEntity;
 import com.movies_unlimited.entity.enums.ActiveStatus;
 import org.springframework.data.domain.Page;

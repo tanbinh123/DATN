@@ -8,7 +8,9 @@ import java.util.List;
 
 public interface CategoryRepository extends JpaRepository<CategoryEntity, Integer> {
     CategoryEntity findById(int id);
+
     CategoryEntity findByName(String name);
+
     @Query(value = "select category.id,category.name,category.description from category join category_product_relation on category.id = category_product_relation.category_id where category_product_relation.product_id = ?1 order by category.id asc", nativeQuery = true)
     List<CategoryEntity> findSizeByProductId(Integer id);
 }

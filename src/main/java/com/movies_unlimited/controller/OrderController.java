@@ -11,13 +11,15 @@ import com.movies_unlimited.service.ProductService;
 import com.movies_unlimited.service.PromotionService;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.HttpSession;
-import java.util.*;
+import java.util.Date;
+import java.util.HashSet;
+import java.util.List;
+import java.util.Set;
 
 @Slf4j
 @RequiredArgsConstructor
@@ -140,7 +142,7 @@ public class OrderController {
                         + "         <p>Order Id: #" + order.getId() + "</p>\n"
                         + "         <p>Order Date: " + StringUltil.fromDateToUS(order.getOrderDate()) + "</p>\n"
                         + "         <p>Order Status: " + order.getStatus() + "</p>\n"
-                        + "		 <a href=\"" + host + "/order-detail?id=" + order.getId() + "&email="+shipping.getEmail()+ "\">Click here to view order details</a>\n"
+                        + "		 <a href=\"" + host + "/order-detail?id=" + order.getId() + "&email=" + shipping.getEmail() + "\">Click here to view order details</a>\n"
                         + "      </div>\n"
                         + "      <table class=\"table\">\n"
                         + "         <thead>\n"
@@ -239,12 +241,13 @@ public class OrderController {
         session.setAttribute("order", order);
         return "redirect:/cart";
     }
+
     @RequestMapping("/order/cancel")
     public String guestCancelOrder(@RequestParam(value = "id") int orderId,
                                    @RequestParam(value = "email") String email,
                                    @RequestHeader(value = "Referer") String referer) {
         OrderEntity order = orderService.getOrderByIdAndEmail(orderId, email);
-        if(order == null){
+        if (order == null) {
             return "redirect:" + referer;
         }
         order.setStatus(OrderStatus.CANCELLED);
@@ -306,7 +309,7 @@ public class OrderController {
         }
         boolean isPromotionApply = false;
         Set<OrderDetailEntity> orderDetails = order.getOrderDetails();
-        for (OrderDetailEntity orderDetail:
+        for (OrderDetailEntity orderDetail :
                 orderDetails) {
             orderDetails.add(orderDetail);
         }
@@ -333,12 +336,12 @@ public class OrderController {
         return "redirect:/cart";
     }
 
-        @RequestMapping(value = "/order-detail")
+    @RequestMapping(value = "/order-detail")
     public String viewOrderDetail(Model model,
                                   @RequestParam(value = "id") int id,
                                   @RequestParam(value = "email") String email) {
         OrderEntity order = orderService.getOrderById(id);
-        if(!order.getShipping().getEmail().equals(email)){
+        if (!order.getShipping().getEmail().equals(email)) {
             return "redirect:/home";
         }
         model.addAttribute("vieworder", order);

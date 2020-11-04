@@ -13,11 +13,10 @@ import java.util.*;
 @RequiredArgsConstructor
 @Slf4j
 public class RatingService {
+    private final Map<Integer, Map<Integer, Integer>> ratings;
+    private final Map<Integer, Double> averageRating;
     @Autowired
     private RatingRepository ratingRepository;
-    private final Map<Integer, Map<Integer, Integer>> ratings;
-
-    private final Map<Integer, Double> averageRating;
 
     public RatingService() {
         ratings = new HashMap<>();

@@ -6,11 +6,13 @@ import com.movies_unlimited.repository.AccountRepository;
 import com.movies_unlimited.service.*;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.*;
+import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 
 import java.util.ArrayList;
 import java.util.Date;
@@ -44,13 +46,13 @@ public class FunctionController {
         }
         if (action.equals("searchProduct")) {
             Page<ProductEntity> productsPage;
-            if(sort==null || sort.isEmpty()){
-                sort  = "none";
+            if (sort == null || sort.isEmpty()) {
+                sort = "none";
             }
 
-            if(searchText==null || searchText.isEmpty()){
+            if (searchText == null || searchText.isEmpty()) {
                 productsPage = productService.getProductsActive(page, sort);
-            }else{
+            } else {
                 productsPage = productService.getProductByAnyActive(searchText, page, sort);
             }
             List<ProductEntity> products = new ArrayList<>(productsPage.getContent());

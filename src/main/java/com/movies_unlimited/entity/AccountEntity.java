@@ -2,7 +2,6 @@ package com.movies_unlimited.entity;
 
 import com.movies_unlimited.Ultil.StringUltil;
 import com.movies_unlimited.entity.enums.ActiveStatus;
-import com.movies_unlimited.entity.enums.Role;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
@@ -62,21 +61,22 @@ public class AccountEntity implements Serializable {
     @OneToMany(mappedBy = "account", fetch = FetchType.LAZY)
     private List<OrderEntity> orders;
 
-    public String getBirthdayFormat(){
-        if(birthday==null){
+    public String getBirthdayFormat() {
+        if (birthday == null) {
             return "";
         }
         return StringUltil.fromDateToUS(birthday);
     }
-    public String getRoleString(){
 
-        for(AccountRoleEntity role : accountRoles){
-            if(role!=null && role.getName().equals("ROLE_ADMIN")){
+    public String getRoleString() {
+
+        for (AccountRoleEntity role : accountRoles) {
+            if (role != null && role.getName().equals("ROLE_ADMIN")) {
                 return "ROLE_ADMIN";
             }
         }
-        for(AccountRoleEntity role : accountRoles){
-            if(role!=null && role.getName().equals("ROLE_SELLER")){
+        for (AccountRoleEntity role : accountRoles) {
+            if (role != null && role.getName().equals("ROLE_SELLER")) {
                 return "ROLE_SELLER";
             }
         }

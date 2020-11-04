@@ -11,7 +11,9 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 
-import java.util.*;
+import java.util.Comparator;
+import java.util.List;
+import java.util.Map;
 
 @Service
 @RequiredArgsConstructor
@@ -28,37 +30,37 @@ public class ProductService {
 
     private final RatingService users;
 
-    public Page<ProductEntity> getProductsActive(int page){
+    public Page<ProductEntity> getProductsActive(int page) {
         Pageable pageable = PageRequest.of(page, 12, Sort.by("date").descending());
-        return productRepository.findAllActiveProductPageable(ActiveStatus.ACTIVE,pageable);
+        return productRepository.findAllActiveProductPageable(ActiveStatus.ACTIVE, pageable);
     }
 
-    public List<ProductEntity> getProductsActive(){
+    public List<ProductEntity> getProductsActive() {
         return productRepository.findAllActiveProduct(ActiveStatus.ACTIVE);
     }
 
     public Page<ProductEntity> getProductByCategoryId(int categoryId, int page, String sort) {
         Pageable pageable;
-        if(sort.equals("Latest")){
+        if (sort.equals("Latest")) {
             pageable = PageRequest.of(page, 12, Sort.by("date").descending());
-        }else if(sort.equals("Oldest")){
+        } else if (sort.equals("Oldest")) {
             pageable = PageRequest.of(page, 12, Sort.by("date").ascending());
-        }else if(sort.equals("HightoLow")){
+        } else if (sort.equals("HightoLow")) {
             pageable = PageRequest.of(page, 12, Sort.by("price").descending());
-        }else if(sort.equals("LowtoHigh")){
+        } else if (sort.equals("LowtoHigh")) {
             pageable = PageRequest.of(page, 12, Sort.by("price").ascending());
-        }else{
+        } else {
             pageable = PageRequest.of(page, 12, Sort.by("date").descending());
         }
-        return productRepository.findProductByCategoryID(categoryId,ActiveStatus.ACTIVE,pageable);
+        return productRepository.findProductByCategoryID(categoryId, ActiveStatus.ACTIVE, pageable);
     }
 
     public Page<ProductEntity> getProducts(Integer page) {
-        Pageable pageable = PageRequest.of(page-1, 9);
-        return (Page<ProductEntity>) productRepository.findAll(pageable);
+        Pageable pageable = PageRequest.of(page - 1, 9);
+        return productRepository.findAll(pageable);
     }
 
-    public List<ProductEntity> getProducts(){
+    public List<ProductEntity> getProducts() {
         return (List<ProductEntity>) productRepository.findAll();
     }
 
@@ -66,48 +68,48 @@ public class ProductService {
         return productRepository.getById(id);
     }
 
-    public List<ProductEntity> getProductsByPromotionId(int id){
+    public List<ProductEntity> getProductsByPromotionId(int id) {
         return productRepository.findAllProductByPromotionId(id);
     }
 
-    public Page<ProductEntity> getProductsActive(int page, String sort){
+    public Page<ProductEntity> getProductsActive(int page, String sort) {
         Pageable pageable;
-        if(sort.equals("Latest")){
-            pageable = PageRequest.of(page-1, 9, Sort.Direction.DESC, "date");
-        }else if(sort.equals("Oldest")){
-            pageable = PageRequest.of(page-1, 9, Sort.Direction.ASC, "date");
-        }else if(sort.equals("HightoLow")){
-            pageable = PageRequest.of(page-1, 9, Sort.Direction.DESC, "price");
-        }else if(sort.equals("LowtoHigh")){
-            pageable = PageRequest.of(page-1, 9, Sort.Direction.ASC, "price");
-        }else{
-            pageable = PageRequest.of(page-1, 9, Sort.Direction.DESC, "date");
+        if (sort.equals("Latest")) {
+            pageable = PageRequest.of(page - 1, 9, Sort.Direction.DESC, "date");
+        } else if (sort.equals("Oldest")) {
+            pageable = PageRequest.of(page - 1, 9, Sort.Direction.ASC, "date");
+        } else if (sort.equals("HightoLow")) {
+            pageable = PageRequest.of(page - 1, 9, Sort.Direction.DESC, "price");
+        } else if (sort.equals("LowtoHigh")) {
+            pageable = PageRequest.of(page - 1, 9, Sort.Direction.ASC, "price");
+        } else {
+            pageable = PageRequest.of(page - 1, 9, Sort.Direction.DESC, "date");
         }
-        return productRepository.findAllActiveProductPageable(ActiveStatus.ACTIVE,pageable);
+        return productRepository.findAllActiveProductPageable(ActiveStatus.ACTIVE, pageable);
     }
 
     public ProductEntity saveProduct(ProductEntity product) {
         return productRepository.save(product);
     }
 
-    public Page<ProductEntity> getProductByAnyActive(String searchText, int page, String sort){
+    public Page<ProductEntity> getProductByAnyActive(String searchText, int page, String sort) {
         Pageable pageable;
-        if(sort.equals("Latest")){
-            pageable = PageRequest.of(page-1, 9, Sort.Direction.DESC, "date");
-        }else if(sort.equals("Oldest")){
-            pageable = PageRequest.of(page-1, 9, Sort.Direction.ASC, "date");
-        }else if(sort.equals("HightoLow")){
-            pageable = PageRequest.of(page-1, 9, Sort.Direction.DESC, "price");
-        }else if(sort.equals("LowtoHigh")){
-            pageable = PageRequest.of(page-1, 9, Sort.Direction.ASC, "price");
-        }else{
-            pageable = PageRequest.of(page-1, 9, Sort.Direction.DESC, "date");
+        if (sort.equals("Latest")) {
+            pageable = PageRequest.of(page - 1, 9, Sort.Direction.DESC, "date");
+        } else if (sort.equals("Oldest")) {
+            pageable = PageRequest.of(page - 1, 9, Sort.Direction.ASC, "date");
+        } else if (sort.equals("HightoLow")) {
+            pageable = PageRequest.of(page - 1, 9, Sort.Direction.DESC, "price");
+        } else if (sort.equals("LowtoHigh")) {
+            pageable = PageRequest.of(page - 1, 9, Sort.Direction.ASC, "price");
+        } else {
+            pageable = PageRequest.of(page - 1, 9, Sort.Direction.DESC, "date");
         }
-        return productRepository.findProductByAnyActive(searchText,ActiveStatus.ACTIVE,pageable);
+        return productRepository.findProductByAnyActive(searchText, ActiveStatus.ACTIVE, pageable);
     }
 
-    public Page<ProductEntity> getProductByAny(String searchText, int page){
-        Pageable pageable = PageRequest.of(page-1, 9);
+    public Page<ProductEntity> getProductByAny(String searchText, int page) {
+        Pageable pageable = PageRequest.of(page - 1, 9);
         return productRepository.findProductByAny(searchText, pageable);
     }
 

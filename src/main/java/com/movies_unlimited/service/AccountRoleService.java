@@ -12,13 +12,14 @@ import java.util.List;
 @Service
 @RequiredArgsConstructor
 @Slf4j
-public class AccountRoleService  {
+public class AccountRoleService {
     private final AccountRoleRepository accountRoleRepository;
-    public List<AccountRoleEntity> getAccountRoles(){
-        return (List<AccountRoleEntity>) accountRoleRepository.findAll();
+
+    public List<AccountRoleEntity> getAccountRoles() {
+        return accountRoleRepository.findAll();
     }
 
-    public AccountRoleEntity getAccountRolesByRole(Role role){
+    public AccountRoleEntity getAccountRolesByRole(Role role) {
         return accountRoleRepository.findByName(role.toString());
     }
 
