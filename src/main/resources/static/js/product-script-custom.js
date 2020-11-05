@@ -1,28 +1,22 @@
-function getSizeSelected() {
-    var radios = document.getElementsByName('product_size_radio');
-    for (var i = 0, length = radios.length; i < length; i++)
-    {
-        if (radios[i].checked)
-        {
-            return radios[i].value;
-        }
-    }
-    return "";
-}
 $(document).ready(function ()
 {
-$("#review").rating({
-                "value": 2,
+    initRating();
+    function initRating(){
+        $.get("api/get-rating/" + $('input[name=productId]').val(), function (data) {
+            $("#review").rating({
+                "value": data,
                 "click": function (e) {
-                    console.log(e);
+                    $.get("api/rating/" + $('input[name=productId]').val() +"/" + e.stars)
                     $("#starsInput").val(e.stars);
                 }
-            });
+            })
+        });
+    }
+
     "use strict";
     initFavorite();
     function initFavorite()
     {
-
         if ($('.product_fav').length)
         {
             var qtys = $('.product_fav');
@@ -51,5 +45,4 @@ $("#review").rating({
             });
         }
     }
-
 });

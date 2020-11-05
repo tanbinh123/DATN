@@ -1,5 +1,6 @@
 package com.movies_unlimited.service;
 
+import com.movies_unlimited.entity.FavoriteEntity;
 import com.movies_unlimited.entity.RatingEntity;
 import com.movies_unlimited.repository.RatingRepository;
 import lombok.RequiredArgsConstructor;
@@ -17,6 +18,9 @@ public class RatingService {
     private final Map<Integer, Double> averageRating;
     @Autowired
     private RatingRepository ratingRepository;
+
+
+
 
     public RatingService() {
         ratings = new HashMap<>();
@@ -145,5 +149,13 @@ public class RatingService {
             userAverage += (int) entry.getValue();
         }
         return userAverage / userRatings.size();
+    }
+
+    public RatingEntity getRatingByAccountIDAndProductID(int accountid, int productid) {
+        return ratingRepository.findByAccount_idAndProduct_id(accountid, productid);
+    }
+
+    public RatingEntity save(RatingEntity rate) {
+        return ratingRepository.save(rate);
     }
 }
