@@ -61,8 +61,8 @@
                                             <td>${orderSaved.id}</td>
                                         </tr>
                                         <tr>
-                                            <th>Username</th>
-                                            <td>${orderSaved.account.username}</td>
+                                            <th>Email</th>
+                                            <td>${orderSaved.account.email}</td>
                                         </tr>
                                         <tr>
                                             <th>Order Date</th>

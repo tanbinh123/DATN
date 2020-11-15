@@ -18,8 +18,8 @@ public interface AccountRepository extends PagingAndSortingRepository<AccountEnt
 
     AccountEntity findAccountByEmail(String email);
 
-    @Query(value = "select account from account join orders on account.id = orders.account_id where orders.id = ?1", nativeQuery = true)
-    AccountEntity findAccountByOrderId(int orderId);
+    @Query(value = "select a from AccountEntity a join a.orders o where o.id = :orderId")
+    AccountEntity findAccountByOrderId(@Param("orderId")int orderId);
 
     @Query(value = "select a from AccountEntity a where a.fullName like %:searchText% or a.email = :searchText or a.phone = :searchText or a.address like %:searchText%")
     Page<AccountEntity> findAccountByAny(@Param("searchText") String searchText, Pageable pageable);

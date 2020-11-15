@@ -112,7 +112,7 @@ checked<%@page contentType="text/html" pageEncoding="UTF-8"%>
                                         </a>
                                     </div>
                                     <div class="media-body">
-                                        <h4 class="media-heading">${comment.account.fullName}<span>${comment.commentDate}</span></h4>
+                                        <h4 class="media-heading">${comment.account.fullName}&nbsp Date:&nbsp<span>${comment.commentDate}</span></h4>
                                         <p>${comment.content}</p>
                                     </div>
                                 </div>      

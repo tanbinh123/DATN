@@ -11,9 +11,7 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 
-import java.util.Comparator;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 
 @Service
 @RequiredArgsConstructor
@@ -21,10 +19,10 @@ import java.util.Map;
 public class ProductService {
 
     final int NUM_RATINGS = 20;
-    final int NUM_NEIGHBOURHOODS = 10;
-    final int NUM_RECOMMENDATIONS = 20;
+    final int NUM_NEIGHBOURHOODS = 100;
+    final int NUM_RECOMMENDATIONS = 6;
     final int MIN_VALUE_RECOMMENDATION = 4;
-    final boolean RANDOM_RATINGS = false;
+    final boolean RANDOM_RATINGS = true;
 
     private final ProductRepository productRepository;
 
@@ -114,58 +112,59 @@ public class ProductService {
     }
 
 
-//    public void recommendMovie() {
-//        List<ProductEntity> products = productRepository.findAll();
-//        users.readFile();
-//        HashMap<Integer, Integer> ratings = new HashMap<>();
-//
-//        Random random = new Random();
-//        Scanner in = new Scanner(System.in);
-//        System.out.println("**********************************************");
-//        for (int i = 0; i < NUM_RATINGS; i++) {
-//            int idMovie = random.nextInt(products.size());
-//            while (ratings.containsKey(idMovie)) {
-//                idMovie = random.nextInt(products.size());
-//            }
-//            int rating;
-//            do {
-//                System.out.println("Movie: " + productRepository.findById(idMovie).getName());
-//                System.out.println("Enter your rating (1-5):");
-//                if (RANDOM_RATINGS) {
-//                    rating = random.nextInt(5) + 1;
-//                    System.out.println(rating);
-//                } else {
-//                    rating = Integer.parseInt(in.nextLine());
-//                }
-//            } while (rating < 0 || rating > 5);
-//            ratings.put(idMovie, rating);
-//        }
-//
-//        Map<Integer, Double> neighbourhoods = users.getNeighbourhoods(ratings, NUM_NEIGHBOURHOODS);
-//        Map<Integer, String> moviesIntegerStringMap = new HashMap<Integer, String>();
-//        for (ProductEntity product : products) {
-//            moviesIntegerStringMap.put(product.getId(), product.getName());
-//        }
-//
-//        Map<Integer, Double> recommendations = users.getRecommendations(ratings, neighbourhoods, moviesIntegerStringMap);
-//
-//        ValueComparator valueComparator = new ValueComparator(recommendations);
-//        Map<Integer, Double> sortedRecommendations = new TreeMap<>(valueComparator);
-//        sortedRecommendations.putAll(recommendations);
-//
-//        System.out.println("**********************************************");
-//        System.out.println("Recommendations: ");
-//        System.out.println("**********************************************");
-//        Iterator entries = sortedRecommendations.entrySet().iterator();
-//        int i = 0;
-//        while (entries.hasNext() && i < NUM_RECOMMENDATIONS) {
-//            Map.Entry entry = (Map.Entry) entries.next();
-//            if ((double) entry.getValue() >= MIN_VALUE_RECOMMENDATION) {
-//                System.out.println("Movie: " + productRepository.findById((int) entry.getKey()).getName() + ", Rating: " + entry.getValue());
-//                i++;
-//            }
-//        }
-//    }
+    public Set<ProductEntity> recommendMovie() {
+        List<ProductEntity> products = productRepository.findAllActiveProduct(ActiveStatus.ACTIVE);
+        users.readFile();
+        HashMap<Integer, Integer> ratings = new HashMap<>();
+
+        Random random = new Random();
+        Scanner in = new Scanner(System.in);
+        System.out.println("**********************************************");
+        for (int i = 0; i < NUM_RATINGS; i++) {
+            int idMovie = random.nextInt(products.size());
+            while (ratings.containsKey(idMovie)) {
+                idMovie = random.nextInt(products.size());
+            }
+            int rating;
+            do {
+                System.out.println("Movie: " + productRepository.getById(idMovie).getName());
+                System.out.println("Enter your rating (1-5):");
+                if (RANDOM_RATINGS) {
+                    rating = random.nextInt(5) + 1;
+                    System.out.println(rating);
+                } else {
+                    rating = Integer.parseInt(in.nextLine());
+                }
+            } while (rating < 0 || rating > 5);
+            ratings.put(idMovie, rating);
+        }
+
+        Map<Integer, Double> neighbourhoods = users.getNeighbourhoods(ratings, NUM_NEIGHBOURHOODS);
+        Map<Integer, String> moviesIntegerStringMap = new HashMap<Integer, String>();
+        for (ProductEntity product : products) {
+            moviesIntegerStringMap.put(product.getId(), product.getName());
+        }
+
+        Map<Integer, Double> recommendations = users.getRecommendations(ratings, neighbourhoods, moviesIntegerStringMap);
+
+        ValueComparator valueComparator = new ValueComparator(recommendations);
+        Map<Integer, Double> sortedRecommendations = new TreeMap<>(valueComparator);
+        sortedRecommendations.putAll(recommendations);
+
+        Iterator entries = sortedRecommendations.entrySet().iterator();
+        int i = 0;
+        Set<ProductEntity> recommendProducts = new HashSet<>();
+        while (entries.hasNext() && i < NUM_RECOMMENDATIONS) {
+            Map.Entry entry = (Map.Entry) entries.next();
+            if ((double) entry.getValue() >= MIN_VALUE_RECOMMENDATION) {
+                //System.out.println("Movie: " + productRepository.getById((int) entry.getKey()).getName() + ", Rating: " + entry.getValue());
+                recommendProducts.add(productRepository.getById((int) entry.getKey()));
+                i++;
+            }
+        }
+
+        return recommendProducts;
+    }
 }
 
 

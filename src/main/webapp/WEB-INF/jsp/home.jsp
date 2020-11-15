@@ -334,33 +334,34 @@
 						</div>
 					</c:if>
 					<c:forEach var="product" items="${products}">
-					<div class="col-xl-4 col-md-6">
-						<div class="product">
-							<div class="product_image"><img src="https://picsum.photos/530/591" alt=""></div>
-							<div class="product_content">
-								<div class="product_info d-flex flex-row align-items-start justify-content-start">
-									<div>
+						<div class="col-xl-4 col-md-6">
+							<div class="product">
+								<div class="product_image"><img src="https://picsum.photos/530/591" alt=""></div>
+								<div class="product_content">
+									<div class="product_info d-flex flex-row align-items-start justify-content-start">
 										<div>
-											<div class="product_name"><a href="<c:url value="/product?id=${product.id}"></c:url>">${product.name}</a></div>
-											<div class="product_category">In <a href="<c:url value="/category?id=${product.categories[0].id}&page=1"></c:url>">${product.categories[0].name}</a></div>
+											<div>
+												<div class="product_name"><a href="<c:url value="/product?id=${product.id}"></c:url>">${product.name}</a></div>
+												<div class="product_category">In <a href="<c:url value="/category?id=${product.categories[0].id}&page=1"></c:url>">${product.categories[0].name}</a></div>
+											</div>
+										</div>
+										<div class="ml-auto text-right">
+											<div>
+												<i class="fa fa-heart fa-1x" style="color: #ff66a3" aria-hidden="true"></i>
+												${product.totalFavorite}
+											</div>
+											<div class="product_price text-right">
+												$${product.price}
+											</div>
 										</div>
 									</div>
-									<div class="ml-auto text-right">
-										<div>
-											<i class="fa fa-heart fa-1x" style="color: #ff66a3" aria-hidden="true"></i>
-											${product.totalFavorite}
-										</div>
-										<div class="product_price text-right">
-											$${product.price}
-										</div>
-									</div>
-								</div>
 
+								</div>
 							</div>
 						</div>
-					</div>
 					</c:forEach>
 				</div>
+
 				<div class="row page_nav_row">
 					<div class="col">
 						<div class="page_nav">
@@ -386,6 +387,46 @@
 							</ul>
 						</div>
 					</div>
+				</div>
+				<div class="row">
+					<div class="col-lg-6 offset-lg-3">
+							<div class="section_title text-center">Recommend for you</div>
+					</div>
+				</div>
+				<div class="row products_row">
+					<!-- Product -->
+					<c:if test="${products_recommend.size()==0}">
+						<div class="col-md-12" style="text-align: center">
+							<h3>We couldn't find any matches!</h3>
+						</div>
+					</c:if>
+					<c:forEach var="product" items="${products_recommend}">
+						<div class="col-xl-4 col-md-6">
+							<div class="product">
+								<div class="product_image"><img src="https://picsum.photos/530/591" alt=""></div>
+								<div class="product_content">
+									<div class="product_info d-flex flex-row align-items-start justify-content-start">
+										<div>
+											<div>
+												<div class="product_name"><a href="<c:url value="/product?id=${product.id}"></c:url>">${product.name}</a></div>
+												<div class="product_category">In <a href="<c:url value="/category?id=${product.categories[0].id}&page=1"></c:url>">${product.categories[0].name}</a></div>
+											</div>
+										</div>
+										<div class="ml-auto text-right">
+											<div>
+												<i class="fa fa-heart fa-1x" style="color: #ff66a3" aria-hidden="true"></i>
+												${product.totalFavorite}
+											</div>
+											<div class="product_price text-right">
+												$${product.price}
+											</div>
+										</div>
+									</div>
+
+								</div>
+							</div>
+						</div>
+					</c:forEach>
 				</div>
 			</div>
 		</div>

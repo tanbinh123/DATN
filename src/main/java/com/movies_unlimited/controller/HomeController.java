@@ -16,6 +16,7 @@ import org.springframework.web.bind.annotation.*;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Set;
 
 @Slf4j
 @RequiredArgsConstructor
@@ -42,10 +43,10 @@ public class HomeController {
             product.setFavorites(favs);
             products.add(product);
         }
+        Set<ProductEntity> products_recommend = productService.recommendMovie();
         model.addAttribute("page", productsPage.getTotalPages());
         model.addAttribute("products", products);
-
-
+        model.addAttribute("products_recommend", products_recommend);
         return "home";
     }
 

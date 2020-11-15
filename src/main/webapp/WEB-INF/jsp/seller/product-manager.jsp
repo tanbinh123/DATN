@@ -78,7 +78,7 @@
                                 <c:forEach var="product" items="${products}">
                                     <tr>
                                         <td>${product.id}</td>
-                                        <td><a href="<c:url value="/product?id=${product.id}"/>"><img src="${product.image}" class="img-thumbnail-list"/>${product.name}</a></td>
+                                        <td><a href="<c:url value="/product?id=${product.id}"/>">${product.name}</a></td>
                                         <td>${product.price}</td>
                                         <c:if test="${product.status=='ACTIVE'}">
                                             <td style="color: blue">${product.status}</td>
@@ -96,10 +96,7 @@
                         <div class="col">
                             <div class="page_nav">
                                 <ul class="d-flex flex-row align-items-start justify-content-center">
-
 <c:forEach begin="${param.page > 5 ? param.page - 5 : 1}" end="${param.page - page + 5 <= 0 ? param.page + 5 : page}" varStatus="status">
-
-
                                         <c:choose>
                                             <c:when test="${param.page==null && status.index==1}">
                                                 <li class="active"><a href="<c:url value="/seller?action=product-manager&page=${status.index}"/>">${status.index}</a></li>

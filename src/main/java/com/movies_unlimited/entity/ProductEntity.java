@@ -4,6 +4,7 @@ import com.movies_unlimited.entity.enums.ActiveStatus;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import org.hibernate.annotations.Type;
 import org.springframework.format.annotation.DateTimeFormat;
 
 import javax.persistence.*;
@@ -26,6 +27,8 @@ public class ProductEntity implements Serializable {
 
     private double price;
 
+    @Lob
+    @Type(type = "org.hibernate.type.TextType")
     private String description;
 
     @DateTimeFormat(pattern = "dd-MM-yyyy")

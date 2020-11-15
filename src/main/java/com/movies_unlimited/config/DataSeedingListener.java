@@ -84,7 +84,8 @@ public class DataSeedingListener implements ApplicationListener<ContextRefreshed
                 ProductEntity productEntity = new ProductEntity();
                 String[] splitLine = line.split("\\|");
                 productEntity.setId(Integer.parseInt(splitLine[0]));
-                productEntity.setName(splitLine[1]);
+                productEntity.setName(splitLine[1].substring(0,splitLine[1].length()-7));
+                productEntity.setDescription("Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Nisl tincidunt eget nullam non. Quis hendrerit dolor magna eget est lorem ipsum dolor sit. Volutpat odio facilisis mauris sit amet massa. Commodo odio aenean sed adipiscing diam donec adipiscing tristique. Mi eget mauris pharetra et. Non tellus orci ac auctor augue. Elit at imperdiet dui accumsan sit. Ornare arcu dui vivamus arcu felis. Egestas integer eget aliquet nibh praesent. In hac habitasse platea dictumst quisque sagittis purus. Pulvinar elementum integer enim neque volutpat ac.");
                 DateFormat format = new SimpleDateFormat("dd-MMMM-yyyy", Locale.ENGLISH);
                 Date date = format.parse(splitLine[2]);
                 productEntity.setDate(date);

@@ -82,24 +82,6 @@
                                             <td><input type="number" name="price" class="form-control" required/></td>
                                         </tr>
                                         <tr>
-                                            <th>Color</th>
-                                            <td>
-                                                <select class="form-control" name="color.id">
-                                                    <c:forEach var="color" items="${colors}">
-                                                        <option value="${color.id}">${color.color}</option>
-                                                    </c:forEach>                                                    
-                                                </select>
-                                            </td>
-                                        </tr>
-                                        <tr>
-                                            <th>Size</th>
-                                            <td>
-                                                <c:forEach items="${sizes}" var="size">
-                                                    <label class="checkbox-inline"><input type="checkbox" name="size" value="${size.id}">${size.size}</label>                                                    
-                                                </c:forEach>
-                                            </td>
-                                        </tr>
-                                        <tr>
                                             <th>Images link <span style="color: red">(*)</span></th>
                                             <td><textarea name="imageLink" rows="6" class="form-control" required></textarea></td>
                                         </tr>

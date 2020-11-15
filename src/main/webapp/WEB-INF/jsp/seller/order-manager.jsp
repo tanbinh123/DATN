@@ -71,7 +71,6 @@
                                     <th>Order Date</th>
                                     <th>User</th>
                                     <th>Product</th>
-                                    <th>Size</th>
                                     <th>Quantity</th>
                                     <th>Price</th>
                                     <th>Total price</th>
@@ -84,10 +83,9 @@
                                             <c:if test="${status.index == 0}">
                                                 <td class="align-middle" rowspan="${o.orderDetails.size()}">${o.id}</td>
                                                 <td class="align-middle" rowspan="${o.orderDetails.size()}">${o.orderDate}</td>
-                                                <td class="align-middle" rowspan="${o.orderDetails.size()}">${o.account.username}</td>
+                                                <td class="align-middle" rowspan="${o.orderDetails.size()}">${o.account.email}</td>
                                             </c:if>
                                             <td class="align-middle"><a href="<c:url value="/product?id=${od.product.id}"/>">${od.product.name}</a></td>
-                                            <td class="align-middle">${od.size.size}</td>
                                             <td class="align-middle">${od.quantity}</td>
                                             <td class="align-middle">${od.product.price}</td>
                                             <c:if test="${status.index == 0}">

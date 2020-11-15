@@ -47,4 +47,18 @@ public class OrderEntity implements Serializable {
 
         return total;
     }
+
+    public String getProductsFormat() {
+        String out = "";
+        int i=0;
+        for (OrderDetailEntity entity:orderDetails
+             ) {
+            out += "x" + entity.getQuantity() +  ", " + entity.getProduct().getName();
+            i++;
+            if (i != (orderDetails.size() - 1)) {
+                out += "<br />";
+            }
+        }
+        return out;
+    }
 }
