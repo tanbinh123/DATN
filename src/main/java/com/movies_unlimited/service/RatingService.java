@@ -19,9 +19,6 @@ public class RatingService {
     @Autowired
     private RatingRepository ratingRepository;
 
-
-
-
     public RatingService() {
         ratings = new HashMap<>();
         averageRating = new HashMap<>();
@@ -157,5 +154,9 @@ public class RatingService {
 
     public RatingEntity save(RatingEntity rate) {
         return ratingRepository.save(rate);
+    }
+
+    public Set<RatingEntity> getRatingsByUserId(int id) {
+        return ratingRepository.findByAccount_id(id);
     }
 }

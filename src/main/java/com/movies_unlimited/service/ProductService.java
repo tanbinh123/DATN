@@ -1,7 +1,11 @@
 package com.movies_unlimited.service;
 
+import com.movies_unlimited.Ultil.AccountUltil;
+import com.movies_unlimited.entity.AccountEntity;
 import com.movies_unlimited.entity.ProductEntity;
+import com.movies_unlimited.entity.RatingEntity;
 import com.movies_unlimited.entity.enums.ActiveStatus;
+import com.movies_unlimited.repository.AccountRepository;
 import com.movies_unlimited.repository.ProductRepository;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -25,8 +29,8 @@ public class ProductService {
     final boolean RANDOM_RATINGS = true;
 
     private final ProductRepository productRepository;
-
-    private final RatingService users;
+    private final RatingService rating;
+    private final AccountRepository accountRepository;
 
     public Page<ProductEntity> getProductsActive(int page) {
         Pageable pageable = PageRequest.of(page, 12, Sort.by("date").descending());
@@ -113,39 +117,25 @@ public class ProductService {
 
 
     public Set<ProductEntity> recommendMovie() {
+        AccountEntity account = accountRepository.findAccountByEmail(AccountUltil.getAccount());
+        account.setId(1);
+        Set<RatingEntity> ratingsFromDatabase = rating.getRatingsByUserId(account.getId());
+
         List<ProductEntity> products = productRepository.findAllActiveProduct(ActiveStatus.ACTIVE);
-        users.readFile();
+        rating.readFile();
         HashMap<Integer, Integer> ratings = new HashMap<>();
 
-        Random random = new Random();
-        Scanner in = new Scanner(System.in);
-        System.out.println("**********************************************");
-        for (int i = 0; i < NUM_RATINGS; i++) {
-            int idMovie = random.nextInt(products.size());
-            while (ratings.containsKey(idMovie)) {
-                idMovie = random.nextInt(products.size());
-            }
-            int rating;
-            do {
-                System.out.println("Movie: " + productRepository.getById(idMovie).getName());
-                System.out.println("Enter your rating (1-5):");
-                if (RANDOM_RATINGS) {
-                    rating = random.nextInt(5) + 1;
-                    System.out.println(rating);
-                } else {
-                    rating = Integer.parseInt(in.nextLine());
-                }
-            } while (rating < 0 || rating > 5);
-            ratings.put(idMovie, rating);
+        for (RatingEntity  ratingEntity : ratingsFromDatabase) {
+            ratings.put(ratingEntity.getProduct().getId(),ratingEntity.getRating());
         }
 
-        Map<Integer, Double> neighbourhoods = users.getNeighbourhoods(ratings, NUM_NEIGHBOURHOODS);
+        Map<Integer, Double> neighbourhoods = rating.getNeighbourhoods(ratings, NUM_NEIGHBOURHOODS);
         Map<Integer, String> moviesIntegerStringMap = new HashMap<Integer, String>();
         for (ProductEntity product : products) {
             moviesIntegerStringMap.put(product.getId(), product.getName());
         }
 
-        Map<Integer, Double> recommendations = users.getRecommendations(ratings, neighbourhoods, moviesIntegerStringMap);
+        Map<Integer, Double> recommendations = rating.getRecommendations(ratings, neighbourhoods, moviesIntegerStringMap);
 
         ValueComparator valueComparator = new ValueComparator(recommendations);
         Map<Integer, Double> sortedRecommendations = new TreeMap<>(valueComparator);
@@ -157,7 +147,6 @@ public class ProductService {
         while (entries.hasNext() && i < NUM_RECOMMENDATIONS) {
             Map.Entry entry = (Map.Entry) entries.next();
             if ((double) entry.getValue() >= MIN_VALUE_RECOMMENDATION) {
-                //System.out.println("Movie: " + productRepository.getById((int) entry.getKey()).getName() + ", Rating: " + entry.getValue());
                 recommendProducts.add(productRepository.getById((int) entry.getKey()));
                 i++;
             }
