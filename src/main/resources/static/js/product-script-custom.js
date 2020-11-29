@@ -10,6 +10,11 @@ $(document).ready(function ()
                     $("#starsInput").val(e.stars);
                 }
             })
+
+        });
+        $.get("api/get-rating-average/" + $('input[name=productId]').val(), function (data) {
+            $("#average").html("average: "+data.average+" /");
+            $("#users").html(" "+data.account+" users");
         });
     }
 

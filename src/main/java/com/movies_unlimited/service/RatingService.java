@@ -152,6 +152,10 @@ public class RatingService {
         return ratingRepository.findByAccount_idAndProduct_id(accountid, productid);
     }
 
+    public Set<RatingEntity> getRatingByProductID(int productid) {
+        return ratingRepository.findByProduct_id(productid);
+    }
+
     public RatingEntity save(RatingEntity rate) {
         return ratingRepository.save(rate);
     }

@@ -1,73 +1,115 @@
-<%@ taglib prefix="spring" uri="http://www.springframework.org/tags" %>
-<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-<%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
-<c:set var="contextPath" value="${pageContext.request.contextPath}"/>
-
+<%@page contentType="text/html" pageEncoding="UTF-8"%>
+<%@taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+<%@taglib uri="http://www.springframework.org/tags/form" prefix="f" %>
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-      <meta charset="utf-8">
-      <title>Create an account</title>
+    <!-- head -->
+    <head>
+        <title>Register</title>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="description" content="Little Closet template">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <link rel="stylesheet" type="text/css" href="<c:url value="/styles/bootstrap-4.1.2/bootstrap.min.css"></c:url>">
+        <link href="<c:url value="/plugins/font-awesome-4.7.0/css/font-awesome.min.css"></c:url>" rel="stylesheet" type="text/css">
+        <link rel="stylesheet" type="text/css" href="<c:url value="/plugins/OwlCarousel2-2.2.1/owl.carousel.css"></c:url>">
+        <link rel="stylesheet" type="text/css" href="<c:url value="/plugins/OwlCarousel2-2.2.1/owl.theme.default.css"></c:url>">
+        <link rel="stylesheet" type="text/css" href="<c:url value="/plugins/OwlCarousel2-2.2.1/animate.css"></c:url>">
+        <link rel="stylesheet" type="text/css" href="<c:url value="/styles/main_styles.css"></c:url>">
+        <link rel="stylesheet" type="text/css" href="<c:url value="/styles/responsive.css"></c:url>">
+        <style>
+            th, input{
+                color: black;
+            }
+        </style>
+    </head>
+    <body>
+        <!-- Mobile Menu -->
+        <jsp:include page="./include/mobile-menu.jsp"/>
 
-      <link href="${contextPath}/css/bootstrap.min.css" rel="stylesheet">
-      <link href="${contextPath}/css/common.css" rel="stylesheet">
-  </head>
+        <div class="super_container">
 
-  <body>
+            <!-- Header -->
+            <jsp:include page="./include/header.jsp"/>
 
-    <div class="container">
+            <div class="super_container_inner">
+                <div class="super_overlay"></div>
+                <div class="container">
+                    <div class="row" style="margin-top: 100px">
+                        <div class="col-lg-6 offset-lg-3">
+                            <div class="section_title text-center">Register</div>
+                        </div>
+                    </div>
 
-        <form:form method="POST" modelAttribute="userForm" class="form-signin">
-            <h2 class="form-signin-heading">Create your account</h2>
-            <spring:bind path="email">
-                <div class="form-group ${status.error ? 'has-error' : ''}">
-                    <form:input type="text" path="email" class="form-control" placeholder="email"
-                                autofocus="true"></form:input>
-                    <form:errors path="email"></form:errors>
+                    <div class="row" style="margin-top: 3em">
+                        <div class="col-xs-12 col-sm-12">
+                            <p style="font-size: 150%;color: red;text-align: center">${messageError}</p>
+                            <p style="font-size: 150%;color: blue;text-align: center">${messageSuccess}</p>
+                            <f:form method="POST" modelAttribute="userForm" class="form-signin">
+                                <div class="table-responsive">
+                                    <table class="table table-bordered">
+                                        <tr>
+                                            <th>Full name <span style="color: red">(*)</span></th>
+                                            <td><input type="text" name="fullName" class="form-control" pattern="[A-Za-z ]{3,50}" title="Only letters and space are allowed, length 3-50" required/></td>
+                                        </tr>
+                                        <tr>
+                                            <th>Email <span style="color: red">(*)</span></th>
+                                            <td><input type="email" name="email" class="form-control" required/></td>
+                                        </tr>
+                                        <tr>
+                                            <th>Phone</th>
+                                            <td><input type="text" name="phone" pattern="[0-9]{10,11}" title="Only numbers are allowed, length 10-11" class="form-control"/></td>
+                                        </tr>
+                                        <tr>
+                                            <th>Birthday</th>
+                                            <td><input type="date" name="birthday" class="form-control"/></td>
+                                        </tr>
+                                        <tr>
+                                            <th>Address</th>
+                                            <td><input type="text" name="address" class="form-control"/></td>
+                                        </tr>
+                                        <tr>
+                                            <th>Password <span style="color: red">(*)</span></th>
+                                            <td><input type="password" name="password1" pattern=".{5,50}" title="Limit 5-50 characters" class="form-control" required/></td>
+                                        </tr>
+                                        <tr>
+                                            <th>Confirm password <span style="color: red">(*)</span></th>
+                                            <td><input type="password" name="password2" pattern=".{5,50}" title="Limit 5-50 characters" class="form-control" required/></td>
+                                        </tr>
+
+                                    </table>
+                                </div>
+                                <div class="form-group">
+                                    <div class="col-sm-12 col-xs-12" style="text-align: center">
+                                        <button id="registerBtn" type="submit" class="btn btn-primary">Register</button>
+                                    </div>
+                                </div>
+                            </f:form>
+                        </div>
+                    </div>
                 </div>
-            </spring:bind>
+                <!-- profile -->
 
-            <spring:bind path="password">
-                <div class="form-group ${status.error ? 'has-error' : ''}">
-                    <form:input type="password" path="password" class="form-control" placeholder="Password"></form:input>
-                    <form:errors path="password"></form:errors>
-                </div>
-            </spring:bind>
 
-            <spring:bind path="address">
-                <div class="form-group ${status.error ? 'has-error' : ''}">
-                    <form:input type="text" path="address" class="form-control" placeholder="address"></form:input>
-                    <form:errors path="address"></form:errors>
-                </div>
-            </spring:bind>
 
-            <spring:bind path="birthday">
-                <div class="form-group ${status.error ? 'has-error' : ''}">
-                    <form:input type="date" path="birthday" class="form-control" placeholder="birthday"></form:input>
-                    <form:errors path="birthday"></form:errors>
-                </div>
-            </spring:bind>
-
-            <spring:bind path="fullName">
-            <div class="form-group ${status.error ? 'has-error' : ''}">
-                <form:input type="text" path="fullName" class="form-control" placeholder="fullName"></form:input>
-                <form:errors path="fullName"></form:errors>
             </div>
-        </spring:bind>
+        </div>
 
-            <spring:bind path="phone">
-                <div class="form-group ${status.error ? 'has-error' : ''}">
-                    <form:input type="text" path="phone" class="form-control" placeholder="phone"></form:input>
-                    <form:errors path="phone"></form:errors>
-                </div>
-            </spring:bind>
-
-            <button class="btn btn-lg btn-primary btn-block" type="submit">Submit</button>
-        </form:form>
-
-    </div>
-
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
-      <script src="${contextPath}/js/bootstrap.min.js"></script>
-  </body>
+        <!-- Footer -->
+        <jsp:include page="./include/footer.jsp"/>
+        <!-- script -->
+        <script src="<c:url value="/js/jquery-3.2.1.min.js"></c:url>"></script>
+        <script src="<c:url value="/styles/bootstrap-4.1.2/popper.js"></c:url>"></script>
+        <script src="<c:url value="/styles/bootstrap-4.1.2/bootstrap.min.js"></c:url>"></script>
+        <script src="<c:url value="/plugins/greensock/TweenMax.min.js"></c:url>"></script>
+        <script src="<c:url value="/plugins/greensock/TimelineMax.min.js"></c:url>"></script>
+        <script src="<c:url value="/plugins/scrollmagic/ScrollMagic.min.js"></c:url>"></script>
+        <script src="<c:url value="/plugins/greensock/animation.gsap.min.js"></c:url>"></script>
+        <script src="<c:url value="/plugins/greensock/ScrollToPlugin.min.js"></c:url>"></script>
+        <script src="<c:url value="/plugins/OwlCarousel2-2.2.1/owl.carousel.js"></c:url>"></script>
+        <script src="<c:url value="/plugins/easing/easing.js"></c:url>"></script>
+        <script src="<c:url value="/plugins/progressbar/progressbar.min.js"></c:url>"></script>
+        <script src="<c:url value="/plugins/parallax-js-master/parallax.min.js"></c:url>"></script>
+        <script src="<c:url value="/js/custom.js"></c:url>"></script>
+    </body>
 </html>

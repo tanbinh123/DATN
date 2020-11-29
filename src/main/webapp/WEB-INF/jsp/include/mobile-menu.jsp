@@ -14,6 +14,21 @@
                 <li><a href="<c:url value="/category?id=2&page=1"></c:url>">Action</a></li>
                 <li><a href="<c:url value="/category?id=3&page=1"></c:url>">Adventure</a></li>
                 <li><a href="<c:url value="/category?id=4&page=1"></c:url>">Animation</a></li>
+                <li><a href="<c:url value="/category?id=5&page=1"></c:url>">Children's</a></li>
+                <li><a href="<c:url value="/category?id=6&page=1"></c:url>">Comedy</a></li>
+                <li><a href="<c:url value="/category?id=7&page=1"></c:url>">Crime</a></li>
+                <li><a href="<c:url value="/category?id=8&page=1"></c:url>">Documentary</a></li>
+                <li><a href="<c:url value="/category?id=9&page=1"></c:url>">Drama</a></li>
+                <li><a href="<c:url value="/category?id=10&page=1"></c:url>">Fantasy</a></li>
+                <li><a href="<c:url value="/category?id=11&page=1"></c:url>">Film-Noir</a></li>
+                <li><a href="<c:url value="/category?id=12&page=1"></c:url>">Horror</a></li>
+                <li><a href="<c:url value="/category?id=13&page=1"></c:url>">Musical</a></li>
+                <li><a href="<c:url value="/category?id=14&page=1"></c:url>">Musical</a></li>
+                <li><a href="<c:url value="/category?id=15&page=1"></c:url>">Romance</a></li>
+                <li><a href="<c:url value="/category?id=16&page=1"></c:url>">Sci-Fi</a></li>
+<!--                <li><a href="<c:url value="/category?id=17&page=1"></c:url>">Thriller</a></li>-->
+<!--                <li><a href="<c:url value="/category?id=18&page=1"></c:url>">War</a></li>-->
+<!--                <li><a href="<c:url value="/category?id=18&page=1"></c:url>">Western</a></li>-->
             </ul>
         </div>
         <!-- Contact Info -->

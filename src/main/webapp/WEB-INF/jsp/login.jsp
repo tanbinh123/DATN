@@ -39,7 +39,7 @@
                             <div class="col">
                                 <div class="page_nav">
                                     <ul class="d-flex flex-row align-items-start justify-content-center">
-                                        <li class="active"><a href="<c:url value="/register"></c:url>">Don't have an account? Register now!</a></li>
+                                        <li class="active"><a href="<c:url value="/registration"></c:url>">Don't have an account? Register now!</a></li>
                                     </ul>
                                 </div>
                             </div>

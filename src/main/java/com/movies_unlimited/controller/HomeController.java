@@ -1,10 +1,9 @@
 package com.movies_unlimited.controller;
 
 import com.movies_unlimited.Ultil.AccountUltil;
-import com.movies_unlimited.entity.AccountEntity;
-import com.movies_unlimited.entity.CommentEntity;
-import com.movies_unlimited.entity.FavoriteEntity;
-import com.movies_unlimited.entity.ProductEntity;
+import com.movies_unlimited.entity.*;
+import com.movies_unlimited.entity.enums.ActiveStatus;
+import com.movies_unlimited.entity.enums.Role;
 import com.movies_unlimited.service.*;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -14,9 +13,8 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Set;
+import java.util.*;
+import java.util.regex.Pattern;
 
 @Slf4j
 @RequiredArgsConstructor
@@ -28,6 +26,7 @@ public class HomeController {
     private final AccountService accountService;
     private final CommentService commentService;
     private final PromotionService promotionService;
+    private final AccountRoleService accountRoleService;
 
     @RequestMapping(value = {"", "/", "/home"}, method = RequestMethod.GET)
     public String home(Model model, @RequestParam(value = "page", required = false) Integer page) {
@@ -102,17 +101,40 @@ public class HomeController {
     }
 
 
-    @GetMapping("/registration")
-    public String registration(Model model) {
-        model.addAttribute("userForm", new AccountEntity());
+
+    @RequestMapping(value = "/registration", method = RequestMethod.GET)
+    public String viewRegister(Model model) {
         return "registration";
     }
 
-    @PostMapping("/registration")
-    public String registration(@ModelAttribute("userForm") AccountEntity userForm) {
-        userForm.setPassword(new BCryptPasswordEncoder().encode(userForm.getPassword()));
-        accountService.save(userForm);
-        return "redirect:/welcome";
+    @RequestMapping(value = "/registration", method = RequestMethod.POST)
+    public String registerAccount(Model model, @ModelAttribute(value = "account") AccountEntity account, @ModelAttribute(value = "password1") String password1, @ModelAttribute(value = "password2") String password2) {
+
+        if (password1.length() < 5) {
+            model.addAttribute("messageError", "Password must be greater than or equal to 5 characters");
+            return "registration";
+        }
+        if (!password1.equals(password2)) {
+            model.addAttribute("messageError", "Password is not the same, please check again");
+            return "registration";
+        }
+        AccountEntity checkUsername = accountService.getAccountByEmail(account.getEmail());
+        if (checkUsername != null) {
+            model.addAttribute("messageError", "This username already exists");
+            return "registration";
+        }
+        AccountEntity checkEmail = accountService.getAccountByEmail(account.getEmail());
+        if (checkEmail != null) {
+            model.addAttribute("messageError", "This email address already exists");
+            return "registration";
+        }
+        account.setPassword(new BCryptPasswordEncoder().encode(password2));
+        Set<AccountRoleEntity> accountRoleEntitys = new HashSet<>();
+        accountRoleEntitys.add(accountRoleService.getAccountRolesByRole(Role.ROLE_USER));
+        account.setAccountRoles(accountRoleEntitys);
+        account.setStatus(ActiveStatus.ACTIVE);
+        AccountEntity accountSaved = accountService.save(account);
+        return "registration";
     }
 
     @GetMapping("/login")

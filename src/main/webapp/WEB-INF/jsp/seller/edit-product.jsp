@@ -83,7 +83,7 @@
                                             <td><input type="number" name="price" value="${product.price}" class="form-control"/></td>
                                         </tr>
                                         <tr>
-                                            <th>Size <span style="color: red">(*)</span></th>
+                                            <th>Category <span style="color: red">(*)</span></th>
                                             <td>
                                                 <c:forEach items="${categories}" var="category" varStatus="status">
                                                     <c:choose>
@@ -98,8 +98,8 @@
                                             </td>
                                         </tr>
                                         <tr>
-                                             <th>Price <span style="color: red">(*)</span></th>
-                                             <td><input type="number" name="image" value="${product.image}" class="form-control"/></td>
+                                             <th>Img <span style="color: red">(*)</span></th>
+                                             <td><input type="text" name="image" value="${product.image}" class="form-control"/></td>
                                         </tr>
                                         <tr>
                                             <th>Status</th>

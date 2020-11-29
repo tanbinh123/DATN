@@ -62,8 +62,13 @@ checked<%@page contentType="text/html" pageEncoding="UTF-8"%>
                                         <div class="col-12 col-md-6" style="font-size: 2em;">
                                             <div id="review"></div>
                                         </div>
-                                            <div class="product_rating_container d-flex flex-row align-items-center justify-content-start">
-                                                <div class="product_reviews"><i class="fa fa-heart fa-1x" style="color: #ff66a3" aria-hidden="true"></i> ${favorites}</div>
+                                        <div class="product_rating_container d-flex flex-row align-items-center justify-content-start">
+                                            <div id="average"></div>
+                                            <div id="users"></div>
+                                            <div class="product_reviews">
+                                                <i class="fa fa-heart fa-1x" style="color: #ff66a3" aria-hidden="true"></i>
+                                                ${favorites}
+                                            </div>
                                         </div>
                                         <div class="product_price">$${product.price}</div>
                                         <div>

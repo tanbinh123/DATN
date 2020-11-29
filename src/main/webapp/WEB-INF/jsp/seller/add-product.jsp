@@ -56,14 +56,6 @@
                                             <td><input type="text" name="name" class="form-control" required/></td>
                                         </tr>
                                         <tr>
-                                            <th>Brand</th>
-                                            <td><input type="text" name="brand" class="form-control"/></td>
-                                        </tr>
-                                        <tr>
-                                            <th>Code <span style="color: red">(*)</span></th>
-                                            <td><input type="text" name="code" class="form-control" required/></td>
-                                        </tr>
-                                        <tr>
                                             <th>Category</th>
                                             <td>
                                                 <select class="form-control" name="category.id">
@@ -83,7 +75,7 @@
                                         </tr>
                                         <tr>
                                             <th>Images link <span style="color: red">(*)</span></th>
-                                            <td><textarea name="imageLink" rows="6" class="form-control" required></textarea></td>
+                                            <td><input type="text" name="image" class="form-control" required/></td>
                                         </tr>
                                     </table>
                                 </div>

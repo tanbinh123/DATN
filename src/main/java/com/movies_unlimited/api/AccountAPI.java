@@ -9,11 +9,14 @@ import com.movies_unlimited.service.AccountService;
 import com.movies_unlimited.service.FavoriteService;
 import com.movies_unlimited.service.ProductService;
 import com.movies_unlimited.service.RatingService;
+import net.minidev.json.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
+
+import java.util.Set;
 
 @RestController
 @RequestMapping("/api")
@@ -95,6 +98,26 @@ public class AccountAPI {
                return 0;
             } else {
                 return rate.getRating();
+            }
+        }
+        return "login";
+    }
+
+    @RequestMapping(value = "/get-rating-average/{productId}", method = RequestMethod.GET)
+    public Object getRatingAverageAPI(@PathVariable(value = "productId") int productId) {
+        AccountEntity account = accountService.getAccountByEmail(AccountUltil.getAccount());
+        if (account != null) {
+
+            Set<RatingEntity> rates = ratingService.getRatingByProductID(productId);
+
+            Double average = rates.stream().mapToDouble(a -> a.getRating()).average().getAsDouble();
+            if (rates == null) {
+                return 0;
+            } else {
+                JSONObject obj = new JSONObject();
+                obj.put("average", Math.floor(average * 100) / 100);
+                obj.put("account", rates.size());
+                return obj;
             }
         }
         return "login";

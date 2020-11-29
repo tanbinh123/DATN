@@ -160,6 +160,7 @@ public class SellerController {
         productEntity.setDate(new Date());
         productEntity.setStatus(ActiveStatus.ACTIVE);
         ProductEntity productEntitySave = productService.saveProduct(productEntity);
+        System.out.println(product);
         model.addAttribute("messageSuccess", "Successfully added products");
         model.addAttribute("categorys", categoryService.getCategorys());
         return "seller/add-product";
@@ -272,7 +273,5 @@ public class SellerController {
             }
         }
         return "redirect:/seller?action=edit-promo&id=" + promo.getId();
-
     }
-
 }
