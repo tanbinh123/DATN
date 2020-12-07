@@ -119,7 +119,6 @@ public class ProductService {
     public Set<ProductEntity> recommendMovie() {
         AccountEntity account = accountRepository.findById(1);
         //AccountEntity account = accountRepository.findAccountByEmail(AccountUltil.getAccount());
-        //account.setId(1);
         Set<RatingEntity> ratingsFromDatabase = rating.getRatingsByUserId(account.getId());
 
         List<ProductEntity> products = productRepository.findAllActiveProduct(ActiveStatus.ACTIVE);
@@ -152,7 +151,6 @@ public class ProductService {
                 i++;
             }
         }
-
         return recommendProducts;
     }
 }
