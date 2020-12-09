@@ -23,4 +23,8 @@ public class AccountRoleService {
         return accountRoleRepository.findByName(role.toString());
     }
 
+    public AccountRoleEntity getAccountRolesById(int id) {
+        return accountRoleRepository.findById(id);
+    }
+
 }

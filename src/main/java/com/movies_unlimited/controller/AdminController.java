@@ -9,6 +9,7 @@ import com.movies_unlimited.service.AccountService;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.data.domain.Page;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.ModelAttribute;
@@ -16,7 +17,9 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 
+import java.util.ArrayList;
 import java.util.HashSet;
+import java.util.List;
 import java.util.Set;
 
 @Slf4j
@@ -58,26 +61,20 @@ public class AdminController {
     @RequestMapping(value = "/admin/add-account", method = RequestMethod.POST)
     public String addAccount(Model model,
                              @ModelAttribute(value = "account") AccountEntity account,
-                             @ModelAttribute(value = "roleradio") int roleId) {
-        AccountEntity checkUsername = accountService.getAccountByEmail(account.getEmail());
-
+                             @RequestParam(value = "roles", required=false) List<Integer> roles) {
         AccountEntity checkEmail = accountService.getAccountByEmail(account.getEmail());
+        if (roles==null){
+            roles = new ArrayList<>();
+            roles.add(1);
+        }
         if (checkEmail == null) {
             Set<AccountRoleEntity> accountRoles = new HashSet<>();
-            AccountRoleEntity admin = accountRoleService.getAccountRolesByRole(Role.ROLE_ADMIN);
-            AccountRoleEntity seller = accountRoleService.getAccountRolesByRole(Role.ROLE_SELLER);
-            AccountRoleEntity user = accountRoleService.getAccountRolesByRole(Role.ROLE_USER);
-            if (roleId == 1) {
-                accountRoles.add(user);
-                accountRoles.add(admin);
-            } else if (roleId == 2) {
-                accountRoles.add(seller);
-                accountRoles.add(user);
-            } else {
-                accountRoles.add(user);
+            for (int roleId : roles) {
+                accountRoles.add(accountRoleService.getAccountRolesById(roleId));
             }
             account.setAccountRoles(accountRoles);
             account.setStatus(ActiveStatus.ACTIVE);
+            account.setPassword(new BCryptPasswordEncoder().encode(account.getPassword()));
             AccountEntity accountSaved = accountService.save(account);
             if (accountSaved != null && accountSaved.getId() > 0) {
                 model.addAttribute("messageSuccess", "Successful add account");
@@ -96,38 +93,35 @@ public class AdminController {
     @RequestMapping(value = "/admin/update-account", method = RequestMethod.POST)
     public String viewUpdateAccount(Model model,
                                     @ModelAttribute(value = "account") AccountEntity acc,
-                                    @ModelAttribute(value = "roleradio") int roleId,
+                                    @RequestParam(value = "roles", required=false) List<Integer> roles,
                                     @ModelAttribute(value = "statusradio") String status) {
         AccountEntity account = accountService.getAccountById(acc.getId());
-        account.setFullName(acc.getFullName());
-        account.setAddress(acc.getAddress());
-        account.setBirthday(acc.getBirthday());
-        account.setEmail(acc.getEmail());
-        account.setPhone(acc.getPhone());
-        account.setStatus(ActiveStatus.valueOf(status));
-        Set<AccountRoleEntity> accountRoles = new HashSet<>();
-        AccountRoleEntity admin = accountRoleService.getAccountRolesByRole(Role.ROLE_ADMIN);
-        AccountRoleEntity seller = accountRoleService.getAccountRolesByRole(Role.ROLE_SELLER);
-        AccountRoleEntity user = accountRoleService.getAccountRolesByRole(Role.ROLE_USER);
-        if (roleId == 1) {
-            accountRoles.add(user);
-            accountRoles.add(admin);
-        } else if (roleId == 2) {
-            accountRoles.add(seller);
-            accountRoles.add(user);
-        } else {
-            accountRoles.add(user);
+        if(roles!=null){
+            account.setFullName(acc.getFullName());
+            account.setAddress(acc.getAddress());
+            account.setBirthday(acc.getBirthday());
+            account.setEmail(acc.getEmail());
+            account.setPhone(acc.getPhone());
+            account.setStatus(ActiveStatus.valueOf(status));
+            Set<AccountRoleEntity> accountRoles = new HashSet<>();
+            for (int roleId : roles) {
+                accountRoles.add(accountRoleService.getAccountRolesById(roleId));
+            }
+            account.setAccountRoles(accountRoles);
+            AccountEntity accountupdated = accountService.save(account);
+
+            if (accountupdated != null && accountupdated.getId() > 0) {
+                model.addAttribute("account", accountupdated);
+                model.addAttribute("messageSuccess", "Successful account update");
+            } else {
+                model.addAttribute("account", account);
+                model.addAttribute("messageError", "Update failed");
+            }
         }
-        account.setAccountRoles(accountRoles);
-        AccountEntity accountupdated = accountService.save(account);
-        if (accountupdated != null && accountupdated.getId() > 0) {
-            model.addAttribute("account", accountupdated);
-            model.addAttribute("messageSuccess", "Successful account update");
-        } else {
+        else {
             model.addAttribute("account", account);
             model.addAttribute("messageError", "Update failed");
         }
-
         model.addAttribute("roles", accountRoleService.getAccountRoles());
         model.addAttribute("activeStatus", ActiveStatus.values());
         return "admin/viewaccount";

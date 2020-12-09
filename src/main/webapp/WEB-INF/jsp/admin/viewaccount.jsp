@@ -1,6 +1,7 @@
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <%@taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <%@taglib uri="http://www.springframework.org/tags/form" prefix="f" %>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn" %>
 <!DOCTYPE html>
 <html lang="en">
     <!-- head -->
@@ -75,9 +76,18 @@
                                             <th>Role</th>
                                             <td>
                                                 <c:forEach items="${roles}" var="role">
-                                                    <label class="radio-inline" style="margin-right: 7px">
-                                                        <input type="radio" name="roleradio" value="${role.id}" <c:if test="${account.roleString==role.roleString}">checked</c:if>>${role.roleString}
-                                                        </label>                                        
+                                                    <c:choose>
+                                                        <c:when test="${fn:contains(account.accountRoles, role)}">
+                                                            <label class="checkbox-inline">
+                                                                <input type="checkbox" name="roles" value="${role.id}" checked>${role.roleString}
+                                                            </label>
+                                                        </c:when>
+                                                        <c:otherwise>
+                                                            <label class="checkbox-inline">
+                                                                <input type="checkbox" name="roles" value="${role.id}">${role.roleString}
+                                                            </label>
+                                                        </c:otherwise>
+                                                    </c:choose>
                                                 </c:forEach>
                                             </td>
                                         </tr>
@@ -87,10 +97,10 @@
                                                 <c:forEach var="status" items="${activeStatus}">
                                                     <label class="radio-inline" style="margin-right: 7px">
                                                         <input type="radio" name="statusradio" value="${status}" <c:if test="${account.status==status}">checked</c:if>>${status}
-                                                        </label>  
-                                                </c:forEach>                                                 
+                                                        </label>
+                                                </c:forEach>
                                             </td>
-                                        </tr>                                       
+                                        </tr>
                                     </table>
                                 </div>
                                 <input type="hidden" name="id" value="${account.id}" />

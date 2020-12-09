@@ -5,4 +5,5 @@ import org.springframework.data.jpa.repository.JpaRepository;
 
 public interface AccountRoleRepository extends JpaRepository<AccountRoleEntity, Integer> {
     AccountRoleEntity findByName(String name);
+    AccountRoleEntity findById(int id);
 }

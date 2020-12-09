@@ -26,7 +26,6 @@
 
                 <!-- Header -->
             <jsp:include page="../include/header.jsp"/>
-
                 <div class="super_container_inner">
                     <div class="super_overlay"></div>		
                     <div class="container">
@@ -67,10 +66,18 @@
                                             <th>Role</th>
                                             <td>
                                                 <c:forEach items="${roles}" var="role">
-                                                    <label class="radio-inline" style="margin-right: 7px">
-                                                        <input type="radio" name="roleradio" value="${role.id}" <c:if test="${role.name == 'ROLE_USER'}">checked</c:if>>
-                                                        ${role.name}
-                                                        </label>                                        
+                                                    <c:choose>
+                                                        <c:when test="${role.roleString == 'ROLE_USER'}">
+                                                            <label class="checkbox-inline">
+                                                                <input type="checkbox" name="roles" value="${role.id}" checked>${role.roleString}
+                                                            </label>
+                                                        </c:when>
+                                                        <c:otherwise>
+                                                            <label class="checkbox-inline">
+                                                                <input type="checkbox" name="roles" value="${role.id}">${role.roleString}
+                                                            </label>
+                                                        </c:otherwise>
+                                                    </c:choose>
                                                 </c:forEach>
                                             </td>
                                         </tr>

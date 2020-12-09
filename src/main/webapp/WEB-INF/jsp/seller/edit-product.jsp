@@ -88,11 +88,15 @@
                                                 <c:forEach items="${categories}" var="category" varStatus="status">
                                                     <c:choose>
                                                         <c:when test="${categoryBoolean[status.index]==true}">
-                                                            <label class="checkbox-inline"><input type="checkbox" name="category" value="${category.id}" checked>${category.name}</label>
-                                                            </c:when>
-                                                            <c:otherwise>
-                                                            <label class="checkbox-inline"><input type="checkbox" name="category" value="${category.id}">${category.name}</label>
-                                                            </c:otherwise>
+                                                            <label class="checkbox-inline">
+                                                                <input type="checkbox" name="category" value="${category.id}" checked>${category.name}
+                                                            </label>
+                                                        </c:when>
+                                                        <c:otherwise>
+                                                            <label class="checkbox-inline">
+                                                                <input type="checkbox" name="category" value="${category.id}">${category.name}
+                                                            </label>
+                                                        </c:otherwise>
                                                     </c:choose>
                                                 </c:forEach>
                                             </td>
