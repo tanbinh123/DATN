@@ -138,15 +138,15 @@ public class ProductService {
         Map<Integer, Double> recommendations = rating.getRecommendations(ratings, neighbourhoods, moviesIntegerStringMap);
 
 
-        LinkedHashMap<Integer, Double> reverseSortedMap  = new LinkedHashMap<>();
-        neighbourhoods.entrySet()
-                .stream()
-                .sorted(Map.Entry.comparingByValue(Comparator.reverseOrder()))
-                .forEachOrdered(x -> reverseSortedMap.put(x.getKey(), x.getValue()));
-
-        for (Map.Entry<Integer, Double> entry : reverseSortedMap .entrySet()) {
-            System.out.println(entry.getKey() + "/" + entry.getValue());
-        }
+//        LinkedHashMap<Integer, Double> reverseSortedMap  = new LinkedHashMap<>();
+//        neighbourhoods.entrySet()
+//                .stream()
+//                .sorted(Map.Entry.comparingByValue(Comparator.reverseOrder()))
+//                .forEachOrdered(x -> reverseSortedMap.put(x.getKey(), x.getValue()));
+//
+//        for (Map.Entry<Integer, Double> entry : reverseSortedMap .entrySet()) {
+//            System.out.println(entry.getKey() + "/" + entry.getValue());
+//        }
 
         ValueComparator valueComparator = new ValueComparator(recommendations);
         Map<Integer, Double> sortedRecommendations = new TreeMap<>(valueComparator);
@@ -158,7 +158,7 @@ public class ProductService {
         while (entries.hasNext() && i < NUM_RECOMMENDATIONS) {
             Map.Entry entry = (Map.Entry) entries.next();
             if ((double) entry.getValue() >= MIN_VALUE_RECOMMENDATION) {
-                System.out.println(productRepository.getById((int) entry.getKey()).getName()+" "+entry.getValue());
+                //System.out.println(productRepository.getById((int) entry.getKey()).getName()+" "+entry.getValue());
                 recommendProducts.add(productRepository.getById((int) entry.getKey()));
                 i++;
             }

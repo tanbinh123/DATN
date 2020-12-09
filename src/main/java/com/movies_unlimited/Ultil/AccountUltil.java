@@ -16,7 +16,6 @@ public class AccountUltil {
 
     public static String getAccount() {
         Object principal = SecurityContextHolder.getContext().getAuthentication().getPrincipal();
-        System.out.println(principal);
         if (principal instanceof UserDetails) {
             return ((UserDetails) principal).getUsername();
         }

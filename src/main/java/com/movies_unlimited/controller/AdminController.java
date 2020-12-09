@@ -39,7 +39,6 @@ public class AdminController {
             model.addAttribute("page", accountsPage.getTotalPages());
             return "admin/account-manager";
         } else if (action.equals("add-account")) {
-            System.out.println(accountRoleService.getAccountRoles().size());
             model.addAttribute("roles", accountRoleService.getAccountRoles());
             return "admin/add-account";
         } else {

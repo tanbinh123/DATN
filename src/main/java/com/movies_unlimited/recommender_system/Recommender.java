@@ -53,14 +53,10 @@ public class Recommender {
                 if (usersTest.getRatings().get(userId).get(entry.getKey()) != null) {
                     sub_r_r += ((double) entry.getValue() - usersTest.getRatings().get(userId).get(entry.getKey())) * ((double) entry.getValue() - usersTest.getRatings().get(userId).get(entry.getKey()));
                     i++;
-                    System.out.println("Movie: " + movies.getName((int) entry.getKey()) + ", Rating: " + entry.getValue() + ", Rating: " + usersTest.getRatings().get(userId).get(entry.getKey()));
                 }
             }
-            System.out.println(userId);
-
             temp += Math.sqrt(sub_r_r / i);
         }
-        System.out.println(temp / (users.getRatings().size() - userNotHaveRating));
         final long endTime = System.currentTimeMillis();
         System.out.println("Total execution time: " + (endTime - startTime));
 
