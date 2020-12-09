@@ -8,7 +8,6 @@ import com.movies_unlimited.repository.AccountRepository;
 import com.movies_unlimited.service.OrderDetailService;
 import com.movies_unlimited.service.OrderService;
 import com.movies_unlimited.service.ProductService;
-import com.movies_unlimited.service.PromotionService;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Controller;
@@ -29,7 +28,6 @@ public class OrderController {
     private final ProductService productService;
     private final OrderService orderService;
     private final OrderDetailService orderDetailService;
-    private final PromotionService promotionService;
 
     @RequestMapping(value = "/cart", method = RequestMethod.GET)
     public String cartPage(Model model) {

@@ -25,7 +25,6 @@ public class HomeController {
     private final CategoryService categoryService;
     private final AccountService accountService;
     private final CommentService commentService;
-    private final PromotionService promotionService;
     private final AccountRoleService accountRoleService;
 
     @RequestMapping(value = {"", "/", "/home"}, method = RequestMethod.GET)
@@ -96,7 +95,6 @@ public class HomeController {
         } else {
             model.addAttribute("favorited", false);
         }
-        model.addAttribute("promotions", promotionService.getPromotionsByProductId(id));
         return "product";
     }
 

@@ -26,7 +26,6 @@ public class SellerController {
     private final ProductService productService;
     private final OrderService orderService;
     private final AccountService accountService;
-    private final PromotionService promotionService;
 
     @RequestMapping("/seller")
     public String viewSeller(Model model,
@@ -62,12 +61,6 @@ public class SellerController {
             model.addAttribute("products", productsPage.getContent());
             model.addAttribute("page", productsPage.getTotalPages());
             return "seller/product-manager";
-        } else if (action.equals("promo-manager")) {
-            Page<PromotionEntity> promosPage = promotionService.getPromotions(page);
-            List<PromotionEntity> promos = new ArrayList<>(promosPage.getContent());
-            model.addAttribute("promos", promos);
-            model.addAttribute("page", promosPage.getTotalPages());
-            return "seller/promo-manager";
         } else if (action.equals("add-product")) {
             ProductEntity product = new ProductEntity();
             model.addAttribute("product", product);
@@ -127,7 +120,6 @@ public class SellerController {
             }
             model.addAttribute("productsBoolean", productsBoolean);
             model.addAttribute("products", products);
-            model.addAttribute("promotion", promotionService.getPromotionById(id));
             model.addAttribute("status", ActiveStatus.values());
             return "seller/edit-promo";
         } else {
@@ -199,78 +191,4 @@ public class SellerController {
         return "redirect:/seller?action=edit-product&id=" + product.getId();
     }
 
-    @RequestMapping(value = "/seller/add-promo", method = RequestMethod.POST)
-    public String addPromo(Model model,
-                           @ModelAttribute(value = "promotion") PromotionEntity promo,
-                           @RequestParam(value = "product") List<Integer> product) {
-        if (promo.getEndDate().before(promo.getStartDate())) {
-            model.addAttribute("messageError", "Please select End date >= Start Date");
-            model.addAttribute("products", productService.getProductsActive());
-            return "seller/add-promo";
-        }
-        if (promo.getDiscount() <= 0) {
-            model.addAttribute("messageError", "Please set discount > 0%");
-            model.addAttribute("products", productService.getProductsActive());
-            return "seller/add-promo";
-        }
-        if (product.isEmpty()) {
-            model.addAttribute("messageError", "Please select product");
-            model.addAttribute("products", productService.getProductsActive());
-            return "seller/add-promo";
-        }
-        PromotionEntity promoCheck = promotionService.getPromotionByName(promo.getName());
-        if (promoCheck != null) {
-            model.addAttribute("messageError", "This promotion name already exists");
-            model.addAttribute("products", productService.getProductsActive());
-            return "seller/add-promo";
-        }
-        List<ProductEntity> products = new ArrayList<>();
-        for (Integer p : product) {
-            products.add(productService.getProductById(p));
-        }
-        promo.setProducts(products);
-        PromotionEntity promoSaved = promotionService.save(promo);
-        if (promoSaved != null && promoSaved.getId() > 0) {
-            model.addAttribute("messageSuccess", "Successfully added promotion");
-        } else {
-            model.addAttribute("messageError", "Add failed");
-        }
-        model.addAttribute("products", productService.getProducts());
-        return "seller/add-promo";
-    }
-
-    @RequestMapping(value = "/seller/edit-promo", method = RequestMethod.POST)
-    public String editPromo(Model model,
-                            @ModelAttribute(value = "promotion") PromotionEntity promo,
-                            @RequestParam(value = "product") List<Integer> productsId) {
-        if (promo.getEndDate().before(promo.getStartDate())) {
-            model.addAttribute("messageError", "Please select End date > Start Date");
-        } else {
-            if (promo.getDiscount() <= 0) {
-                model.addAttribute("messageError", "Please set discount > 0%");
-            } else {
-                if (productsId.isEmpty()) {
-                    model.addAttribute("messageError", "Please select product");
-                } else {
-                    PromotionEntity promoCheck = promotionService.getPromotionByName(promo.getName());
-                    if (promoCheck == null) {
-                        model.addAttribute("messageError", "Please don't change promotion name");
-                    } else {
-                        List<ProductEntity> products = new ArrayList<>();
-                        for (int i : productsId) {
-                            products.add(productService.getProductById(i));
-                        }
-                        promo.setProducts(products);
-                        PromotionEntity promoSaved = promotionService.save(promo);
-                        if (promoSaved != null && promoSaved.getId() > 0) {
-                            model.addAttribute("messageSuccess", "Successfully updated promotion");
-                        } else {
-                            model.addAttribute("messageError", "Update failed");
-                        }
-                    }
-                }
-            }
-        }
-        return "redirect:/seller?action=edit-promo&id=" + promo.getId();
-    }
 }

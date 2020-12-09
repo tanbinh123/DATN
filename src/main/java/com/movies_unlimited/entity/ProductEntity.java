@@ -46,9 +46,6 @@ public class ProductEntity implements Serializable {
             inverseJoinColumns = @JoinColumn(name = "category_id", referencedColumnName = "id"))
     private List<CategoryEntity> categories;
 
-    @ManyToMany(mappedBy = "products")
-    private List<PromotionEntity> promotions;
-
     @OneToMany(mappedBy = "product", fetch = FetchType.LAZY)
     private List<FavoriteEntity> favorites;
 
