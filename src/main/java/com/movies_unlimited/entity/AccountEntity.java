@@ -69,7 +69,6 @@ public class AccountEntity implements Serializable {
     }
 
     public String getRoleString() {
-
         for (AccountRoleEntity role : accountRoles) {
             if (role != null && role.getName().equals("ROLE_ADMIN")) {
                 return "ROLE_ADMIN";

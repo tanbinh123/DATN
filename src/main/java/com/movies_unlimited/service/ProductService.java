@@ -116,7 +116,7 @@ public class ProductService {
 
     public Set<ProductEntity> recommendMovie() {
         AccountEntity account = accountRepository.findAccountByEmail(AccountUltil.getAccount());
-        if(account==null||rating.getRatingsByUserId(account.getId())==null){
+        if(account==null){
             return null;
         }
         Set<RatingEntity> ratingsFromDatabase = rating.getRatingsByUserId(account.getId());
@@ -138,15 +138,15 @@ public class ProductService {
         Map<Integer, Double> recommendations = rating.getRecommendations(ratings, neighbourhoods, moviesIntegerStringMap);
 
 
-//        LinkedHashMap<Integer, Double> reverseSortedMap  = new LinkedHashMap<>();
-//        neighbourhoods.entrySet()
-//                .stream()
-//                .sorted(Map.Entry.comparingByValue(Comparator.reverseOrder()))
-//                .forEachOrdered(x -> reverseSortedMap.put(x.getKey(), x.getValue()));
-//
-//        for (Map.Entry<Integer, Double> entry : reverseSortedMap .entrySet()) {
-//            System.out.println(entry.getKey() + "/" + entry.getValue());
-//        }
+        LinkedHashMap<Integer, Double> reverseSortedMap  = new LinkedHashMap<>();
+        neighbourhoods.entrySet()
+                .stream()
+                .sorted(Map.Entry.comparingByValue(Comparator.reverseOrder()))
+                .forEachOrdered(x -> reverseSortedMap.put(x.getKey(), x.getValue()));
+
+        for (Map.Entry<Integer, Double> entry : reverseSortedMap .entrySet()) {
+            System.out.println(entry.getKey() + "/" + entry.getValue());
+        }
 
         ValueComparator valueComparator = new ValueComparator(recommendations);
         Map<Integer, Double> sortedRecommendations = new TreeMap<>(valueComparator);

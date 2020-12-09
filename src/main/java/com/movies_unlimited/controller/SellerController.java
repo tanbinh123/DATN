@@ -148,7 +148,7 @@ public class SellerController {
         } else {
             model.addAttribute("messageError", "Update failed");
         }
-        model.addAttribute("order", order);
+        model.addAttribute("orderSaved", order);
         model.addAttribute("status", OrderStatus.values());
         return "seller/update-order";
     }

@@ -57,7 +57,7 @@
                                         </tr>
                                         <tr>
                                             <th>Email <span style="color: red">(*)</span></th>
-                                            <td><input type="email" name="email" value="${account.email}" class="form-control" required/></td>
+                                            <td><input type="email" name="email" value="${account.email}" class="form-control" required readonly/></td>
                                         </tr>
                                         <tr>
                                             <th>Phone</th>

@@ -2,6 +2,7 @@ package com.movies_unlimited.config;
 
 import com.movies_unlimited.entity.AccountEntity;
 import com.movies_unlimited.entity.AccountRoleEntity;
+import com.movies_unlimited.entity.enums.ActiveStatus;
 import com.movies_unlimited.repository.AccountRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.GrantedAuthority;
@@ -23,27 +24,18 @@ public class UserDetailsServiceImpl implements UserDetailsService {
 
     @Override
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
-
-
         Optional<AccountEntity> userOpt = accountRepository.findByEmail(username);
-
-        if (userOpt.isPresent()) {
-
+        if (userOpt.isPresent() && userOpt.get().getStatus()== ActiveStatus.ACTIVE) {
             AccountEntity emailEntity = userOpt.get();
-
             Set<GrantedAuthority> grantedAuthorities = new HashSet<>();
-
             Set<AccountRoleEntity> roles = emailEntity.getAccountRoles();
-
             for (AccountRoleEntity role : roles) {
                 grantedAuthorities.add(new SimpleGrantedAuthority(role.getName()));
             }
-
             return new org.springframework.security.core.userdetails.User(
                     emailEntity.getEmail(), emailEntity.getPassword(), grantedAuthorities);
 
         }
-
         throw new UsernameNotFoundException("User not found");
     }
 }
