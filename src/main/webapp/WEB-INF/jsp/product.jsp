@@ -71,14 +71,6 @@ checked<%@page contentType="text/html" pageEncoding="UTF-8"%>
                                             </div>
                                         </div>
                                         <div class="product_price">$${product.price}</div>
-                                        <div>
-                                            <c:if test="${promotions != null && fn:length(promotions) > 0}">
-                                                <p style="font-weight: bold;color: red">Promotions: </p>
-                                                <c:forEach var="promo" items="${promotions}">
-                                                    <p>${promo.name} - ${promo.description}</p>
-                                                </c:forEach>
-                                            </c:if>
-                                        </div>
                                         <div class="product_text">
                                             <p>Description: ${product.description}</p>
                                         </div>

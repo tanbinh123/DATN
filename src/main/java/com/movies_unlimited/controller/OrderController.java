@@ -297,42 +297,6 @@ public class OrderController {
         return "redirect:/account?action=myorder";
     }
 
-    @RequestMapping(value = "/apply-promotion", method = RequestMethod.POST)
-    public String applyPromotion(Model model,
-                                 HttpSession session,
-                                 @ModelAttribute(value = "promotion_name") String promotion_name) {
-        OrderEntity order = (OrderEntity) session.getAttribute("order");
-        if (order == null) {
-            return "redirect:/cart";
-        }
-        boolean isPromotionApply = false;
-        Set<OrderDetailEntity> orderDetails = order.getOrderDetails();
-        for (OrderDetailEntity orderDetail :
-                orderDetails) {
-            orderDetails.add(orderDetail);
-        }
-        order.setTotalPrice(order.getTotal());
-        order.setOrderDetails(orderDetails);
-        session.setAttribute("order", order);
-        if (isPromotionApply) {
-            model.addAttribute("messageSuccess", "Successfully added promotion");
-        } else {
-            model.addAttribute("messageError", "Invalid promotional code");
-        }
-        return "cart";
-    }
-
-    @RequestMapping(value = "/remove-promotion")
-    public String removePromotion(HttpSession session,
-                                  @RequestParam(value = "id") int id) {
-        OrderEntity order = (OrderEntity) session.getAttribute("order");
-        if (order != null) {
-            Set<OrderDetailEntity> orderDetails = order.getOrderDetails();
-            order.setOrderDetails(orderDetails);
-            session.setAttribute("order", order);
-        }
-        return "redirect:/cart";
-    }
 
     @RequestMapping(value = "/order-detail")
     public String viewOrderDetail(Model model,

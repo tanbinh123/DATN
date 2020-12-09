@@ -95,34 +95,7 @@ public class SellerController {
             ProductEntity product = productService.getProductById(id);
             model.addAttribute("product", product);
             return "seller/edit-product";
-        } else if (action.equals("add-promo")) {
-            model.addAttribute("products", productService.getProductsActive());
-            return "seller/add-promo";
-        } else if (action.equals("edit-promo")) {
-            if (id == null || id <= 0) {
-                return "redirect:/seller?action=promo-manager";
-            }
-            List<ProductEntity> productApplys = productService.getProductsByPromotionId(id);
-            List<ProductEntity> products = productService.getProducts();
-            List<Boolean> productsBoolean = new ArrayList<>();
-            for (ProductEntity p : products) {
-                boolean isApply = false;
-                for (ProductEntity pa : productApplys) {
-                    if (pa.getId() == p.getId()) {
-                        productsBoolean.add(true);
-                        isApply = true;
-                        break;
-                    }
-                }
-                if (!isApply) {
-                    productsBoolean.add(false);
-                }
-            }
-            model.addAttribute("productsBoolean", productsBoolean);
-            model.addAttribute("products", products);
-            model.addAttribute("status", ActiveStatus.values());
-            return "seller/edit-promo";
-        } else {
+        }  else {
             return "redirect:/account";
         }
     }

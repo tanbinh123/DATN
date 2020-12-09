@@ -68,10 +68,6 @@ public class ProductService {
         return productRepository.getById(id);
     }
 
-    public List<ProductEntity> getProductsByPromotionId(int id) {
-        return productRepository.findAllProductByPromotionId(id);
-    }
-
     public Page<ProductEntity> getProductsActive(int page, String sort) {
         Pageable pageable;
         if (sort.equals("Latest")) {
@@ -120,7 +116,6 @@ public class ProductService {
             return null;
         }
         Set<RatingEntity> ratingsFromDatabase = rating.getRatingsByUserId(account.getId());
-
         List<ProductEntity> products = productRepository.findAllActiveProduct(ActiveStatus.ACTIVE);
         rating.readFile();
         HashMap<Integer, Integer> ratings = new HashMap<>();

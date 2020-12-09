@@ -29,9 +29,6 @@ public interface ProductRepository extends PagingAndSortingRepository<ProductEnt
             "where c.id = :categoryID and p.status = :status")
     Page<ProductEntity> findProductByCategoryID(@Param("categoryID") int categoryID, @Param("status") ActiveStatus status, Pageable pageable);
 
-    @Query(value = "select * from product join product_promotion_relation on product.id = product_promotion_relation.product_id where product_promotion_relation.promotion_id = ?1", nativeQuery = true)
-    List<ProductEntity> findAllProductByPromotionId(int id);
-
     @Query(value = "select p from ProductEntity p where (p.name like %:searchText% or p.description like %:searchText%) and status = :status")
     Page<ProductEntity> findProductByAnyActive(@Param("searchText") String searchText, @Param("status") ActiveStatus status, Pageable pageable);
 
