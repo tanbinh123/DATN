@@ -69,7 +69,7 @@ public class Users {
                 }
             }
             double matchRate;
-            if (matches.size() > 0) {
+            if (matches.size() > 1) {
                 double numerator = 0, userDenominator = 0, otherUserDenominator = 0;
                 for (int movie : matches) {
                     double u = userRatings.get(movie) - userAverage;

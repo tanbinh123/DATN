@@ -60,13 +60,14 @@ public class RatingService {
 
         for (int user : ratings.keySet()) {
             ArrayList<Integer> matches = new ArrayList<>();
-            for (int movie : userRatings.keySet()) {
+            for (Map.Entry<Integer, Integer> entry : userRatings.entrySet()) {
+                int movie = entry.getKey();
                 if (ratings.get(user).containsKey(movie)) {
                     matches.add(movie);
                 }
             }
             double matchRate;
-            if (matches.size() > 0) {
+            if (matches.size() > 1) {
                 double numerator = 0, userDenominator = 0, otherUserDenominator = 0;
                 for (int movie : matches) {
                     double u = userRatings.get(movie) - userAverage;

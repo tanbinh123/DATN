@@ -26,9 +26,6 @@
                 <li><a href="<c:url value="/category?id=14&page=1"></c:url>">Musical</a></li>
                 <li><a href="<c:url value="/category?id=15&page=1"></c:url>">Romance</a></li>
                 <li><a href="<c:url value="/category?id=16&page=1"></c:url>">Sci-Fi</a></li>
-<!--                <li><a href="<c:url value="/category?id=17&page=1"></c:url>">Thriller</a></li>-->
-<!--                <li><a href="<c:url value="/category?id=18&page=1"></c:url>">War</a></li>-->
-<!--                <li><a href="<c:url value="/category?id=18&page=1"></c:url>">Western</a></li>-->
             </ul>
         </div>
         <!-- Contact Info -->

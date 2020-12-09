@@ -388,11 +388,13 @@
 						</div>
 					</div>
 				</div>
+				<c:if test="${products_recommend!=null}">
 				<div class="row">
 					<div class="col-lg-6 offset-lg-3">
 							<div class="section_title text-center">Recommend for you</div>
 					</div>
 				</div>
+				</c:if>
 				<div class="row products_row">
 					<!-- Product -->
 					<c:if test="${products_recommend.size()==0}">

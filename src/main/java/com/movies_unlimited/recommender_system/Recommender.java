@@ -9,7 +9,7 @@ import java.util.TreeMap;
 public class Recommender {
     public static void main(String[] args) {
         final long startTime = System.currentTimeMillis();
-        final int NUM_NEIGHBOURHOODS = 140;
+        final int NUM_NEIGHBOURHOODS = 110;
 
         Movies movies = new Movies();
         movies.readFile(new File("src/main/java/com/movies_unlimited/data/ml-data/u.item").getAbsolutePath());

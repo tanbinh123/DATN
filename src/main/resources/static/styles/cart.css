@@ -608,22 +608,6 @@ section
 {
 	color: #2fce98;
 }
-.menu_nav ul li a::after
-{
-	display: block;
-	position: absolute;
-	top: 50%;
-	left: 0;
-	width: 0%;
-	height: 2px;
-	background: #2fce98;
-	-webkit-transition: all 400ms ease;
-	-moz-transition: all 400ms ease;
-	-ms-transition: all 400ms ease;
-	-o-transition: all 400ms ease;
-	transition: all 400ms ease;
-	content: '';
-}
 .menu_nav ul li a:hover::after
 {
 	width: 100%;

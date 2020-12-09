@@ -22,11 +22,9 @@ import java.util.*;
 @Slf4j
 public class ProductService {
 
-    final int NUM_RATINGS = 20;
     final int NUM_NEIGHBOURHOODS = 100;
-    final int NUM_RECOMMENDATIONS = 6;
+    final int NUM_RECOMMENDATIONS = 20;
     final int MIN_VALUE_RECOMMENDATION = 4;
-    final boolean RANDOM_RATINGS = true;
 
     private final ProductRepository productRepository;
     private final RatingService rating;
@@ -117,15 +115,17 @@ public class ProductService {
 
 
     public Set<ProductEntity> recommendMovie() {
-        AccountEntity account = accountRepository.findById(1);
-        //AccountEntity account = accountRepository.findAccountByEmail(AccountUltil.getAccount());
+        AccountEntity account = accountRepository.findAccountByEmail(AccountUltil.getAccount());
+        if(account==null||rating.getRatingsByUserId(account.getId())==null){
+            return null;
+        }
         Set<RatingEntity> ratingsFromDatabase = rating.getRatingsByUserId(account.getId());
 
         List<ProductEntity> products = productRepository.findAllActiveProduct(ActiveStatus.ACTIVE);
         rating.readFile();
         HashMap<Integer, Integer> ratings = new HashMap<>();
 
-        for (RatingEntity  ratingEntity : ratingsFromDatabase) {
+        for (RatingEntity ratingEntity : ratingsFromDatabase) {
             ratings.put(ratingEntity.getProduct().getId(),ratingEntity.getRating());
         }
 
@@ -137,6 +137,17 @@ public class ProductService {
 
         Map<Integer, Double> recommendations = rating.getRecommendations(ratings, neighbourhoods, moviesIntegerStringMap);
 
+
+        LinkedHashMap<Integer, Double> reverseSortedMap  = new LinkedHashMap<>();
+        neighbourhoods.entrySet()
+                .stream()
+                .sorted(Map.Entry.comparingByValue(Comparator.reverseOrder()))
+                .forEachOrdered(x -> reverseSortedMap.put(x.getKey(), x.getValue()));
+
+        for (Map.Entry<Integer, Double> entry : reverseSortedMap .entrySet()) {
+            System.out.println(entry.getKey() + "/" + entry.getValue());
+        }
+
         ValueComparator valueComparator = new ValueComparator(recommendations);
         Map<Integer, Double> sortedRecommendations = new TreeMap<>(valueComparator);
         sortedRecommendations.putAll(recommendations);
@@ -147,6 +158,7 @@ public class ProductService {
         while (entries.hasNext() && i < NUM_RECOMMENDATIONS) {
             Map.Entry entry = (Map.Entry) entries.next();
             if ((double) entry.getValue() >= MIN_VALUE_RECOMMENDATION) {
+                System.out.println(productRepository.getById((int) entry.getKey()).getName()+" "+entry.getValue());
                 recommendProducts.add(productRepository.getById((int) entry.getKey()));
                 i++;
             }
